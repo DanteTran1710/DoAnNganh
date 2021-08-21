@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache
+Software Foundation//DTD Tiles Configuration 3.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- Definition Home base Layout -->
+    <definition name="homeBaseLayout" template="/WEB-INF/layout/homeBase.jsp">
+        <put-attribute name="banner" value="/WEB-INF/layout/banner.jsp"/>
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" value="/WEB-INF/layout/header.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/layout/footer.jsp"/>
+    </definition>
+    
+        <!-- Definition Home Layout -->
+    <definition name="home" extends="homeBaseLayout">
+        <put-attribute name="title" value="FINDING CAREER"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/home.jsp"/>
+    </definition>
+    
+    <!-- Definition Login base Layout -->
+    <definition name="loginBaseLayout" template="/WEB-INF/layout/loginBase.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="content" value=""/>
+    </definition>
+    
+    <!-- Definition Login Layout -->
+    <definition name="login" extends="loginBaseLayout">
+        <put-attribute name="title" value="LOGIN"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp"/>
+    </definition>
+    
+    <!-- Definition Signup Layout -->
+    <definition name="signup" extends="loginBaseLayout">
+        <put-attribute name="title" value="SIGN UP"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/signup.jsp"/>
+    </definition>
+    
+</tiles-definitions>
