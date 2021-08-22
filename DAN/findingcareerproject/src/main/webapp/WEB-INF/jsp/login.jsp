@@ -10,29 +10,55 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <!DOCTYPE html>
-  <div class="container">
-    <form class="login-form" action="">
-      <div class="login-wrap">
-        <p class="login-img">LOG IN</p>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="text" class="form-control" placeholder="Username" autofocus>
-        </div>
-        <div class="input-group">
-          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-          <input type="password" class="form-control" placeholder="Password">
-        </div>
-        <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
-            </label>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-        <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
-      </div>
-    </form>
-    <div class="text-right">
-      <div class="credits">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="<c:url value="/img/signup-login/img-01.png"/>" alt="IMG">
+            </div>
+
+            <form class="login100-form validate-form">
+                <span class="login100-form-title">
+                    Member Login
+                </span>
+
+                <div class="signup-form">
+                    <form method="POST" class="register-form" id="register-form">
+
+                        <div class="form-group">
+                            <label for="email"><i class="fa fa-user-circle" aria-hidden="true"></i></label>
+                            <input type="email" name="email" id="email" placeholder="Your Email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="fa fa-lock" aria-hidden="true"></i></label>
+                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                        </div>
+                        <div class="container-login100-form-btn">     
+                            <button class="login100-form-btn">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
+                    <div class="text-center p-t-12">
+                        <span class="txt1">
+                            Forgot
+                        </span>
+                        <a class="txt2" href="#">
+                            Username / Password?
+                        </a>
+                    </div>
+
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="<c:url value="/signup"/>">
+                            Create your Account
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+            </form>
         </div>
     </div>
-  </div>
+</div>
 

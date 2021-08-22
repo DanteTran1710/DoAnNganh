@@ -41,4 +41,18 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/signup.jsp"/>
     </definition>
     
+        <!-- Definition Admin base Layout -->
+    <definition name="adminBaseLayout" template="/WEB-INF/layout/adminBase.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="navbar" value="/WEB-INF/layout/navbar.jsp"/>
+        <put-attribute name="slide-bar" value="/WEB-INF/layout/slide-bar.jsp"/>
+    </definition>
+    
+    <!-- Definition Login Layout -->
+    <definition name="dashboard" extends="adminBaseLayout">
+        <put-attribute name="title" value="DASH BOARD"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/dashboard.jsp"/>
+    </definition>
+    
 </tiles-definitions>

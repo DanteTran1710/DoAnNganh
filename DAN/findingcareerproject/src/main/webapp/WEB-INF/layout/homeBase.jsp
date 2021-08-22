@@ -17,20 +17,20 @@
         <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
         <meta name="author" content="GeeksLabs">
         <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+        <meta content="" name="description">
+        <meta content="" name="keywords">
+        
         <title>
             <tiles:insertAttribute name="title"/>
         </title>
-        <meta content="" name="description">
-        <meta content="" name="keywords">
-
         <!-- HOME PAGE RESOURCES -->
         <!-- Favicons -->
         <link href="assets/img/favicon.png" rel="icon">
         <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-        <!-- Vendor CSS Files -->
-        <link href="<c:url value="/vendor/bootstrap/css/bootstrap.min.css"/>" rel="stylesheet">
+        <!-- CSS Files -->
+        <link href="<c:url value="/vendor/bootstrap/home/css/bootstrap.min.css"/>" rel="stylesheet">
         <link href="<c:url value="/vendor/icofont/icofont.min.css" />" rel="stylesheet">
         <link href="<c:url value="/vendor/animate/css/animate.min.css" />" rel="stylesheet">
         <link href="<c:url value="/vendor/assets/owl.carousel.min.css" />" rel="stylesheet"> 
@@ -57,7 +57,7 @@
             
         <!-- HOME PAGE RESOURCES -->    
         <!-- Vendor JS Files -->
-        <script src="<c:url value="/vendor/jquery/jquery.min.js"/>"/></script>
+        <script src="<c:url value="/vendor/jquery/home/jquery.min.js"/>"/></script>
         <script src="<c:url value="/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"/></script>
         <script src="<c:url value="/vendor/jquery.easing/jquery.easing.min.js"/>"/></script>
         <script src="<c:url value="/vendor/email-form/validate.js"/>"/></script>

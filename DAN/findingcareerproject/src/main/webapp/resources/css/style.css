@@ -23,6 +23,10 @@ a:hover {
   text-decoration: none;
 }
 
+.login {
+    color : #fff;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
 }
@@ -720,11 +724,11 @@ section {
 /*--------------------------------------------------------------
 # Cta
 --------------------------------------------------------------*/
-.cta {
+/*.cta {
   background: linear-gradient(rgba(66, 84, 81, 0.5), rgba(43, 56, 54, 0.5)), url("../img/cta-bg.jpg") fixed center center;
   background-size: cover;
   padding: 60px 0;
-}
+}*/
 
 .cta h3 {
   color: #fff;

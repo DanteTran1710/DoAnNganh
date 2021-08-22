@@ -27,21 +27,33 @@
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
         <!-- Bootstrap CSS -->
-        <link href="<c:url value="/css/bootstrap.min.css" />" rel="stylesheet">
-        <!-- bootstrap theme -->
-        <link href="<c:url value="/vendor/bootstrap/css/bootstrap-theme.css" />" rel="stylesheet">
-        <!--external css-->
-        <!-- font icon -->
-        <link href="<c:url value="/css/elegant-icons-style.css" />" rel="stylesheet" />
-        <link href="<c:url value="/css/font-awesome.css" />" rel="stylesheet" />
-        <!-- Custom styles -->
-        <link href="<c:url value="/css/style.login.css" />" rel="stylesheet">
-        <link href="<c:url value="/css/style-responsive.css" />" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="<c:url value="/vendor/bootstrap/login/css/bootstrap.min.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/vendor/animate/animate.login.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/vendor/css-hamburgers/hamburgers.min.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/vendor/select2/select2.min.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/util.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="css/main.login.css"/>">
+        <!--Icont Font-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     </head>
     <body>
         <div>       
             <!-- Content -->
             <tiles:insertAttribute name="content"/>
         </div>
+
+        <!-- LOGIN PAGE RESOURCES -->
+        <script src="<c:url value="vendor/jquery/jquery-3.2.1.min.js"/>"></script>
+        <script src="<c:url value="/vendor/bootstrap/login/js/popper.js"/>"></script>
+        <script src="<c:url value="/vendor/bootstrap/login/js/bootstrap.min.js"/>"></script>
+        <script src="<c:url value="/vendor/select2/select2.min.js"/>"></script>
+        <script src="<c:url value="/vendor/tilt/tilt.jquery.min.js"/>"></script>
+        <script >
+            $('.js-tilt').tilt({
+                scale: 1.1
+            });
+        </script>
+        <script src="<c:url value="/js/main.login.js"/>"></script>
     </body>
 </html>

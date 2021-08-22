@@ -4,6 +4,9 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+
+// HOME PAGE
+
 !(function($) {
   "use strict";
 
@@ -199,3 +202,4 @@
   });
 
 })(jQuery);
+

@@ -39,4 +39,10 @@ public class HomeController {
         
         return "signup";
     }
+    
+    @RequestMapping(path = "/admin")
+    public String admin(Model model){
+        
+        return "dashboard";
+    }
 }
