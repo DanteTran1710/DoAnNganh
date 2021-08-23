@@ -4,6 +4,16 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
+    Created on : Aug 23, 2021, 8:42:05 AM
+    Author     : hp
+*/
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
     Created on : Aug 22, 2021, 12:49:50 PM
     Author     : hp
 */
@@ -47,8 +57,8 @@ a:focus {
 }
 
 a:hover {
-	text-decoration: none;
-  color: #57b846;
+  text-decoration: none;
+  color: #980000;
 }
 
 /*---------------------------------------------*/
@@ -298,7 +308,7 @@ iframe {
 }
 
 .input100:focus + .focus-input100 + .symbol-input100 {
-  color: #57b846;
+  color: #980000;
   padding-left: 28px;
 }
 

@@ -17,9 +17,6 @@ Tip 2: you can also add an image using data-image tag
     -->
     <div class="sidebar-wrapper">
         <div class="logo">
-            <a href="http://www.creative-tim.com" class="simple-text">
-                Creative Tim
-            </a>
         </div>
         <ul class="nav">
             <li class="nav-item active">

@@ -32,7 +32,7 @@
         <link rel="stylesheet" type="text/css" href="<c:url value="/vendor/css-hamburgers/hamburgers.min.css"/>">
         <link rel="stylesheet" type="text/css" href="<c:url value="/vendor/select2/select2.min.css"/>">
         <link rel="stylesheet" type="text/css" href="<c:url value="/css/util.css"/>">
-        <link rel="stylesheet" type="text/css" href="<c:url value="css/main.login.css"/>">
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/login.style.css"/>">
         <!--Icont Font-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -44,7 +44,7 @@
         </div>
 
         <!-- LOGIN PAGE RESOURCES -->
-        <script src="<c:url value="vendor/jquery/jquery-3.2.1.min.js"/>"></script>
+        <script src="<c:url value="/vendor/jquery/jquery-3.2.1.min.js"/>"></script>
         <script src="<c:url value="/vendor/bootstrap/login/js/popper.js"/>"></script>
         <script src="<c:url value="/vendor/bootstrap/login/js/bootstrap.min.js"/>"></script>
         <script src="<c:url value="/vendor/select2/select2.min.js"/>"></script>

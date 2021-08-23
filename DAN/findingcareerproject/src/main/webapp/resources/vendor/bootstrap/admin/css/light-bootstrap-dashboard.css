@@ -76,7 +76,7 @@ td,
 button.close {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 400;
 }
 
@@ -218,7 +218,7 @@ a {
 
 a:hover,
 a:focus {
-    color: #42d0ed;
+    color: #980000;
     text-decoration: none;
 }
 

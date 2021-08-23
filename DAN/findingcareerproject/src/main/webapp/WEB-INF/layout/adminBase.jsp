@@ -26,8 +26,9 @@
         <!--Icont Font-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- CSS Files -->
+        <link href="<c:url value="/css/admin.style.css"/>" rel="stylesheet" />
         <link href="<c:url value="/vendor/bootstrap/admin/css/bootstrap.min.css"/>" rel="stylesheet" />
-        <link href="<c:url value="/vendor/bootstrap/admin/css/light-bootstrap-dashboard.css?v=2.0.0 " />" rel="stylesheet" />
+        <!--<link href="<c:url value="/vendor/bootstrap/admin/css/light-bootstrap-dashboard.css?v=2.0.0 " />" rel="stylesheet" />-->
     </head>
     <body>
         <div class="wrapper">        
@@ -44,19 +45,18 @@
         </div>
 
         <!-- Core JS Files -->
-        <script src="<c:url value="/vendor/jquery/jquery.3.2.1.min.js"/>" type="text/javascript"></script>
+<!--        <script src="<c:url value="/vendor/jquery/jquery.3.2.1.min.js"/>" type="text/javascript"></script>
         <script src="<c:url value="/vendor/jquery/admin/popper.min.js" />"type="text/javascript"></script>
         <script src="<c:url value="/vendor/bootstrap/admin/js/bootstrap.min.js" />" type="text/javascript"></script>
-        <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
-        <script src="<c:url value="/vendor/bootstrap/js/bootstrap-switch.js" />"></script>
-        <!--  Google Maps Plugin    -->
+        <script src="<c:url value="/vendor/bootstrap/admin/js/bootstrap-switch.js" />"></script>
+          Google Maps Plugin    
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-        <!--  Chartist Plugin  -->
+          Chartist Plugin  
         <script src="<c:url value="/vendor/jquery/admin/chartist.min.js" />"></script>
-        <!--  Notifications Plugin    -->
-        <script src="<c:url value="/vendor/bootstrap/js/bootstrap-notify.js" />"></script>
-        <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
-        <script src="<c:url value="/vendor/jquery/light-bootstrap-dashboard.js" />" type="text/javascript"></script>
+          Notifications Plugin    
+        <script src="<c:url value="/vendor/bootstrap/admin/js/bootstrap-notify.js" />"></script>
+         Control Center for Light Bootstrap Dashboard: scripts for the example pages etc 
+        <script src="<c:url value="/vendor/jquery/admin/light-bootstrap-dashboard.js" />" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 // Javascript method's body can be found in assets/js/demos.js
@@ -65,6 +65,6 @@
                 demo.showNotification();
 
             });
-        </script>
+        </script>-->
     </body>
 </html>

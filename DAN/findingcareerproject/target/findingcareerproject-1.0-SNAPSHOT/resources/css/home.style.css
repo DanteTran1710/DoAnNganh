@@ -11,11 +11,12 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  color: #000;
+  color: #000 !important;
+  background-color: #f2f5f4;
 }
 
 a {
-  color:  #fff;
+  color:  #DCDCDC;
 }
 
 a:hover {
@@ -23,7 +24,7 @@ a:hover {
   text-decoration: none;
 }
 
-.login {
+#login {
     color : #fff;
 }
 
@@ -462,6 +463,11 @@ section {
   padding: 60px 0;
 }
 
+.cta{
+  background: #fff;
+}
+
+
 .section-bg {
   background-color: #f2f5f4;
 }
@@ -731,13 +737,13 @@ section {
 }*/
 
 .cta h3 {
-  color: #fff;
+  color: #000;
   font-size: 28px;
   font-weight: 700;
 }
 
 .cta p {
-  color: #fff;
+  color: #000;
 }
 
 .cta .cta-btn {
@@ -751,7 +757,7 @@ section {
   transition: 0.5s;
   margin-top: 10px;
   border: 2px solid  #E50914;
-  color: #fff;
+  color: #000;
 }
 
 .cta .cta-btn:hover {

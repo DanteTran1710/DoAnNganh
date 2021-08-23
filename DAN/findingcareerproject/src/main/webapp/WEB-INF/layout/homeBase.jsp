@@ -36,7 +36,7 @@
         <link href="<c:url value="/vendor/assets/owl.carousel.min.css" />" rel="stylesheet"> 
         <link href="<c:url value="/vendor/venobox/venobox.css"/>" rel="stylesheet">
         <!-- Template Main CSS File -->
-        <link href="<c:url value="/css/style.css" />" rel="stylesheet">
+        <link href="<c:url value="/css/home.style.css" />" rel="stylesheet">
         <!--Icont Font-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
