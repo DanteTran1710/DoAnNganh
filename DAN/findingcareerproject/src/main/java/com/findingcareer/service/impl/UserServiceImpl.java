@@ -16,6 +16,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,27 +29,31 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    @Transactional
     public boolean addUser(User user) {
+        String password = user.getPassword();
+        user.setPassword(this.passwordEncoder.encode(password));
+        user.setIdUser("3");
+        user.setUserRole(User.user);
+        
         return this.userRepository.addUser(user);
     }
 
     @Override
-    @Transactional
     public List<User> getListUser(String username) {
         return this.userRepository.getListUser(username);
     }
 
     @Override
-    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Method get users
-        List<User> users = userRepository.getListUser(username);
+        List<User> users = this.getListUser(username);
         
         if(users.isEmpty()){
-            throw new UsernameNotFoundException("Không tồn tại người dùng này!");
+            throw new UsernameNotFoundException("USER DOESNT EXIST!");
         }
         
         User user = users.get(0);
@@ -58,6 +63,6 @@ public class UserServiceImpl implements UserService {
         authorities.add(new SimpleGrantedAuthority(user.getUserRole()));
         
         return new org.springframework.security.core.userdetails
-                .User(user.getUserName(), user.getPassword(), authorities);
+                .User(user.getUsername(), user.getPassword(), authorities);
     }
 }

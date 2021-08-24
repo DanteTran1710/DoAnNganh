@@ -10,6 +10,12 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<c:url value="/signup" var="action" />
+
+<c:if test="${errorMessage != null}">
+    <div class="alert alert-danger">${errorMessage}</div>
+</c:if>
+
 <!DOCTYPE html>
 <div class="limiter">
     <div class="container-login100">
@@ -18,42 +24,44 @@
                 <img src="<c:url value="/img/signup-login/img-01.png"/>" alt="IMG">
             </div>
 
-            <form class="login100-form validate-form">
+            <div class="login100-form validate-form">
                 <span class="login100-form-title">
                     SIGN UP
                 </span>
                 <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form">
+                    <form:form method="post" action="${action}" class="register-form" id="register-form" modelAttribute="user">
                         <div class="form-group">
                             <label for="firstName"><i class="fa fa-user-o"></i></label>
-                            <input type="text" name="name" id="name" placeholder="First Name"/>
+                                <form:input type="text" path="firstName" id="name" placeholder="First Name"/>
                         </div>
                         <div class="form-group">
                             <label for="lastName"><i class="fa fa-user-o"></i></label>
-                            <input type="text" name="name" id="name" placeholder="Last Name"/>
+                                <form:input type="text" path="lastName" id="name" placeholder="Last Name"/>
                         </div>
                         <div class="form-group">
                             <label for="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></label>
-                            <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                <form:input type="email" path="email" id="email" placeholder="Your Email"/>
                         </div>
                         <div class="form-group">
-                            <label for="pass"><i class="fa fa-lock" aria-hidden="true"></i></label>
-                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                            <label for="username"><i class="fa fa-address-card-o" aria-hidden="true"></i></label>
+                                <form:input type="username" path="username" id="username" placeholder="User Name"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><i class="fa fa-lock" aria-hidden="true"></i></label>
+                                <form:input type="password" path="password" id="pass" placeholder="Password"/>
                         </div>
                         <div class="form-group">
                             <label for="re-pass"><i class="fa fa-lock" aria-hidden="true"></i></label>
-                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                                <form:input type="password" path="rePassword" id="repass" placeholder="Repeat your password"/>
                         </div>
                         <div class="form-group">
                             <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                             <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                         </div>
-                    </form>
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
-                            SIGN UP
-                        </button>
-                    </div>
+                        <div class="container-login100-form-btn">
+                            <button type="submit" class="login100-form-btn">SIGN UP</button>
+                        </div>
+                    </form:form>>
 
                     <div class="text-center p-t-136">
                         <a class="txt2" href="<c:url value="/login"/>">
@@ -62,7 +70,7 @@
                         </a>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

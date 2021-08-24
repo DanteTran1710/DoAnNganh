@@ -5,10 +5,14 @@
  */
 package com.findingcareer.controller;
 
+import com.findingcareer.pojo.User;
+import com.findingcareer.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -16,17 +20,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class UserController {
+    @Autowired
+    private UserService userDetailsService;
+    
     @GetMapping("/login")
     public String Login(){
         
         return "login";
     }
-//    @RequestMapping(path = "/signup")
-//    public String Signup(Model model){
-//        
-//        return "signup";
-//    }
+    @GetMapping("/signup")
+    public String SignupView(Model model){
+        model.addAttribute("user", new User());
+        return "signup";
+    }
 //    
+    @PostMapping("/signup")
+    public String Signup(Model model, @ModelAttribute(value ="user") User user){
+        String errorMessage;
+                
+        if(user.getPassword().equals(user.getRePassword())){
+            if(this.userDetailsService.addUser(user) == true)
+                return "redirect:/login";
+            else
+                errorMessage = "Da co loi xay ra";
+        }
+        else
+            errorMessage = "Mat khau khong khop";
+        
+        model.addAttribute("errorMessage",errorMessage);
+        
+        return "signup";
+    }
 //    @RequestMapping(path = "/admin")
 //    public String admin(Model model){
 //        

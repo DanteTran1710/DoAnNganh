@@ -56,6 +56,9 @@
                     <a href="<c:url value="/" />">
                         ${pageContext.request.userPrincipal.name}
                     </a>
+                    <a href="<c:url value="/" />">
+                        <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;LOGOUT
+                    </a>
                 </c:if>
             </div>
         </div>

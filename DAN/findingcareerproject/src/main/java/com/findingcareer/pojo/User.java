@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -17,8 +18,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User implements Serializable{
-    private static final String admin = "ROLE_ADMIN";
-    private static final String user = "ROLE_USER";
+    public static final String admin = "ROLE_ADMIN";
+    public static final String user = "ROLE_USER";
     
     @Id
     private String idUser;
@@ -27,20 +28,23 @@ public class User implements Serializable{
     private String firstName;
     private String lastName;
     private String userRole;
-    private String userName;
+    private String username;
+    @Transient
+    private String rePassword;
 
     public User() {
     }
 
-    public User(String idUser, String email, String password, String firstName, String lastName, String userRole, String userName) {
+    public User(String idUser, String email, String password, String firstName, String lastName, String userRole, String username) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userRole = userRole;
-        this.userName = userName;
+        this.username = username;
     }
+
 
     /**
      * @return the idUser
@@ -127,18 +131,36 @@ public class User implements Serializable{
     }
 
     /**
-     * @return the userName
+     * @return the username
      */
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param userName the userName to set
+     * @param username the username to set
      */
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    /**
+     * @return the rePassword
+     */
+    public String getRePassword() {
+        return rePassword;
+    }
+
+    /**
+     * @param rePassword the rePassword to set
+     */
+    public void setRePassword(String rePassword) {
+        this.rePassword = rePassword;
+    }
+
+    /**
+     * @return the userName
+     */
     
     
 }

@@ -23,7 +23,7 @@
                 <img src="<c:url value="/img/signup-login/img-01.png"/>" alt="IMG">
             </div>
 
-            <form class="login100-form validate-form">
+            <div class="login100-form validate-form">
                 <span class="login100-form-title">
                     Member Login
                 </span>
@@ -31,8 +31,8 @@
                 <div class="signup-form">
                     <form method="post" action="${action}">
                         <div class="form-group">
-                            <label for="email"><i class="fa fa-user-circle" aria-hidden="true"></i></label>
-                            <input type="text" name="username" id="email" placeholder="Your Username"/>
+                            <label for="username"><i class="fa fa-user-circle" aria-hidden="true"></i></label>
+                            <input type="text" name="username" id="username" placeholder="Your Username"/>
                         </div>
                         <div class="form-group">
                             <label for="pass"><i class="fa fa-lock" aria-hidden="true"></i></label>
@@ -62,7 +62,7 @@
                     </div>
 
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
