@@ -17,23 +17,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "user")
 public class User implements Serializable{
+    private static final String admin = "ROLE_ADMIN";
+    private static final String user = "ROLE_USER";
+    
     @Id
     private String idUser;
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-
+    private String userRole;
+    private String userName;
 
     public User() {
     }
 
-    public User(String idUser, String firstName, String lastName, String email, String password) {
+    public User(String idUser, String email, String password, String firstName, String lastName, String userRole, String userName) {
         this.idUser = idUser;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userRole = userRole;
+        this.userName = userName;
     }
 
     /**
@@ -104,6 +110,34 @@ public class User implements Serializable{
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * @return the userRole
+     */
+    public String getUserRole() {
+        return userRole;
+    }
+
+    /**
+     * @param userRole the userRole to set
+     */
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
     
     

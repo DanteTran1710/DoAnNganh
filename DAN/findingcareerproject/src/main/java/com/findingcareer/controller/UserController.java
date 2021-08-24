@@ -7,6 +7,7 @@ package com.findingcareer.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -14,11 +15,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author hp
  */
 @Controller
-public class HomeController {
-    
-    @RequestMapping(value = "/")
-    public String index(Model model){
+public class UserController {
+    @GetMapping("/login")
+    public String Login(){
         
-        return "home";
+        return "login";
     }
+//    @RequestMapping(path = "/signup")
+//    public String Signup(Model model){
+//        
+//        return "signup";
+//    }
+//    
+//    @RequestMapping(path = "/admin")
+//    public String admin(Model model){
+//        
+//        return "dashboard";
+//    }
 }

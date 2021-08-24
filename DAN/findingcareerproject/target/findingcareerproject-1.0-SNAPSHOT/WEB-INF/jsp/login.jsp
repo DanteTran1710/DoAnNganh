@@ -9,6 +9,12 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<c:url value="/login" var="action" />
+<!-- Check out error and show error text -->
+<c:if test="${param.error != null}">
+    <div class="alert alert-danger">Đã có lỗi xảy ra vui lòng thử lại!</div>
+</c:if>
+
 <!DOCTYPE html>
 <div class="limiter">
     <div class="container-login100">
@@ -23,18 +29,17 @@
                 </span>
 
                 <div class="signup-form">
-                    <form method="POST" class="register-form" id="register-form">
-
+                    <form method="post" action="${action}">
                         <div class="form-group">
                             <label for="email"><i class="fa fa-user-circle" aria-hidden="true"></i></label>
-                            <input type="email" name="email" id="email" placeholder="Your Email"/>
+                            <input type="text" name="username" id="email" placeholder="Your Username"/>
                         </div>
                         <div class="form-group">
                             <label for="pass"><i class="fa fa-lock" aria-hidden="true"></i></label>
-                            <input type="password" name="pass" id="pass" placeholder="Password"/>
+                            <input type="password" name="password" id="pass" placeholder="Password"/>
                         </div>
                         <div class="container-login100-form-btn">     
-                            <button class="login100-form-btn">
+                            <button  type ="submit" class="login100-form-btn">
                                 Login
                             </button>
                         </div>

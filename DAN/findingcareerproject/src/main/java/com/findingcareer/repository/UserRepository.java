@@ -13,5 +13,6 @@ import java.util.List;
  * @author hp
  */
 public interface UserRepository {
-    public List<User> getListUser();
+    List<User> getListUser(String username);
+    boolean addUser(User user);
 }

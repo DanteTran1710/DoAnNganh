@@ -2,13 +2,16 @@ C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerprojec
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\pojo\Employee.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\repository\UserRepository.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\service\impl\UserServiceImpl.java
+C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\config\SpringSecurityConfig.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\pojo\Employer.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\pojo\Recruitment.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\config\TilesConfig.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\pojo\User.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\config\DispatcherServletInitializer.java
+C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\config\SecurityWebApplicationInitializer.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\config\WebApplicationContextConfig.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\controller\HomeController.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\config\HibernateConfig.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\repository\impl\UserRepositoryImpl.java
+C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\controller\UserController.java
 C:\Users\hp\Desktop\DAN(Back up file )\Project\DoAnNganh\DAN\findingcareerproject\src\main\java\com\findingcareer\service\UserService.java

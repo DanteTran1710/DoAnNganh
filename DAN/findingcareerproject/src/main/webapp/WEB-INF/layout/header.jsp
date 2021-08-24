@@ -4,7 +4,7 @@
     Author     : hp
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="property" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
@@ -47,9 +47,16 @@
         </nav><!-- .nav-menu --> 
         <div class="logo m-auto">
             <div class="text-light" id="login">
-                <a href="<c:url value="/login" />">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;LOGIN
-                </a>
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
+                    <a href="<c:url value="/login" />">
+                        <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;LOGIN
+                    </a>
+                </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                    <a href="<c:url value="/" />">
+                        ${pageContext.request.userPrincipal.name}
+                    </a>
+                </c:if>
             </div>
         </div>
     </div>
