@@ -7,6 +7,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="property" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <!-- ======= Header ======= -->
 <header id="header">
@@ -45,23 +46,43 @@
 
             </ul>
         </nav><!-- .nav-menu --> 
-        <div class="logo m-auto">
-            <div class="text-light" id="login">
+        <nav class="logo m-auto nav-menu " id="profile">
+            <div class="text-light " id="login">
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
-                    <a href="<c:url value="/login" />">
-                        <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;LOGIN
-                    </a>
+                    <div>
+                        <a href="<c:url value="/login" />" class="title">
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;LOGIN
+                        </a>
+                    </div>
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
-                    <a href="<c:url value="/" />">
-                        ${pageContext.request.userPrincipal.name}
-                    </a>
-                    <a href="<c:url value="/" />">
-                        <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp;LOGOUT
-                    </a>
+                    <div class="drop-down">
+                        <a href="<c:url value="/" />">
+                            ${pageContext.request.userPrincipal.name}&nbsp;
+                        </a>
+                        <ul>
+                            <li>
+                                <a href="<c:url value="/logout" />">
+                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i>&nbsp;&nbsp;LOGOUT
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<c:url value="/" />">
+                                    <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
+                                </a>
+                            </li>
+                            <li>
+                                <security:authorize access="hasRole('ROLE_ADMIN')"> 
+                                    <a href="<c:url value="/admin" />">
+                                        <i class="fa fa-key" aria-hidden="true"></i>&nbsp;&nbsp;ADMINISTRATE
+                                    </a>
+                                </security:authorize>
+                            </li>
+                        </ul>
+                    </div>
                 </c:if>
             </div>
-        </div>
+        </nav>
     </div>
 </header>
 <!-- End Header -->

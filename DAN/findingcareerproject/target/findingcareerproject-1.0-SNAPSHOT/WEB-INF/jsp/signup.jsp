@@ -11,9 +11,21 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <c:url value="/signup" var="action" />
-
 <c:if test="${errorMessage != null}">
-    <div class="alert alert-danger">${errorMessage}</div>
+        <div id="toast">
+        <div id="toast_main">
+            <div class="toast_icon">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <div class="toast_body">
+                <h3 class="toast_title">THẤT BẠI!</h3>
+                <div class="toast_message">${errorMessage}</div>
+            </div>
+            <div class="toast_close" onclick="removeToast();">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
 </c:if>
 
 <!DOCTYPE html>
@@ -61,7 +73,7 @@
                         <div class="container-login100-form-btn">
                             <button type="submit" class="login100-form-btn">SIGN UP</button>
                         </div>
-                    </form:form>>
+                    </form:form>
 
                     <div class="text-center p-t-136">
                         <a class="txt2" href="<c:url value="/login"/>">

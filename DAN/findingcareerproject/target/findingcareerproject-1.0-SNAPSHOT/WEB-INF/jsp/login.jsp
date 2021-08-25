@@ -10,12 +10,41 @@
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <c:url value="/login" var="action" />
-<!-- Check out error and show error text -->
-<c:if test="${param.error != null}">
-    <div class="alert alert-danger">Đã có lỗi xảy ra vui lòng thử lại!</div>
-</c:if>
-
 <!DOCTYPE html>
+
+<!-- CHECK OUT THE ERROR AND SHOW TOAST MESSAGE  -->
+<c:if test="${param.error != null}">
+        <div id="toast">
+        <div id="toast_main">
+            <div class="toast_icon">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <div class="toast_body">
+                <h3 class="toast_title">THẤT BẠI!</h3>
+                <div class="toast_message">Hệ thống xảy ra lỗi vui lòng thử lại</div>
+            </div>
+            <div class="toast_close" onclick="removeToast();">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</c:if>
+<c:if test="${param.accessDenied != null}">
+        <div id="toast">
+        <div id="toast_main">
+            <div class="toast_icon">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <div class="toast_body">
+                <h3 class="toast_title">THẤT BẠI!</h3>
+                <div class="toast_message">Bạn không có quyền truy cập!</div>
+            </div>
+            <div class="toast_close" onclick="removeToast();">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+</c:if>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -27,7 +56,6 @@
                 <span class="login100-form-title">
                     Member Login
                 </span>
-
                 <div class="signup-form">
                     <form method="post" action="${action}">
                         <div class="form-group">
@@ -39,7 +67,7 @@
                             <input type="password" name="password" id="pass" placeholder="Password"/>
                         </div>
                         <div class="container-login100-form-btn">     
-                            <button  type ="submit" class="login100-form-btn">
+                            <button onclick=""  type ="submit" class="login100-form-btn">
                                 Login
                             </button>
                         </div>
@@ -53,7 +81,6 @@
                             Username / Password?
                         </a>
                     </div>
-
                     <div class="text-center p-t-136">
                         <a class="txt2" href="<c:url value="/signup"/>">
                             CREATE YOUR ACCOUNT
@@ -66,4 +93,3 @@
         </div>
     </div>
 </div>
-

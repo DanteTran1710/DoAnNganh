@@ -22,7 +22,7 @@ public class User implements Serializable{
     public static final String user = "ROLE_USER";
     
     @Id
-    private String idUser;
+    private int idUser;
     private String email;
     private String password;
     private String firstName;
@@ -35,7 +35,7 @@ public class User implements Serializable{
     public User() {
     }
 
-    public User(String idUser, String email, String password, String firstName, String lastName, String userRole, String username) {
+    public User(int idUser, String email, String password, String firstName, String lastName, String userRole, String username, String rePassword) {
         this.idUser = idUser;
         this.email = email;
         this.password = password;
@@ -43,22 +43,9 @@ public class User implements Serializable{
         this.lastName = lastName;
         this.userRole = userRole;
         this.username = username;
+        this.rePassword = rePassword;
     }
 
-
-    /**
-     * @return the idUser
-     */
-    public String getIdUser() {
-        return idUser;
-    }
-
-    /**
-     * @param idUser the idUser to set
-     */
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
 
     /**
      * @return the email
@@ -156,6 +143,20 @@ public class User implements Serializable{
      */
     public void setRePassword(String rePassword) {
         this.rePassword = rePassword;
+    }
+
+    /**
+     * @return the idUser
+     */
+    public int getIdUser() {
+        return idUser;
+    }
+
+    /**
+     * @param idUser the idUser to set
+     */
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     /**

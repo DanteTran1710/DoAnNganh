@@ -28,4 +28,10 @@ public class HomeController {
         
         return "home";
     }
+    
+    @RequestMapping(value = "/admin/test")
+    public String test(Model model){
+        
+        return "test";
+    }
 }

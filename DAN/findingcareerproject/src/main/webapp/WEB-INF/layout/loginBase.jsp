@@ -55,5 +55,14 @@
             });
         </script>
         <script src="<c:url value="/js/main.login.js"/>"></script>
+        <!-- REMOVE TOAST MESSAGE WHEN CLICK ICON CLOSE-->
+        <script>
+            function removeToast(){
+                var main = document.getElementById('toast');
+                var child = document.getElementById('toast_main');
+
+                main.removeChild(child);
+            }
+        </script>
     </body>
 </html>

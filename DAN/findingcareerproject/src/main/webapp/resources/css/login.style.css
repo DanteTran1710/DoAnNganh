@@ -20,12 +20,77 @@ and open the template in the editor.
 
 
 
+/*TOAST MESSAGE*/
+
+#toast{
+  position: fixed;
+  top: 32px;
+  right: 32px;
+}
+
+#toast_main{
+  width: 450px;
+  display: flex;
+  align-items: center;
+  background-color:#fff;
+  border-radius: 2px;
+  padding: 20px 0px;
+  border-left: 7px solid;
+  box-shadow: 0 5px 8px rgba(0,0,0, 0.08);
+  border-color: #980000;
+  animation: slideInLeft ease .7s, fadeOut linear 1s 7s forwards;
+}
+@keyframes slideInLeft{
+  from{
+    opacity: 0;
+    transform: translateX(calc(100% + 32px));
+  }to{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeOut{
+    to{
+        opacity: 0;
+    }
+}
+.toast_title{
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+}
+.toast_message{
+  font-size: 12px;
+  margin-top: 5px;
+  color: #000;
+}
+.toast_icon{
+  font-size: 25px;
+  color: #980000;
+}
+.toast_body{
+  flex-grow: 1;
+}
+.toast_icon,.toast_close{
+  padding: 0 16px;
+}
+.toast_close{
+  font-size: 20px;
+  color: #787878;
+  cursor: pointer;
+}
+
+.toast_close:hover{
+  color: #C8C8C8;
+}
+
 
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
 /* 
 */
+
 
 * {
 	margin: 0px; 

@@ -42,18 +42,18 @@ public class UserController {
             if(this.userDetailsService.addUser(user) == true)
                 return "redirect:/login";
             else
-                errorMessage = "Da co loi xay ra";
+                errorMessage = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
         }
         else
-            errorMessage = "Mat khau khong khop";
+            errorMessage = "Mật khẩu không khớp! Vui lòng thực hiện lại";
         
         model.addAttribute("errorMessage",errorMessage);
         
         return "signup";
     }
-//    @RequestMapping(path = "/admin")
-//    public String admin(Model model){
-//        
-//        return "dashboard";
-//    }
+    @GetMapping(path = "/admin")
+    public String admin(Model model){
+        
+        return "dashboard";
+    }
 }
