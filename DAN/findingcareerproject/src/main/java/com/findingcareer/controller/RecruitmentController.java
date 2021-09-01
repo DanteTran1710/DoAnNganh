@@ -6,19 +6,22 @@
 package com.findingcareer.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
  * @author hp
  */
 @Controller
-public class HomeController {
-    
-    @RequestMapping(value = "/")
-    public String index(Model model){
+public class RecruitmentController {
+    @GetMapping("/jobs")
+    public String listJob(){
         
-        return "home";
+        return "job";
+    }
+    @GetMapping("/jobs/recruitment")
+    public String recruitmentDescription(){
+        
+        return "recruitment";
     }
 }

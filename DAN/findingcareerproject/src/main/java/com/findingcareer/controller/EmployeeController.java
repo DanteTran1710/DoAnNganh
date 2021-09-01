@@ -5,6 +5,7 @@
  */
 package com.findingcareer.controller;
 
+import com.findingcareer.pojo.Employee;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author hp
  */
 @Controller
-public class HomeController {
+public class EmployeeController {
     
-    @RequestMapping(value = "/")
-    public String index(Model model){
-        
-        return "home";
+    @RequestMapping("/user/employee_profile")
+    public String editProfileEmployeeView(Model model){
+        model.addAttribute("employee", new Employee());
+        return "employeeProfile";
     }
+    
+
 }

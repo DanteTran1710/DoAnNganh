@@ -30,7 +30,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
-
+    
     @Override
     public List<User> getListUser(String username) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -62,4 +62,26 @@ public class UserRepositoryImpl implements UserRepository {
         return false;
     }
 
+    @Override
+    public boolean updateRoleUser(String username, String role) {
+        List<User> users = this.getListUser(username);
+        
+        User user = users.get(0);
+        
+        user.setUserRole(role);
+        
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        
+        try{
+            session.update(user);
+            
+            return true;
+        } catch(HibernateException ex){
+            System.err.println(ex.getMessage());
+        }
+        
+        return false;
+    }
+    
+    
 }

@@ -30,12 +30,12 @@ public class Recruitment implements Serializable{
     private String hastag;
     @ManyToOne
     @JoinColumn(name = "idCompany")
-    private Employer idCompany;
+    private Employer employer;
 
     public Recruitment() {
     }
 
-    public Recruitment(String idRecruitment, String title, String description, String content, String position, String experience, String salary, String hastag, Employer idCompany) {
+    public Recruitment(String idRecruitment, String title, String description, String content, String position, String experience, String salary, String hastag, Employer employer) {
         this.idRecruitment = idRecruitment;
         this.title = title;
         this.description = description;
@@ -44,9 +44,10 @@ public class Recruitment implements Serializable{
         this.experience = experience;
         this.salary = salary;
         this.hastag = hastag;
-        this.idCompany = idCompany;
+        this.employer = employer;
     }
 
+    
     /**
      * @return the idRecruitment
      */
@@ -160,18 +161,21 @@ public class Recruitment implements Serializable{
     }
 
     /**
-     * @return the idCompany
+     * @return the employer
      */
-    public Employer getIdCompany() {
-        return idCompany;
+    public Employer getEmployer() {
+        return employer;
     }
 
     /**
-     * @param idCompany the idCompany to set
+     * @param employer the employer to set
      */
-    public void setIdCompany(Employer idCompany) {
-        this.idCompany = idCompany;
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
     }
 
+    /**
+     * @return the idCompany
+     */
    
 }

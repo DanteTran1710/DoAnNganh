@@ -56,7 +56,7 @@
                 <span class="login100-form-title">
                     Member Login
                 </span>
-                <div class="signup-form">
+                <div class="login-form">
                     <form method="post" action="${action}">
                         <div class="form-group">
                             <label for="username"><i class="fa fa-user-circle" aria-hidden="true"></i></label>
@@ -67,7 +67,7 @@
                             <input type="password" name="password" id="pass" placeholder="Password"/>
                         </div>
                         <div class="container-login100-form-btn">     
-                            <button onclick=""  type ="submit" class="login100-form-btn">
+                            <button  type ="submit" class="login100-form-btn">
                                 Login
                             </button>
                         </div>

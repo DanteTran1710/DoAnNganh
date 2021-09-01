@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -23,11 +24,18 @@ public class UserController {
     @Autowired
     private UserService userDetailsService;
     
+    @RequestMapping("/user/authorize")
+    public String Authorize(){
+        
+        return "authorization";
+    }
+    
     @GetMapping("/login")
     public String Login(){
         
         return "login";
     }
+    
     @GetMapping("/signup")
     public String SignupView(Model model){
         model.addAttribute("user", new User());
@@ -51,9 +59,11 @@ public class UserController {
         
         return "signup";
     }
+    
     @GetMapping(path = "/admin")
     public String admin(Model model){
         
         return "dashboard";
     }
+   
 }

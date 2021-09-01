@@ -18,7 +18,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /** 
  *
@@ -64,4 +63,11 @@ public class UserServiceImpl implements UserService {
         return new org.springframework.security.core.userdetails
                 .User(user.getUsername(), user.getPassword(), authorities);
     }
+
+    @Override
+    public boolean updateRoleUser(String username, String role) {
+        return this.userRepository.updateRoleUser(username, role);
+    }
+
+    
 }

@@ -5,15 +5,13 @@
  */
 package com.findingcareer.repository;
 
-import com.findingcareer.pojo.User;
-import java.util.List;
+import com.findingcareer.pojo.Employer;
 
 /**
  *
  * @author hp
  */
-public interface UserRepository {
-    List<User> getListUser(String username);
-    boolean addUser(User user);
-    boolean updateRoleUser(String username, String role);
+
+public interface EmployerRepository {
+    boolean addEmployer(Employer e);
 }

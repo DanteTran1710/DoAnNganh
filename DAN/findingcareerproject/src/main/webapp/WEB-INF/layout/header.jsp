@@ -67,9 +67,25 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<c:url value="/" />">
-                                    <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
-                                </a>
+                                <security:authorize access="hasRole('ROLE_EMPLOYER')"> 
+                                    <a href="<c:url value="/user/employer_profile" />">
+                                        <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
+                                    </a>
+                                </security:authorize>
+                            </li>
+                            <li>
+                                <security:authorize access="hasRole('ROLE_EMPLOYEE')"> 
+                                    <a href="<c:url value="/user/employer_profile" />">
+                                        <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
+                                    </a>
+                                </security:authorize>
+                            </li>
+                            <li>
+                                <security:authorize access="hasRole('ROLE_USER')"> 
+                                    <a href="<c:url value="/user/authorize" />">
+                                        <i class="fa fa-key" aria-hidden="true"></i>&nbsp;&nbsp;DEFINE ACCOUNT
+                                    </a>
+                                </security:authorize>
                             </li>
                             <li>
                                 <security:authorize access="hasRole('ROLE_ADMIN')"> 
