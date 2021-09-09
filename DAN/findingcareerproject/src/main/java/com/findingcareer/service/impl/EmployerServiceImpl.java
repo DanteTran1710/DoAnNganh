@@ -20,9 +20,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EmployerServiceImpl implements EmployerService{
-
-    @Autowired
-    private UserRepository userRepository;
     @Autowired
     private EmployerRepository employerRepository;
     

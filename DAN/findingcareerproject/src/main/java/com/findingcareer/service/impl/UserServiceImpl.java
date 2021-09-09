@@ -9,7 +9,6 @@ import com.findingcareer.pojo.User;
 import com.findingcareer.repository.UserRepository;
 import com.findingcareer.service.UserService;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -41,20 +40,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getListUser(String username) {
-        return this.userRepository.getListUser(username);
+    public User getUserByUsername(String username) {
+        return this.userRepository.getUserByUsername(username);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Method get users
-        List<User> users = this.getListUser(username);
-        
-        if(users.isEmpty()){
-            throw new UsernameNotFoundException("USER DOESNT EXIST!");
-        }
-        
-        User user = users.get(0);
+        // Method get user
+        User user = this.getUserByUsername(username);
         
         // Method check access permission
         Set<GrantedAuthority> authorities = new HashSet<>();
@@ -65,9 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateRoleUser(String username, String role) {
-        return this.userRepository.updateRoleUser(username, role);
+    public boolean updateUser(User user) {
+        return this.userRepository.updateUser(user);
     }
-
-    
 }

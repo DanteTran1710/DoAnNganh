@@ -6,11 +6,16 @@
 package com.findingcareer.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -20,34 +25,42 @@ import javax.persistence.Table;
 @Table(name = "employee")
 public class Employee implements Serializable{
     @Id
-    private String idEmployee;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEmployee;
     private String avatarUrl;
-    private String cvUrl;
-    @OneToOne
+    private String cv;
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
     private User user;
+    private String phoneNumber;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dob;
+    private boolean sex;
+    private String nationality;
+    private String address;
 
     public Employee() {
     }
 
-    public Employee(String idEmployee, String avatarUrl, String cvUrl, User user) {
+    public Employee(int idEmployee, String avatarUrl, String cv, User user) {
         this.idEmployee = idEmployee;
         this.avatarUrl = avatarUrl;
-        this.cvUrl = cvUrl;
+        this.cv = cv;
         this.user = user;
     }
 
+    
     /**
      * @return the idEmployee
      */
-    public String getIdEmployee() {
+    public int getIdEmployee() {
         return idEmployee;
     }
 
     /**
      * @param idEmployee the idEmployee to set
      */
-    public void setIdEmployee(String idEmployee) {
+    public void setIdEmployee(int idEmployee) {
         this.idEmployee = idEmployee;
     }
 
@@ -66,17 +79,17 @@ public class Employee implements Serializable{
     }
 
     /**
-     * @return the cvUrl
+     * @return the cv
      */
     public String getCvUrl() {
-        return cvUrl;
+        return cv;
     }
 
     /**
-     * @param cvUrl the cvUrl to set
+     * @param cv the cv to set
      */
-    public void setCvUrl(String cvUrl) {
-        this.cvUrl = cvUrl;
+    public void setCvUrl(String cv) {
+        this.cv = cv;
     }
 
     /**
@@ -92,7 +105,74 @@ public class Employee implements Serializable{
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
-    
+
+    /**
+     * @return the phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * @param phoneNumber the phoneNumber to set
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    /**
+     * @return the dob
+     */
+    public Date getDob() {
+        return dob;
+    }
+
+    /**
+     * @param dob the dob to set
+     */
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    /**
+     * @return the sex
+     */
+    public boolean isSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the sex to set
+     */
+    public void setSex(boolean sex) {
+        this.sex = sex;
+    }
+
+    /**
+     * @return the nationality
+     */
+    public String getNationality() {
+        return nationality;
+    }
+
+    /**
+     * @param nationality the nationality to set
+     */
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

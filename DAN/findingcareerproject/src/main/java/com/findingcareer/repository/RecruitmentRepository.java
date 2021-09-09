@@ -5,15 +5,10 @@
  */
 package com.findingcareer.repository;
 
-import com.findingcareer.pojo.User;
-import java.util.List;
-
 /**
  *
  * @author hp
  */
-public interface UserRepository {
-    User getUserByUsername(String username);
-    boolean addUser(User user);
-    boolean updateUser(User user);
+public interface RecruitmentRepository {
+    
 }

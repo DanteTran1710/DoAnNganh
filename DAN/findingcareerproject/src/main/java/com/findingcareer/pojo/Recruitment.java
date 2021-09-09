@@ -6,7 +6,11 @@
 package com.findingcareer.pojo;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +24,8 @@ import javax.persistence.Table;
 @Table(name = "recruiment")
 public class Recruitment implements Serializable{
     @Id
-    private String idRecruitment;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idRecruitment;
     private String title;
     private String description;
     private String content;
@@ -28,14 +33,17 @@ public class Recruitment implements Serializable{
     private String experience;
     private String salary;
     private String hastag;
-    @ManyToOne
+    @ManyToOne(
+            cascade = CascadeType.REMOVE,
+            fetch = FetchType.LAZY
+    )
     @JoinColumn(name = "idCompany")
     private Employer employer;
 
     public Recruitment() {
     }
 
-    public Recruitment(String idRecruitment, String title, String description, String content, String position, String experience, String salary, String hastag, Employer employer) {
+    public Recruitment(int idRecruitment, String title, String description, String content, String position, String experience, String salary, String hastag, Employer employer) {
         this.idRecruitment = idRecruitment;
         this.title = title;
         this.description = description;
@@ -51,14 +59,14 @@ public class Recruitment implements Serializable{
     /**
      * @return the idRecruitment
      */
-    public String getIdRecruitment() {
+    public int getIdRecruitment() {
         return idRecruitment;
     }
 
     /**
      * @param idRecruitment the idRecruitment to set
      */
-    public void setIdRecruitment(String idRecruitment) {
+    public void setIdRecruitment(int idRecruitment) {
         this.idRecruitment = idRecruitment;
     }
 

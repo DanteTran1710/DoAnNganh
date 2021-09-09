@@ -11,6 +11,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 
+
 <!-- ======= AUTHORIZATION Section ======= -->
 <section id="authorize" class="authorize">
     <div class="container">
@@ -20,10 +21,10 @@
                     <div class="icon"><i class="fa fa-user fa-2x" aria-hidden="true"></i></div>
                     <div class="content">
                         <h4 class="title"><a href="">EMPLOYEE ACCOUNT</a></h4>
-                        <button type="button" class="btn btn-outline-danger"
-                                onclick="window.location.href='employee_profile'">
-                            CHANGE
-                        </button>
+                        <c:url value="/user/employee_profile" var="un" >
+                            <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
+                        </c:url>
+                        <a class="btn-change" href="${un}">CHANGE</a>
                     </div>
                 </div>
             </div>
@@ -32,12 +33,13 @@
                     <div class="icon"><i class="fa fa-building-o fa-2x" aria-hidden="true"></i></div>
                     <div class="content">
                         <h4 class="title"><a href="">EMPLOYER ACCOUNT</a></h4>
-                        <button type="button" class="btn btn-outline-danger"
-                                onclick="window.location.href='employer_profile'">
-                            CHANGE
-                        </button>
+                        <c:url value="/add_employer" var="un" >
+                            <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
+                        </c:url>
+                        <a class="btn-change" href="${un}">CHANGE</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section><!-- End Our Services Section -->

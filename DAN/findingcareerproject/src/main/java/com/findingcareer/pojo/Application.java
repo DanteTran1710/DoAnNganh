@@ -7,6 +7,8 @@ package com.findingcareer.pojo;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,17 +20,12 @@ import javax.persistence.Table;
 @Table(name = "application")
 public class Application implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String idEmployee;
-    private String idEmployer;
+    private Employee employee;
+    private Employer employer;
 
     public Application() {
-    }
-
-    public Application(int id, String idEmployee, String idEmployer) {
-        this.id = id;
-        this.idEmployee = idEmployee;
-        this.idEmployer = idEmployer;
     }
 
     /**
@@ -46,31 +43,30 @@ public class Application implements Serializable{
     }
 
     /**
-     * @return the idEmployee
+     * @return the employee
      */
-    public String getIdEmployee() {
-        return idEmployee;
+    public Employee getEmployee() {
+        return employee;
     }
 
     /**
-     * @param idEmployee the idEmployee to set
+     * @param employee the employee to set
      */
-    public void setIdEmployee(String idEmployee) {
-        this.idEmployee = idEmployee;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     /**
-     * @return the idEmployer
+     * @return the employer
      */
-    public String getIdEmployer() {
-        return idEmployer;
+    public Employer getEmployer() {
+        return employer;
     }
 
     /**
-     * @param idEmployer the idEmployer to set
+     * @param employer the employer to set
      */
-    public void setIdEmployer(String idEmployer) {
-        this.idEmployer = idEmployer;
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
     }
-    
 }

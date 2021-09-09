@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.findingcareer.repository;
-
-import com.findingcareer.pojo.Employer;
+package com.findingcareer.service.impl;
 
 /**
  *
  * @author hp
  */
-
-public interface EmployerRepository {
-    boolean addEmployer(Employer e);
-    boolean updateEmployer(Employer e);
+public class RecruitmentServiceImpl {
+    
 }

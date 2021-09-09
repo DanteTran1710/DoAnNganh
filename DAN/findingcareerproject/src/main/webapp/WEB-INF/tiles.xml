@@ -25,11 +25,9 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     
         <!-- Definition Authorization Layout -->
     <definition name="authorization" extends="homeBaseLayout">
-        <put-attribute name="header" value=""/>
-        <put-attribute name="footer" value=""/>
         <put-attribute name="banner" value=""/>
         <put-attribute name="title" value="AUTHORIZE ACCOUNT"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/authorization.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/user/authorization.jsp"/>
     </definition>
         
     <!-- Definition Job Layout -->
@@ -55,25 +53,41 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <!-- Definition Login Layout -->
     <definition name="login" extends="loginBaseLayout">
         <put-attribute name="title" value="LOGIN"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/login.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/user/login.jsp"/>
     </definition>
     
     <!-- Definition Signup Layout -->
     <definition name="signup" extends="loginBaseLayout">
         <put-attribute name="title" value="SIGN UP"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/signup.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/user/signup.jsp"/>
     </definition>
     
-    <!-- Definition Signup Layout -->
-    <definition name="employeeProfile" extends="loginBaseLayout">
+    <!-- Definition Employee profile Layout -->
+    <definition name="employeeProfile" extends="homeBaseLayout">
+        <put-attribute name="banner" value=""/>
         <put-attribute name="title" value="EMPLOYEE PROFILE"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/employeeProfile.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/employee/employeeProfile.jsp"/>
     </definition>
     
-    <!-- Definition Signup Layout -->
-    <definition name="employerProfile" extends="loginBaseLayout">
+    <!-- Definition Employer profile Layout -->
+    <definition name="employerProfile" extends="homeBaseLayout">
+        <put-attribute name="banner" value=""/>
         <put-attribute name="title" value="EMPLOYER PROFILE"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/employerProfile.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/employer/employerProfile.jsp"/>
+    </definition>
+    
+    <!-- Definition Add Employer Layout -->
+    <definition name="addEmployer" extends="homeBaseLayout">
+        <put-attribute name="banner" value=""/>
+        <put-attribute name="title" value="EMPLOYER PROFILE"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/employer/addEmployer.jsp"/>
+    </definition>
+    
+    <!-- Definition update recruiment Layout -->
+    <definition name="updateRecruitment" extends="homeBaseLayout">
+        <put-attribute name="banner" value=""/>
+        <put-attribute name="title" value="UPDATE RECRUITMENT"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/employer/updateRecruitment.jsp"/>
     </definition>
         
     <!-- Definition Admin base Layout -->
@@ -87,7 +101,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
     <!-- Definition Login Layout -->
     <definition name="dashboard" extends="adminBaseLayout">
         <put-attribute name="title" value="DASH BOARD"/>
-        <put-attribute name="content" value="/WEB-INF/jsp/dashboard.jsp"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/admin/dashboard.jsp"/>
     </definition>
     
 </tiles-definitions>

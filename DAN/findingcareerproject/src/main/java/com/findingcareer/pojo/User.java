@@ -7,7 +7,9 @@ package com.findingcareer.pojo;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -31,6 +33,10 @@ public class User implements Serializable{
     private String username;
     @Transient
     private String rePassword;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Employee employee;
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private Employer employer;
 
     public User() {
     }
@@ -157,6 +163,34 @@ public class User implements Serializable{
      */
     public void setIdUser(int idUser) {
         this.idUser = idUser;
+    }
+
+    /**
+     * @return the employee
+     */
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    /**
+     * @param employee the employee to set
+     */
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    /**
+     * @return the employer
+     */
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    /**
+     * @param employer the employer to set
+     */
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
     }
 
     /**

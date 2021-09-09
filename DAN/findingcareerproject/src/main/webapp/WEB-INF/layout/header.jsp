@@ -9,6 +9,7 @@
 <%@taglib prefix="property" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
+
 <!-- ======= Header ======= -->
 <header id="header">
     <div class="container d-flex">
@@ -20,7 +21,7 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a href="<c:url value="/" />">Home</a></li>
-                <li><a href="#about">About Us</a></li>
+                <li><a href="<c:url value="/jobs" />">Jobs</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#team">Team</a></li>
 
@@ -57,7 +58,16 @@
                 </c:if>
                 <c:if test="${pageContext.request.userPrincipal.name != null}">
                     <div class="drop-down">
-                        <a href="<c:url value="/" />">
+                        <a href="<c:url value="/"/>">
+                            <security:authorize access="hasRole('ROLE_EMPLOYER')">
+                                <i class="fa fa-building-o" aria-hidden="true"></i>&nbsp;
+                            </security:authorize>
+                            <security:authorize access="hasRole('ROLE_EMPLOYEE')">
+                                <i class="fa fa-user" aria-hidden="true"></i>&nbsp;
+                            </security:authorize>
+                            <security:authorize access="hasRole('ROLE_ADMIN')">
+                                <i class="fa fa-key" aria-hidden="true"></i>&nbsp;
+                            </security:authorize>
                             ${pageContext.request.userPrincipal.name}&nbsp;
                         </a>
                         <ul>
@@ -68,15 +78,21 @@
                             </li>
                             <li>
                                 <security:authorize access="hasRole('ROLE_EMPLOYER')"> 
-                                    <a href="<c:url value="/user/employer_profile" />">
-                                        <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
+                                    <c:url value="/user/employer_profile" var="un" >
+                                        <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
+                                    </c:url>
+                                    <a href="${un}">
+                                       <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
                                     </a>
                                 </security:authorize>
                             </li>
                             <li>
-                                <security:authorize access="hasRole('ROLE_EMPLOYEE')"> 
-                                    <a href="<c:url value="/user/employer_profile" />">
-                                        <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
+                                <security:authorize access="hasRole('ROLE_EMPLOYEE')">
+                                    <c:url value="/user/employee_profile" var="un" >
+                                        <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
+                                    </c:url>
+                                    <a href="${un}">
+                                       <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
                                     </a>
                                 </security:authorize>
                             </li>

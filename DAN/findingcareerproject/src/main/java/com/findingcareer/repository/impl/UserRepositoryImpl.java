@@ -8,6 +8,7 @@ package com.findingcareer.repository.impl;
 import com.findingcareer.pojo.User;
 import org.springframework.stereotype.Repository;
 import com.findingcareer.repository.UserRepository;
+import java.time.Clock;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -32,7 +33,7 @@ public class UserRepositoryImpl implements UserRepository {
     private LocalSessionFactoryBean sessionFactoryBean;
     
     @Override
-    public List<User> getListUser(String username) {
+    public User getUserByUsername(String username) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
@@ -44,9 +45,11 @@ public class UserRepositoryImpl implements UserRepository {
 
             query = query.where(p);
         }
+        else
+            System.out.println("Your username is null");
 
-        Query q = session.createQuery(query);
-        return q.getResultList();
+        User user = session.createQuery(query).uniqueResult();
+        return user;
     }
 
     @Override
@@ -63,25 +66,20 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean updateRoleUser(String username, String role) {
-        List<User> users = this.getListUser(username);
-        
-        User user = users.get(0);
-        
-        user.setUserRole(role);
-        
+    public boolean updateUser(User user) {  
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         
-        try{
-            session.update(user);
+        if(!user.getUserRole().isEmpty()){
+            Query q = session.createQuery("UPDATE User SET userRole=:ul WHERE id=:id ");
+            q.setParameter("ul", user.getUserRole());
+            q.setParameter("id", user.getIdUser());
+            
+            q.executeUpdate();
             
             return true;
-        } catch(HibernateException ex){
-            System.err.println(ex.getMessage());
         }
         
         return false;
     }
-    
-    
+  
 }

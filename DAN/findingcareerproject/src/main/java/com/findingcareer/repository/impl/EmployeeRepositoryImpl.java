@@ -5,8 +5,8 @@
  */
 package com.findingcareer.repository.impl;
 
-import com.findingcareer.pojo.Employer;
-import com.findingcareer.repository.EmployerRepository;
+import com.findingcareer.pojo.Employee;
+import com.findingcareer.repository.EmployeeRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class EmployerRepositoryImpl implements EmployerRepository{
+public class EmployeeRepositoryImpl implements EmployeeRepository{
+
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
     
     @Override
-    public boolean addEmployer(Employer e) {
+    public boolean addEmployee(Employee e) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         
         try{
@@ -40,20 +41,7 @@ public class EmployerRepositoryImpl implements EmployerRepository{
     }
 
     @Override
-    public boolean updateEmployer(Employer e) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
-        
-        
-//        if(!e.getUserRole().isEmpty()){
-//            Query q = session.createQuery("UPDATE employer SET userRole=:ul WHERE id=:id ");
-//            q.setParameter("ul", user.getUserRole());
-//            q.setParameter("id", user.getIdUser());
-//            
-//            q.executeUpdate();
-//            
-//            return true;
-//        }
-//        
+    public boolean updateEmployee(Employee empl) {
         return false;
     }
     

@@ -6,9 +6,14 @@
 package com.findingcareer.pojo;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,22 +23,28 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "employer")
-public class Employer implements Serializable{
+public class Employer implements Serializable {
+
     @Id
-    private String idEmployer;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idEmployer;
     private String phoneNumber;
     private String companyName;
     private String orientation;
     private String address;
     private String description;
-    @OneToOne
-    @JoinColumn(name  = "idUser")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idUser")
     private User user;
+    @OneToMany(mappedBy = "employer")
+    private Set<Recruitment> listRecruiment;
+    private String logo;
+    private String companyImgs;
 
     public Employer() {
     }
 
-    public Employer(String idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user) {
+    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user) {
         this.idEmployer = idEmployer;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
@@ -43,17 +54,18 @@ public class Employer implements Serializable{
         this.user = user;
     }
 
+    
     /**
      * @return the idEmployer
      */
-    public String getIdEmployer() {
+    public int getIdEmployer() {
         return idEmployer;
     }
 
     /**
      * @param idEmployer the idEmployer to set
      */
-    public void setIdEmployer(String idEmployer) {
+    public void setIdEmployer(int idEmployer) {
         this.idEmployer = idEmployer;
     }
 
@@ -140,7 +152,47 @@ public class Employer implements Serializable{
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
-    
+
+    /**
+     * @return the listRecruiment
+     */
+    public Set<Recruitment> getListRecruiment() {
+        return listRecruiment;
     }
+
+    /**
+     * @param listRecruiment the listRecruiment to set
+     */
+    public void setListRecruiment(Set<Recruitment> listRecruiment) {
+        this.listRecruiment = listRecruiment;
+    }
+
+    /**
+     * @return the logo
+     */
+    public String getLogo() {
+        return logo;
+    }
+
+    /**
+     * @param logo the logo to set
+     */
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    /**
+     * @return the companyImgs
+     */
+    public String getCompanyImgs() {
+        return companyImgs;
+    }
+
+    /**
+     * @param companyImgs the companyImgs to set
+     */
+    public void setCompanyImgs(String companyImgs) {
+        this.companyImgs = companyImgs;
+    }
+
+}
