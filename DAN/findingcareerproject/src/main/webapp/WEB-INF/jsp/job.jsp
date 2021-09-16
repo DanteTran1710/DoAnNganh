@@ -40,52 +40,53 @@
         </div>
     </div>
     <div class="container">
-        <div class="search input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search">
-            <div class="input-group-append">
-                <button class="btn-search" type="submit">Go</button>
+        <form action="">
+            <div class="search input-group mb-3">
+                <input type="text" name="kw" class="form-control" placeholder="Search">
+                <div class="input-group-append">
+                    <button class="btn-search" type="submit">Go</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="container">
         <div class="filter-result">
-            
+
         </div>
     </div>
     <div class="container">
         <div class="row pb-4">
-            <div class="col-md-12 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0 pb-4">
-                <div class="icon-box">
-                    <div class="box1">
-                        <div class="icon"></div>
-                        <h4 class="title"><a href="<c:url value="/jobs/recruitment"/>">Title</a></h4>
+            <c:forEach var="r" items="${recruitment}">
+                <div class="col-md-12 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0 pb-4">
+                    <div class="icon-box">
+                        <div class="box1">
+                            <div class="icon"></div>
+                            <h4 class="title"><a href="<c:url value="/jobs/recruitment"/>">${r.title}</a></h4>
+                        </div>
+                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                     </div>
-                    <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                 </div>
-            </div>
-            <div class="col-md-12 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0 pb-4">
-                <div class="icon-box">
-                    <div class="icon"></div>
-                    <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
-                    <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                </div>
-            </div>
+            </c:forEach>
         </div>
         <nav class="pagi">
             <ul class="pagination pagination-lg justify-content-center">
+
                 <li class="page-item">
                     <a class="page-link" href="#">
                         <i class="fa fa-caret-left" aria-hidden="true"></i>
                     </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <c:forEach begin="1" end="${Math.ceil(counter/3)}" var="i">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/jobs"/>?page=${i}">${i}</a>
+                    </li>
+                </c:forEach>
                 <li class="page-item">
                     <a class="page-link" href="#">
                         <i class="fa fa-caret-right" aria-hidden="true"></i>
                     </a>
                 </li>
+
             </ul>
         </nav>
 </section><!-- End Our Services Section -->

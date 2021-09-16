@@ -5,10 +5,14 @@
  */
 package com.findingcareer.service;
 
+import com.findingcareer.pojo.Recruitment;
+import java.util.List;
+
 /**
  *
  * @author hp
  */
 public interface RecruitmentService {
-    
+    List<Recruitment> getListRecruitment(String kw, int page);
+    long countRecruitment();
 }

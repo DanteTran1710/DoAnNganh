@@ -21,14 +21,15 @@ import javax.persistence.Table;
  * @author hp
  */
 @Entity
-@Table(name = "recruiment")
+@Table(name = "recruitment")
 public class Recruitment implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRecruitment;
     private String title;
+    private String welfare;
     private String description;
-    private String content;
+    private String requirement;
     private String position;
     private String experience;
     private String salary;
@@ -39,20 +40,27 @@ public class Recruitment implements Serializable{
     )
     @JoinColumn(name = "idCompany")
     private Employer employer;
+    @ManyToOne(
+            cascade =  CascadeType.REMOVE,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "idCategory")
+    private CategoryJob categoryJob;
 
     public Recruitment() {
     }
 
-    public Recruitment(int idRecruitment, String title, String description, String content, String position, String experience, String salary, String hastag, Employer employer) {
+    public Recruitment(int idRecruitment, String title, String description, String requirement, String position, String experience, String salary, String hastag, Employer employer, CategoryJob categoryJob) {
         this.idRecruitment = idRecruitment;
         this.title = title;
         this.description = description;
-        this.content = content;
+        this.requirement = requirement;
         this.position = position;
         this.experience = experience;
         this.salary = salary;
         this.hastag = hastag;
         this.employer = employer;
+        this.categoryJob = categoryJob;
     }
 
     
@@ -99,17 +107,17 @@ public class Recruitment implements Serializable{
     }
 
     /**
-     * @return the content
+     * @return the requirement
      */
-    public String getContent() {
-        return content;
+    public String getRequirement() {
+        return requirement;
     }
 
     /**
-     * @param content the content to set
+     * @param requirement the requirement to set
      */
-    public void setContent(String content) {
-        this.content = content;
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
     }
 
     /**
@@ -183,7 +191,31 @@ public class Recruitment implements Serializable{
     }
 
     /**
-     * @return the idCompany
+     * @return the categoryJob
      */
-   
+    public CategoryJob getCategoryJob() {
+        return categoryJob;
+    }
+
+    /**
+     * @param categoryJob the categoryJob to set
+     */
+    public void setCategoryJob(CategoryJob categoryJob) {
+        this.categoryJob = categoryJob;
+    }
+
+    /**
+     * @return the welfare
+     */
+    public String getWelfare() {
+        return welfare;
+    }
+
+    /**
+     * @param welfare the welfare to set
+     */
+    public void setWelfare(String welfare) {
+        this.welfare = welfare;
+    }
+
 }
