@@ -26,9 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class RecruitmentRepositoryImpl implements RecruitmentRepository{
-
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
+    
     @Override
     public List<Recruitment> getListRecruitment(String kw, int page) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
@@ -62,4 +62,10 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository{
         return Long.parseLong(q.getSingleResult().toString());
     }
     
+    @Override
+    public Recruitment getRecruitmentById(int id) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        
+        return session.get(Recruitment.class, id);
+    }  
 }

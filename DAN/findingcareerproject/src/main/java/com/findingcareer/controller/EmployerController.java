@@ -55,7 +55,7 @@ public class EmployerController {
 
         if (this.employerService.addEmployer(employer) == true) {
             // CHANGE USER ROLE
-            this.userService.updateUser(u);
+            this.userService.updateUserRole(u);
             return "redirect:/login";
         } else {
             errorMessage = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";

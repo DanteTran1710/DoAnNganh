@@ -56,5 +56,12 @@ public class EmployerRepositoryImpl implements EmployerRepository{
 //        
         return false;
     }
+
+    @Override
+    public Employer getEmployerById(int id) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        
+        return session.get(Employer.class, id);
+    }
     
 }

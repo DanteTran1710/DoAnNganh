@@ -5,10 +5,13 @@
  */
 package com.findingcareer.controller;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.findingcareer.pojo.Employee;
 import com.findingcareer.pojo.User;
 import com.findingcareer.service.EmployeeService;
 import com.findingcareer.service.UserService;
+import java.io.IOException;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +29,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class EmployeeController {
 
     @Autowired
+    private Cloudinary cloudinary;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
     private EmployeeService employeeService;
+    
 
     String username;
 
@@ -38,7 +45,17 @@ public class EmployeeController {
             @RequestParam Map<String, String> params) {
 
         this.username = params.get("username");
-        model.addAttribute("employee", new Employee());
+
+        Employee e = new Employee();
+                    model.addAttribute("employee", e);
+
+        User u = this.userService.getUserByUsername(username);
+        if (u.getUserRole().equals("ROLE_USER")) {
+            model.addAttribute("employee", e);
+        } else {
+            e = this.employeeService.getEmployeeByUserId(1);
+            model.addAttribute("employee",e);
+        }
 
         return "employeeProfile";
     }
@@ -46,7 +63,19 @@ public class EmployeeController {
     @PostMapping("/user/employee_profile")
     public String editProfileEmployee(Model model,
             @ModelAttribute(value = "employee") Employee e) {
-        String errorMessage = null;
+
+        // LOAD IMAGE UP TO CLOUDINARY
+        String img = null;
+        try {
+            Map r = this.cloudinary.uploader().upload(e.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            //GET IMAGE'S URL AND ADD TO DATABASE
+            img = (String) r.get("secure_url");
+        } catch (IOException ex) {
+            System.err.println("Failure: " + ex.getMessage());
+        }
+
+        String message = null;
 
         //GET USER BY USER NAME
         User u = this.userService.getUserByUsername(username);
@@ -57,19 +86,24 @@ public class EmployeeController {
             u.setUserRole("ROLE_EMPLOYEE");
             // SET ID USER FOR EMPLOYEE
             e.setUser(u);
+            e.setAvatarUrl(img);
             // ADD NEW EMPLOYER
             if (this.employeeService.addEmployee(e) == true) {
                 // CHANGE USER ROLE
-                this.userService.updateUser(u);
+                this.userService.updateUserRole(u);
                 return "redirect:/login";
             } else {
-                errorMessage = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
+                message = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
             }
         } // EDIT PROFILE 
-        else {
-            return "/user/employee_profile";
+        else if (u.getUserRole().equals("ROLE_EMPLOYEE")) {
+            if (this.employeeService.updateEmployee(e)) {
+                message = "Cập nhật dữ liệu thành công!";
+            } else {
+                message = "Cập nhật dữ liệu thất bại";
+            }
         }
-        model.addAttribute("errorMessage", errorMessage);
+        model.addAttribute("errorMessage", message);
 
         return "employeeProfile";
     }

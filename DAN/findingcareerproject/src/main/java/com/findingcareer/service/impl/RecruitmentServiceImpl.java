@@ -32,4 +32,9 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         return this.recruitmentRepository.countRecruitment();
     }
 
+    @Override
+    public Recruitment getRecruitmentById(int id) {
+        return this.recruitmentRepository.getRecruitmentById(id);
+    }
+
 }

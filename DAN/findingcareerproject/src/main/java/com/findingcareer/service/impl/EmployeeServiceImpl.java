@@ -25,5 +25,15 @@ public class EmployeeServiceImpl implements EmployeeService{
         
         return this.employeeRepository.addEmployee(e);
     }
+
+    @Override
+    public boolean updateEmployee(Employee e) {
+        return this.employeeRepository.updateEmployee(e);
+    }
+
+    @Override
+    public Employee getEmployeeByUserId(int i) {
+        return this.employeeRepository.getEmployeeByUserId(i);
+    }
     
 }

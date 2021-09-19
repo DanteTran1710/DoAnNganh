@@ -28,5 +28,10 @@ public class EmployerServiceImpl implements EmployerService{
         
         return this.employerRepository.addEmployer(e);
     }
+
+    @Override
+    public Employer getEmployerById(int id) {
+        return this.employerRepository.getEmployerById(id);
+    }
     
 }

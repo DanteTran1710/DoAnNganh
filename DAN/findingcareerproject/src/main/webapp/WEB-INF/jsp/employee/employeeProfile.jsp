@@ -54,11 +54,12 @@
             <fieldset class="border p-2">
                 <legend class="w-auto p-2">PERSONAL INFORMATION</legend>  
 
-                <form:form method="post" action="${action}" modelAttribute="employee">
+                <form:form method="post" action="${action}" modelAttribute="employee"
+                           enctype="multipart/form-data">
                     <div class="personal-form grid-container">
                         <div class="grid-item form-group">
                             <label for="phone">Phone number</label>
-                            <form:input type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
+                            <form:input value="${employee.phoneNumber}" type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
                         </div>
                         <div class="grid-item form-group">
                             <label for="dob">Day of birth</label>
@@ -79,6 +80,10 @@
                         <div class="grid-item form-group">
                             <label for="address">Address</label>
                             <form:input type="text" path="address" id="address" placeholder="Address"/>
+                        </div>
+                                                <div class="grid-item form-group">
+                            <label for="file">Address</label>
+                            <form:input type="file" path="file" id="file"/>
                         </div>
                     </div>
                     <div class="accept-section">

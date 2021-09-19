@@ -16,25 +16,35 @@
         <div class="filter input-group mb-3">
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="<c:url value="/" />">Home</a></li>
-                    <li><a href="<c:url value="/jobs" />">Jobs</a></li>
-                    <li class="drop-down"><a href="">Drop Down</a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="drop-down"><a href="#">Drop Down 2</a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                            <li><a href="#">Drop Down 5</a></li>
+                    <li class="drop-down"><a href="">Tất cả cấp bậc</a>
+                        <ul class="scrolltable">
+                            <li><a href="#">Thực tập sinh/Sinh viên</a></li>
+                            <li><a href="#">Mới tốt nghiệp</a></li>
+                            <li><a href="#">Nhân viên</a></li>
+                            <li><a href="#">Trưởng phòng</a></li>
+                            <li><a href="#">Giám đốc và cao cấp hơn</a></li>
                         </ul>
                     </li>
+                    <li class="drop-down"><a href="<c:url value="/jobs"/>">Tất cả ngành nghề</a>
+                        <ul class="scrolltable">
+                            <c:forEach var="cat" items="${category}">
+                                <c:url value="/jobs" var="id">
+                                    <c:param name="idCat" value="${cat.idCategory}"></c:param>
+                                </c:url>
+                                <li><a href="${id}">${cat.nameJob}</a></li>
+                            </c:forEach>
+                        </ul>
+                    </li>
+                    <li class="drop-down"><a href="">Tất cả mức lương</a>
+                        <ul class="scrolltable">
+                            <li><a href="#"><= $500</a></li>
+                            <li><a href="#">$500 - $1000</a></li>
+                            <li><a href="#">$1000 - 2000</a></li>
+                            <li><a href="#">$2000 - $3000</a></li>
+                            <li><a href="#">>= $3000</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Việc làm cần gấp</a></li>
                 </ul>
             </nav>
         </div>
@@ -61,7 +71,7 @@
                     <div class="icon-box">
                         <div class="box1">
                             <div class="icon"></div>
-                            <h4 class="title"><a href="<c:url value="/jobs/recruitment"/>">${r.title}</a></h4>
+                            <h4 class="title"><a href="<c:url value="/recruitment/${r.idRecruitment}"/>">${r.title}</a></h4>
                         </div>
                         <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                     </div>

@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUser(User user) {
-        return this.userRepository.updateUser(user);
+    public boolean updateUserRole(User user) {
+        return this.userRepository.updateUserRole(user);
     }
 }

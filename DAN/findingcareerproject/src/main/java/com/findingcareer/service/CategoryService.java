@@ -5,15 +5,14 @@
  */
 package com.findingcareer.service;
 
-import com.findingcareer.pojo.Employee;
+import com.findingcareer.pojo.CategoryJob;
+import java.util.List;
 
 /**
  *
  * @author hp
  */
-public interface EmployeeService {
-    boolean addEmployee(Employee e);
-    boolean updateEmployee(Employee e);
-    Employee getEmployeeByUserId(int id);
-
+public interface CategoryService {
+    List<CategoryJob> getListCategory();
+    CategoryJob getCategoryById(int id);
 }

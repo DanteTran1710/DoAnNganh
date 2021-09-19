@@ -16,6 +16,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -38,6 +40,8 @@ public class Employee implements Serializable{
     private boolean sex;
     private String nationality;
     private String address;
+    @Transient
+    private MultipartFile file;
 
     public Employee() {
     }
@@ -174,5 +178,19 @@ public class Employee implements Serializable{
      */
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 }

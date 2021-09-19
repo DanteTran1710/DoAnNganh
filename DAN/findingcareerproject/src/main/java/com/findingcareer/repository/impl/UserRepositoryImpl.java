@@ -66,7 +66,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public boolean updateUser(User user) {  
+    public boolean updateUserRole(User user) {  
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         
         if(!user.getUserRole().isEmpty()){

@@ -15,13 +15,13 @@
     picture
 </div>
 <div class="container jobtitle">
-    title
+    <div>${re.title}</div>
 </div>
 <div class="container">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#jobinfor">JOB INFO</a>
+            <a class="nav-link active" data-toggle="tab" href="#jobinfor">JOB INFOR</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="#companyinfor">COMPANY INFO</a>
@@ -31,26 +31,59 @@
     <div class="tab-content">
         <div id="jobinfor" class="container tab-pane active">
             <div class="jobinfor">
-                <div class="wrap-infor ">
-                    <div class="offer">offer</div>
-                    <div class="mt-2 description">description</div>
-                    <div class="mt-2 requirement">requirement</div>
-                    <div class="mt-2 address">address</div>
-                    <div class="mt-2 hastag">hastag</div>
+                <div class="wrap-infor " id="description">
+                    <div class="section">
+                        <label>WHAT WE CAN OFFER</label>
+                        <div class="offer">${re.welfare}</div>
+                    </div>
+                    <div class="section">
+                        <label>JOB DESCRIPTION</label>
+                        <div class="mt-2 description">${re.description}</div>
+                    </div>
+                    <div class="section">
+                        <label>JOB REQUIREMENTS</label>
+                        <div class="mt-2 requirement">${re.requirement}</div>
+                    </div>
+                    <div class="section">
+                        <label>JOB LOCATIONS</label>
+                        <div class="mt-2 address">address</div>
+                    </div>
+                    <div class="section">
+                        <label>TAGS</label>
+                        <div class="mt-2 hastag">${re.hastag}</div>
+                    </div>
                 </div>
-                <div class="wrap-infor">
-                    <div class="mt-2 summary">Summary</div>
+                <div class="wrap-infor" id="summary">
+                    <div class="mt-2 summary">
+                        <div class="section">
+                            
+                        <label>JOB LEVEL</label>
+                        <div class="mt-2 description">${re.position}</div>
+                        </div>
+                        <div class="section">
+                             <label>SKILL</label>
+                        <div class="mt-2 description">${re.experience}</div>
+                        </div>
+                       
+                    </div>
                 </div>
             </div>
         </div>
         <div id="companyinfor" class="container tab-pane fade">
             <div class="companyinfor">
-                <div class="wrap-infor">
-                    <div class="imgs mt-2">img</div>
-                    <div class="infor mt-2">infor</div>
+                <div class="wrap-infor" id="description">
+                    <div class="section">
+                                            <div class="imgs mt-2">img</div>
+                    <div class="infor mt-2">${co.orientation}</div>
+                    </div>
                 </div>
                 <div class="wrap-infor">
-                    <div class="location">locatison</div>
+                    <div class="location">
+                        <div class="section">
+                            <label>LOCATION</label>
+                        <div class="mt-2 description">${co.address}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -14,4 +14,5 @@ import com.findingcareer.pojo.Employee;
 public interface EmployeeRepository {
     boolean addEmployee(Employee e);
     boolean updateEmployee(Employee e);
+    Employee getEmployeeByUserId(int id);
 }
