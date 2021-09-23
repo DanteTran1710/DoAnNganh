@@ -6,6 +6,7 @@
 package com.findingcareer.controller;
 
 import com.findingcareer.pojo.CategoryJob;
+import Utils.Utils;
 import com.findingcareer.pojo.Recruitment;
 import com.findingcareer.service.EmployerService;
 import com.findingcareer.service.RecruitmentService;
@@ -36,22 +37,44 @@ public class RecruitmentController {
     public String listJob(Model model,
             @RequestParam(required = false) Map<String, String> params) {
         String kw = params.getOrDefault("kw", null);
-        int page = Integer.parseInt(params.getOrDefault("page", "1"));
-
+        String page = params.getOrDefault("page", "1");
+        String position = params.getOrDefault("position", null);
+        String salary = params.get("salary");
         String idCate = params.get("idCat");
-        if (idCate == null) {
-            model.addAttribute("recruitment",
-                    this.recruitmentService.getListRecruitment(kw, page));
-            model.addAttribute("counter", this.recruitmentService.countRecruitment());
-        } else {
-            CategoryJob c = this.categoryService.getCategoryById(Integer.parseInt(idCate));
-            model.addAttribute("recruitment", c.getListRecruitment());
-            model.addAttribute("counter", c.getListRecruitment().size());
-            
-        }
+        String now = params.get("now");
         
-        model.addAttribute("category", this.categoryService.getListCategory());
+        if(now != null){
+            model.addAttribute("recruitment",
+                    Utils.pagination(this.recruitmentService.
+                            getListRecruitmentByNow(Integer.parseInt(now)), page));
+            model.addAttribute("now",now);
+        }
+        else if(salary != null){
+            String[] l = salary.split("-");
+            
+            model.addAttribute("recruitment",
+                    Utils.pagination(this.recruitmentService.getListRecruitmentBySalary(
+                            Integer.parseInt(l[0]),Integer.parseInt(l[1])), page));
+        }   
+        else if (position != null) {
+            // POSITION CONDITIONS
+            model.addAttribute("recruitment",
+                    Utils.pagination(this.recruitmentService.getListRecruitmentByFilter(position), page));
+            model.addAttribute("position", position);
+        } else if (idCate != null && position == null) {
+            // CATEGORY CONDITIONS
+            CategoryJob c = this.categoryService.getCategoryById(Integer.parseInt(idCate));
+            model.addAttribute("recruitment", Utils.pagination(c.getListRecruitment(), page));
+            model.addAttribute("idCate", idCate);
 
+        } else{
+            // KEYWORDS CONDITIONS AND NO CONDITIONS
+            model.addAttribute("recruitment",
+                    Utils.pagination(this.recruitmentService.getListRecruitment(kw), page));
+            model.addAttribute("keyword", kw);
+        }
+
+        model.addAttribute("category", this.categoryService.getListCategory());
         return "job";
     }
 

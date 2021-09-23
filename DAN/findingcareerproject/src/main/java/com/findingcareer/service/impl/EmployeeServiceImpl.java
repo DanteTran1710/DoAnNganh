@@ -32,8 +32,8 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
 
     @Override
-    public Employee getEmployeeByUserId(int i) {
-        return this.employeeRepository.getEmployeeByUserId(i);
+    public Employee getEmployeeById(int i) {
+        return this.employeeRepository.getEmployeeById(i);
     }
     
 }

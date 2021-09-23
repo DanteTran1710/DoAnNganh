@@ -15,7 +15,16 @@
     picture
 </div>
 <div class="container jobtitle">
-    <div>${re.title}</div>
+    <div class="imglogo">img</div>
+    <div class="job-title">
+        <label class="big-title">${re.title}</label>
+        <div class="button-apply">
+            <div>APPLY CV</div>
+            <div class="like">
+                <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
     <!-- Nav tabs -->
@@ -54,17 +63,21 @@
                     </div>
                 </div>
                 <div class="wrap-infor" id="summary">
-                    <div class="mt-2 summary">
+                    <div class="summary">
                         <div class="section">
-                            
-                        <label>JOB LEVEL</label>
-                        <div class="mt-2 description">${re.position}</div>
+                            <label>
+                                <i class="fa fa-id-badge" aria-hidden="true"></i>
+                                &nbsp;&nbsp;JOB LEVEL
+                            </label>
+                            <div class="mt-2 description">${re.position}</div>
                         </div>
                         <div class="section">
-                             <label>SKILL</label>
-                        <div class="mt-2 description">${re.experience}</div>
+                            <label>
+                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                &nbsp;&nbsp;SKILL
+                            </label>
+                            <div class="mt-2 description">${re.experience}</div>
                         </div>
-                       
                     </div>
                 </div>
             </div>
@@ -73,15 +86,18 @@
             <div class="companyinfor">
                 <div class="wrap-infor" id="description">
                     <div class="section">
-                                            <div class="imgs mt-2">img</div>
-                    <div class="infor mt-2">${co.orientation}</div>
+                        <div class="imgs mt-2">img</div>
+                        <div class="infor mt-2">${co.orientation}</div>
                     </div>
                 </div>
                 <div class="wrap-infor">
                     <div class="location">
                         <div class="section">
-                            <label>LOCATION</label>
-                        <div class="mt-2 description">${co.address}</div>
+                            <label>
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                &nbsp;&nbsp;LOCATION
+                            </label>
+                            <div class="mt-2 description">${co.address}</div>
                         </div>
                     </div>
                 </div>
@@ -92,3 +108,4 @@
 
 <div class="recommend">recommend</div>
 
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

@@ -27,17 +27,13 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class EmployeeController {
-
     @Autowired
     private Cloudinary cloudinary;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private EmployeeService employeeService;
     
-
     String username;
 
     @GetMapping("/user/employee_profile")
@@ -46,17 +42,15 @@ public class EmployeeController {
 
         this.username = params.get("username");
 
-        Employee e = new Employee();
-                    model.addAttribute("employee", e);
-
         User u = this.userService.getUserByUsername(username);
+
         if (u.getUserRole().equals("ROLE_USER")) {
-            model.addAttribute("employee", e);
-        } else {
-            e = this.employeeService.getEmployeeByUserId(1);
+            model.addAttribute("employee", new Employee());
+        } else if (u.getUserRole().equals("ROLE_EMPLOYEE")){
+            Employee e = this.employeeService.getEmployeeById(u.getEmployee().getIdEmployee());
             model.addAttribute("employee",e);
         }
-
+        
         return "employeeProfile";
     }
 
@@ -75,7 +69,7 @@ public class EmployeeController {
             System.err.println("Failure: " + ex.getMessage());
         }
 
-        String message = null;
+        String message;
 
         //GET USER BY USER NAME
         User u = this.userService.getUserByUsername(username);
@@ -96,14 +90,16 @@ public class EmployeeController {
                 message = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
             }
         } // EDIT PROFILE 
-        else if (u.getUserRole().equals("ROLE_EMPLOYEE")) {
+        else {
+            e.setIdEmployee(u.getEmployee().getIdEmployee());
+            e.setAvatarUrl(img);
             if (this.employeeService.updateEmployee(e)) {
                 message = "Cập nhật dữ liệu thành công!";
             } else {
                 message = "Cập nhật dữ liệu thất bại";
             }
         }
-        model.addAttribute("errorMessage", message);
+        model.addAttribute("message", message);
 
         return "employeeProfile";
     }

@@ -14,7 +14,7 @@
 
 <!-- CHECK OUT THE ERROR AND SHOW TOAST MESSAGE  -->
 <c:if test="${param.error != null}">
-        <div id="toast">
+    <div id="toast">
         <div id="toast_main">
             <div class="toast_icon">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -30,7 +30,7 @@
     </div>
 </c:if>
 <c:if test="${param.accessDenied != null}">
-        <div id="toast">
+    <div id="toast">
         <div id="toast_main">
             <div class="toast_icon">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
@@ -82,6 +82,12 @@
                         </a>
                     </div>
                     <div class="text-center p-t-136">
+                        <a class="txt2" href="<c:url value="/"/>">
+                            BACK TO HOME
+                            <i class="fa fa-long-arrow-left m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="text-center p-t-12">
                         <a class="txt2" href="<c:url value="/signup"/>">
                             CREATE YOUR ACCOUNT
                             <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>

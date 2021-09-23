@@ -11,23 +11,6 @@
 
 <c:url value="/user/employee_profile" var="action" />
 
-<c:if test="${errorMessage != null}">
-    <div id="toast">
-        <div id="toast_main">
-            <div class="toast_icon">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            </div>
-            <div class="toast_body">
-                <h3 class="toast_title">THẤT BẠI!</h3>
-                <div class="toast_message">${errorMessage}</div>
-            </div>
-            <div class="toast_close" onclick="removeToast();">
-                <i class="fa fa-times" aria-hidden="true"></i>
-            </div>
-        </div>
-    </div>
-</c:if>
-
 <c:if test="${message != null}">
     <div id="toast">
         <div id="toast_main">
@@ -56,6 +39,7 @@
 
                 <form:form method="post" action="${action}" modelAttribute="employee"
                            enctype="multipart/form-data">
+                    <div>${a}</div>
                     <div class="personal-form grid-container">
                         <div class="grid-item form-group">
                             <label for="phone">Phone number</label>
@@ -92,7 +76,7 @@
                         </div>
                         <div class="save_cancelButtons">
                             <div class="container-login100-form-btn mr-2">
-                                <button type="cancel" class="login100-form-btn cancel">CANCEL</button>
+                                <button type="submit" class="login100-form-btn cancel">CANCEL</button>
                             </div>
                             <div class="container-login100-form-btn">
                                 <button type="submit" class="login100-form-btn update">UPDATE</button>

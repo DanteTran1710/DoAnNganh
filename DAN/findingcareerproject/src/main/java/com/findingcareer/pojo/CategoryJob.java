@@ -6,7 +6,7 @@
 package com.findingcareer.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -26,7 +26,7 @@ public class CategoryJob implements Serializable{
     private String description;
     private String hastag;
     @OneToMany(mappedBy = "categoryJob", fetch = FetchType.EAGER)
-    private Set<Recruitment> listRecruitment;
+    private List<Recruitment> listRecruitment;
     
 
     public CategoryJob() {
@@ -98,14 +98,14 @@ public class CategoryJob implements Serializable{
     /**
      * @return the listRecruitment
      */
-    public Set<Recruitment> getListRecruitment() {
+    public List<Recruitment> getListRecruitment() {
         return listRecruitment;
     }
 
     /**
      * @param listRecruitment the listRecruitment to set
      */
-    public void setListRecruitment(Set<Recruitment> listRecruitment) {
+    public void setListRecruitment(List<Recruitment> listRecruitment) {
         this.listRecruitment = listRecruitment;
     }
 

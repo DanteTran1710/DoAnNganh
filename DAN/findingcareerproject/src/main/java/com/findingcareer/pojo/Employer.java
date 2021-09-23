@@ -40,6 +40,7 @@ public class Employer implements Serializable {
     private Set<Recruitment> listRecruiment;
     private String logo;
     private String companyImgs;
+    private boolean active;
 
     public Employer() {
     }
@@ -193,6 +194,20 @@ public class Employer implements Serializable {
      */
     public void setCompanyImgs(String companyImgs) {
         this.companyImgs = companyImgs;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }

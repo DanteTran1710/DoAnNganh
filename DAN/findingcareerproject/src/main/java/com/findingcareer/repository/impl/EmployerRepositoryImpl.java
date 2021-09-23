@@ -9,6 +9,7 @@ import com.findingcareer.pojo.Employer;
 import com.findingcareer.repository.EmployerRepository;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -43,17 +44,23 @@ public class EmployerRepositoryImpl implements EmployerRepository{
     public boolean updateEmployer(Employer e) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         
-        
-//        if(!e.getUserRole().isEmpty()){
-//            Query q = session.createQuery("UPDATE employer SET userRole=:ul WHERE id=:id ");
-//            q.setParameter("ul", user.getUserRole());
-//            q.setParameter("id", user.getIdUser());
-//            
-//            q.executeUpdate();
-//            
-//            return true;
-//        }
-//        
+        if(!e.getCompanyName().isEmpty() && !e.getAddress().isEmpty()
+           && !e.getDescription().isEmpty() && !e.getOrientation().isEmpty()
+           && !e.getPhoneNumber().isEmpty()){
+            String query = "UPDATE Employer SET companyName=:a, phoneNumber=:b, orientation=:c,"
+                    + "description=:d, address=:f WHERE idEmployer=:id ";
+            javax.persistence.Query q = session.createQuery(query);
+            q.setParameter("a", e.getCompanyName());
+            q.setParameter("b", e.getPhoneNumber());
+            q.setParameter("c", e.getOrientation());
+            q.setParameter("d", e.getDescription());
+            q.setParameter("f", e.getAddress());
+            q.setParameter("id", e.getIdEmployer());
+            
+            q.executeUpdate();
+            
+            return true;
+        }
         return false;
     }
 

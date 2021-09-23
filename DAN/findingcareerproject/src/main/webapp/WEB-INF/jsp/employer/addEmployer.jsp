@@ -36,7 +36,7 @@
         <div class="login100-pic js-tilt" data-tilt>
             <img src="<c:url value="/img/signup-login/img-01.png"/>" alt="IMG">
         </div>
-        <div class="login-form scrolltable">
+        <div class="login-form">
             <div class="signup-form">
                 <form:form method="post" action="${action}" modelAttribute="employer">
                     <div class="form-group">

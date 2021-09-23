@@ -23,13 +23,8 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     private RecruitmentRepository recruitmentRepository;
 
     @Override
-    public List<Recruitment> getListRecruitment(String kw, int page) {
-        return this.recruitmentRepository.getListRecruitment(kw, page);
-    }
-
-    @Override
-    public long countRecruitment() {
-        return this.recruitmentRepository.countRecruitment();
+    public List<Recruitment> getListRecruitment(String kw) {
+        return this.recruitmentRepository.getListRecruitment(kw);
     }
 
     @Override
@@ -37,4 +32,18 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         return this.recruitmentRepository.getRecruitmentById(id);
     }
 
+    @Override
+    public List<Recruitment> getListRecruitmentByFilter(String kw) {
+        return this.recruitmentRepository.getListRecruitmentByFilter(kw);
+    }
+
+    @Override
+    public List<Recruitment> getListRecruitmentBySalary(int i, int i1) {
+        return this.recruitmentRepository.getListRecruitmentBySalary(i, i1);
+    }
+
+    @Override
+    public List<Recruitment> getListRecruitmentByNow(int a) {
+        return this.recruitmentRepository.getListRecruitmentByNow(a);
+    }
 }

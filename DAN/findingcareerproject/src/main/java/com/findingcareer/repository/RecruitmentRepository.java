@@ -13,7 +13,9 @@ import java.util.List;
  * @author hp
  */
 public interface RecruitmentRepository {
-    List<Recruitment> getListRecruitment(String kw, int page);
+    List<Recruitment> getListRecruitment(String kw);
+    List<Recruitment> getListRecruitmentByFilter(String kw);
+    List<Recruitment> getListRecruitmentBySalary(int a, int b);
+    List<Recruitment> getListRecruitmentByNow(int a);
     Recruitment getRecruitmentById(int id);
-    long countRecruitment();
 }

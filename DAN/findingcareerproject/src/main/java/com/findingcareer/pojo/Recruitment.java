@@ -6,6 +6,7 @@
 package com.findingcareer.pojo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -32,7 +33,8 @@ public class Recruitment implements Serializable{
     private String requirement;
     private String position;
     private String experience;
-    private String salary;
+    private BigDecimal salary;
+    private boolean now;
     private String hastag;
     @ManyToOne(
             cascade = CascadeType.REMOVE,
@@ -50,7 +52,7 @@ public class Recruitment implements Serializable{
     public Recruitment() {
     }
 
-    public Recruitment(int idRecruitment, String title, String description, String requirement, String position, String experience, String salary, String hastag, Employer employer, CategoryJob categoryJob) {
+    public Recruitment(int idRecruitment, String title, String description, String requirement, String position, String experience, BigDecimal salary, String hastag, Employer employer, CategoryJob categoryJob) {
         this.idRecruitment = idRecruitment;
         this.title = title;
         this.description = description;
@@ -151,14 +153,14 @@ public class Recruitment implements Serializable{
     /**
      * @return the salary
      */
-    public String getSalary() {
+    public BigDecimal getSalary() {
         return salary;
     }
 
     /**
      * @param salary the salary to set
      */
-    public void setSalary(String salary) {
+    public void setSalary(BigDecimal salary) {
         this.salary = salary;
     }
 
@@ -216,6 +218,20 @@ public class Recruitment implements Serializable{
      */
     public void setWelfare(String welfare) {
         this.welfare = welfare;
+    }
+
+    /**
+     * @return the now
+     */
+    public boolean isNow() {
+        return now;
+    }
+
+    /**
+     * @param now the now to set
+     */
+    public void setNow(boolean now) {
+        this.now = now;
     }
 
 }

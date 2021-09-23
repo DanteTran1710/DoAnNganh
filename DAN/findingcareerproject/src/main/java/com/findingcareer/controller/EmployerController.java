@@ -65,37 +65,34 @@ public class EmployerController {
 
         return "addEmployer";
     }
-    
-     @GetMapping("/user/employer_profile")
+
+    @GetMapping("/user/employer_profile")
     public String profileEmployerView(Model model, @RequestParam Map<String, String> params) {
         username = params.get("username");
-        model.addAttribute("employer", new Employer());
+
+        User u = this.userService.getUserByUsername(username);
+
+        model.addAttribute("employer",
+                this.employerService.getEmployerById(u.getEmployer().getIdEmployer()));
 
         return "employerProfile";
     }
 
     @PostMapping("/user/employer_profile")
     public String profileEmployer(Model model,
-            @ModelAttribute(value = "employer") Employer employer) {
-        String errorMessage;
+            @ModelAttribute(value = "employer") Employer e) {
+        String message;
+        
+        e.setIdEmployer(this.userService.
+                getUserByUsername(username).getEmployer().getIdEmployer());
+        if (this.employerService.updateEmployer(e) == true) {
 
-        //GET USER BY USER NAME
-//        User u = this.userService.getUserByUsername(username);
-//        // SET NEW ROLE FOR USER
-//        u.setUserRole("ROLE_EMPLOYER");
-//        // SET ID USER FOR EMPLOYER
-//        employer.setUser(u);
-//        // ADD NEW EMPLOYER
-//
-//        if (this.employerService.addEmployer(employer) == true) {
-//            // CHANGE USER ROLE
-//            this.userService.updateUser(u);
-//            return "redirect:/login";
-//        } else {
-//            errorMessage = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
-//        }
-//
-//        model.addAttribute("errorMessage", errorMessage);
+            message = "Cập nhật dữ liệu thành công";
+        } else {
+            message = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
+        }
+
+        model.addAttribute("message", message);
 
         return "employerProfile";
     }
