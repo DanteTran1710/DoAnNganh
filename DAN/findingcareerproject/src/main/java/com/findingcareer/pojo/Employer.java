@@ -6,7 +6,7 @@
 package com.findingcareer.pojo;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,8 +36,8 @@ public class Employer implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
     private User user;
-    @OneToMany(mappedBy = "employer")
-    private Set<Recruitment> listRecruiment;
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER)
+    private List<Recruitment> listRecruiment;
     private String logo;
     private String companyImgs;
     private boolean active;
@@ -157,14 +157,14 @@ public class Employer implements Serializable {
     /**
      * @return the listRecruiment
      */
-    public Set<Recruitment> getListRecruiment() {
+    public List<Recruitment> getListRecruiment() {
         return listRecruiment;
     }
 
     /**
      * @param listRecruiment the listRecruiment to set
      */
-    public void setListRecruiment(Set<Recruitment> listRecruiment) {
+    public void setListRecruiment(List<Recruitment> listRecruiment) {
         this.listRecruiment = listRecruiment;
     }
 

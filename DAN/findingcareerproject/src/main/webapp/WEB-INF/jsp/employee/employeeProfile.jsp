@@ -8,8 +8,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:url value="/user/employee_profile" var="action" />
+<c:url value="/employee/employee-profile" var="action" />
 
 <c:if test="${message != null}">
     <div id="toast">
@@ -19,7 +20,7 @@
             </div>
             <div class="toast_body">
                 <h3 class="toast_title">THÔNG BÁO!</h3>
-                <div class="toast_message">${Message}</div>
+                <div class="toast_message">${message}</div>
             </div>
             <div class="toast_close" onclick="removeToast();">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -39,15 +40,16 @@
 
                 <form:form method="post" action="${action}" modelAttribute="employee"
                            enctype="multipart/form-data">
-                    <div>${a}</div>
                     <div class="personal-form grid-container">
                         <div class="grid-item form-group">
                             <label for="phone">Phone number</label>
-                            <form:input value="${employee.phoneNumber}" type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
+                            <form:input type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
                         </div>
                         <div class="grid-item form-group">
                             <label for="dob">Day of birth</label>
-                            <form:input type="text" path="dob" id="dob" placeholder="Your DOB"/>
+                            <fmt:formatDate value="${employee.dob}" var="date" pattern="dd/MM/yyyy" />
+                            <input type="text" id="date" class="form-control date" placeholder="Check-in date">
+                            <form:input value="${date}" path="dob" id="dob"/>
                         </div>
                         <div class="grid-item form-group">
                             <label for="dob">Sex:</label>&nbsp;
@@ -65,8 +67,8 @@
                             <label for="address">Address</label>
                             <form:input type="text" path="address" id="address" placeholder="Address"/>
                         </div>
-                                                <div class="grid-item form-group">
-                            <label for="file">Address</label>
+                        <div class="grid-item form-group">
+                            <label for="file">Avatar User</label>
                             <form:input type="file" path="file" id="file"/>
                         </div>
                     </div>

@@ -24,14 +24,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+    private LocalSessionFactoryBean sessionFactory;
 
     @Override
     public boolean addEmployee(Employee e) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
+            System.err.println("ID:" + e.getIdEmployee());
             session.save(e);
-
             return true;
         } catch (HibernateException ex) {
             System.err.println(ex.getMessage());
@@ -42,7 +42,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public boolean updateEmployee(Employee e) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+       Session session = this.sessionFactory.getObject().getCurrentSession();
         
         if(!e.getAvatarUrl().isEmpty() && !e.getAddress().isEmpty()
            && !e.getNationality().isEmpty() && !e.getPhoneNumber().isEmpty()){
@@ -67,7 +67,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Employee getEmployeeById(int i) {
-       Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+       Session session = this.sessionFactory.getObject().getCurrentSession();
        
        return session.get(Employee.class, i);
     }

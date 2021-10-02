@@ -1,6 +1,6 @@
 <%-- 
-    Document   : employerProfile
-    Created on : Aug 31, 2021, 11:50:41 AM
+    Document   : addEmployee
+    Created on : Sep 29, 2021, 9:28:08 AM
     Author     : hp
 --%>
 
@@ -8,9 +8,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:url value="/employer/employer-profile" var="action" />
-
+<c:url value="/user/add-employee" var="action" />
 <c:if test="${message != null}">
     <div id="toast">
         <div id="toast_main">
@@ -19,7 +19,7 @@
             </div>
             <div class="toast_body">
                 <h3 class="toast_title">THÔNG BÁO!</h3>
-                <div class="toast_message">${message}</div>
+                <div class="toast_message">${Message}</div>
             </div>
             <div class="toast_close" onclick="removeToast();">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -35,29 +35,39 @@
         </span>
         <div class="login100-form validate-form">
             <fieldset class="border p-2">
-                <legend class="w-auto p-2">UPDATE PROFILE</legend>  
+                <legend class="w-auto p-2">PERSONAL INFORMATION</legend>  
 
-                <form:form method="post" action="${action}" modelAttribute="employer">
+                <form:form method="post" action="${action}" modelAttribute="employee"
+                           enctype="multipart/form-data">
                     <div class="personal-form grid-container">
                         <div class="grid-item form-group">
                             <label for="phone">Phone number</label>
-                            <form:input type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
+                            <form:input value="${employee.phoneNumber}" type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
                         </div>
                         <div class="grid-item form-group">
-                            <label for="companyName">Company name</label>
-                            <form:input type="text" path="companyName" id="companyName" placeholder="Company Name"/>
+                            <label for="dob">Day of birth</label>
+                            <fmt:formatDate value="${employee.dob}" var="date" pattern="dd/MM/yyyy" />
+                            <form:input value="${date}" path="dob" id="dob"/>    
                         </div>
                         <div class="grid-item form-group">
-                            <label for="orientation">Orientation</label>
-                            <form:input type="text" path="orientation" id="orientation" placeholder="Your Orientation"/>
+                            <label for="dob">Sex:</label>&nbsp;
+                            Male&nbsp;<form:radiobutton path="sex" value="0"/>&nbsp;
+                            Female&nbsp;<form:radiobutton path="sex" value="1"/>&nbsp;
+                        </div>
+                        <div class="grid-item form-group">
+                            <label for="nationality">Nationality</label>
+                            <form:select path="nationality" id="nationality" class="custom-select w-75">
+                                <form:option value="Local VietNamese">Local VietNamese</form:option>
+                                <form:option value="Foreigner">Foreigner</form:option>
+                            </form:select>
                         </div>
                         <div class="grid-item form-group">
                             <label for="address">Address</label>
                             <form:input type="text" path="address" id="address" placeholder="Address"/>
                         </div>
                         <div class="grid-item form-group">
-                            <label for="description">Description for company</label>
-                            <form:textarea type="textarea" path="description" id="description"/>
+                            <label for="file">Address</label>
+                            <form:input type="file" path="file" id="file"/>
                         </div>
                     </div>
                     <div class="accept-section">

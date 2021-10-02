@@ -8,8 +8,6 @@ package com.findingcareer.repository.impl;
 import com.findingcareer.pojo.User;
 import org.springframework.stereotype.Repository;
 import com.findingcareer.repository.UserRepository;
-import java.time.Clock;
-import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,11 +28,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserRepositoryImpl implements UserRepository {
 
     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+    private LocalSessionFactoryBean sessionFactory;
     
     @Override
     public User getUserByUsername(String username) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<User> query = builder.createQuery(User.class);
         Root root = query.from(User.class);
@@ -54,7 +52,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean addUser(User user) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         try{
             session.save(user);
             
@@ -67,7 +65,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public boolean updateUserRole(User user) {  
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         
         if(!user.getUserRole().isEmpty()){
             Query q = session.createQuery("UPDATE User SET userRole=:ul WHERE id=:id ");

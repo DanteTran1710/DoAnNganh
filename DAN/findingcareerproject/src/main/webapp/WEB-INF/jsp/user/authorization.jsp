@@ -21,7 +21,7 @@
                     <div class="icon"><i class="fa fa-user fa-2x" aria-hidden="true"></i></div>
                     <div class="content">
                         <h4 class="title"><a href="">EMPLOYEE ACCOUNT</a></h4>
-                        <c:url value="/user/employee_profile" var="un" >
+                        <c:url value="/user/add-employee" var="un" >
                             <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
                         </c:url>
                         <a class="btn-change" href="${un}">CHANGE</a>
@@ -33,7 +33,7 @@
                     <div class="icon"><i class="fa fa-building-o fa-2x" aria-hidden="true"></i></div>
                     <div class="content">
                         <h4 class="title"><a href="">EMPLOYER ACCOUNT</a></h4>
-                        <c:url value="/add_employer" var="un" >
+                        <c:url value="/user/add-employer" var="un" >
                             <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
                         </c:url>
                         <a class="btn-change" href="${un}">CHANGE</a>

@@ -35,16 +35,17 @@ public class Recruitment implements Serializable{
     private String experience;
     private BigDecimal salary;
     private boolean now;
-    private String hastag;
     @ManyToOne(
             cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER,
+            optional = true
     )
     @JoinColumn(name = "idCompany")
     private Employer employer;
     @ManyToOne(
+            optional = true,
             cascade =  CascadeType.REMOVE,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(name = "idCategory")
     private CategoryJob categoryJob;
@@ -52,7 +53,7 @@ public class Recruitment implements Serializable{
     public Recruitment() {
     }
 
-    public Recruitment(int idRecruitment, String title, String description, String requirement, String position, String experience, BigDecimal salary, String hastag, Employer employer, CategoryJob categoryJob) {
+    public Recruitment(int idRecruitment, String title, String description, String requirement, String position, String experience, BigDecimal salary, Employer employer, CategoryJob categoryJob) {
         this.idRecruitment = idRecruitment;
         this.title = title;
         this.description = description;
@@ -60,7 +61,6 @@ public class Recruitment implements Serializable{
         this.position = position;
         this.experience = experience;
         this.salary = salary;
-        this.hastag = hastag;
         this.employer = employer;
         this.categoryJob = categoryJob;
     }
@@ -162,20 +162,6 @@ public class Recruitment implements Serializable{
      */
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
-    }
-
-    /**
-     * @return the hastag
-     */
-    public String getHastag() {
-        return hastag;
-    }
-
-    /**
-     * @param hastag the hastag to set
-     */
-    public void setHastag(String hastag) {
-        this.hastag = hastag;
     }
 
     /**

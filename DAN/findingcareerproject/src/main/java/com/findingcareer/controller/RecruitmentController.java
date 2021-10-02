@@ -8,15 +8,20 @@ package com.findingcareer.controller;
 import com.findingcareer.pojo.CategoryJob;
 import Utils.Utils;
 import com.findingcareer.pojo.Recruitment;
+import com.findingcareer.pojo.User;
 import com.findingcareer.service.EmployerService;
 import com.findingcareer.service.RecruitmentService;
 import com.findingcareer.service.CategoryService;
+import com.findingcareer.service.UserService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -25,13 +30,14 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class RecruitmentController {
-
     @Autowired
     private RecruitmentService recruitmentService;
     @Autowired
     private EmployerService employerService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/jobs")
     public String listJob(Model model,
@@ -46,7 +52,7 @@ public class RecruitmentController {
         if(now != null){
             model.addAttribute("recruitment",
                     Utils.pagination(this.recruitmentService.
-                            getListRecruitmentByNow(Integer.parseInt(now)), page));
+                            getListRecruitmentByNow(Integer.parseInt(now)), page,3));
             model.addAttribute("now",now);
         }
         else if(salary != null){
@@ -54,23 +60,23 @@ public class RecruitmentController {
             
             model.addAttribute("recruitment",
                     Utils.pagination(this.recruitmentService.getListRecruitmentBySalary(
-                            Integer.parseInt(l[0]),Integer.parseInt(l[1])), page));
+                            Integer.parseInt(l[0]),Integer.parseInt(l[1])), page,3));
         }   
         else if (position != null) {
             // POSITION CONDITIONS
             model.addAttribute("recruitment",
-                    Utils.pagination(this.recruitmentService.getListRecruitmentByFilter(position), page));
+                    Utils.pagination(this.recruitmentService.getListRecruitmentByFilter(position), page,3));
             model.addAttribute("position", position);
         } else if (idCate != null && position == null) {
             // CATEGORY CONDITIONS
             CategoryJob c = this.categoryService.getCategoryById(Integer.parseInt(idCate));
-            model.addAttribute("recruitment", Utils.pagination(c.getListRecruitment(), page));
+            model.addAttribute("recruitment", Utils.pagination(c.getListRecruitment(), page,3));
             model.addAttribute("idCate", idCate);
 
         } else{
             // KEYWORDS CONDITIONS AND NO CONDITIONS
             model.addAttribute("recruitment",
-                    Utils.pagination(this.recruitmentService.getListRecruitment(kw), page));
+                    Utils.pagination(this.recruitmentService.getListRecruitment(kw), page,3));
             model.addAttribute("keyword", kw);
         }
 
@@ -79,7 +85,7 @@ public class RecruitmentController {
     }
 
     @GetMapping("/recruitment/{recruitmentId}")
-    public String recruitmentDescription(Model model,
+    public String recruitment(Model model,
             @PathVariable(value = "recruitmentId") int recruitmentId) {
 
         Recruitment r = this.recruitmentService.getRecruitmentById(recruitmentId);
@@ -90,4 +96,73 @@ public class RecruitmentController {
 
         return "recruitment";
     }
+    
+    @GetMapping("/employer/recruitment/update/{recruitmentId}")
+    public String recruitmentByCompany(Model model,
+            @PathVariable(value = "recruitmentId") int recruitmentId) {
+
+        Recruitment r = this.recruitmentService.getRecruitmentById(recruitmentId);
+
+        model.addAttribute("r", r);
+        model.addAttribute("cate",this.categoryService.getListCategory());
+
+        return "updateRecruitment";
+    }
+    
+    @PostMapping("/employer/recruitment/update/{recruitmentId}")
+    public String updateRecruitmentByCompany(Model model,
+           @ModelAttribute(value = "r") Recruitment recruitment, 
+           @PathVariable(value = "recruitmentId") int recruitmentId) {
+        String message;
+        
+        recruitment.setIdRecruitment(recruitmentId);
+        
+        CategoryJob c = this.categoryService.
+                getCategoryById(recruitment.getCategoryJob().getIdCategory());
+        
+        recruitment.setCategoryJob(c);
+        
+        if(this.recruitmentService.updateRecruitment(recruitment) == true)
+            message = "Cập nhật dữ liệu thành công";
+        else
+            message = "Cập nhật dữ liệu thất bại";
+        
+        model.addAttribute("message", message);
+
+        return "updateRecruitment";
+    }
+    
+    @GetMapping("/employer/recruitment/new")
+    public String newRecruitmentByCompany(Model model) {
+
+        model.addAttribute("r", new Recruitment());
+        model.addAttribute("cate",this.categoryService.getListCategory());
+
+        return "addRecruitment";
+    }
+    
+    @PostMapping("/employer/recruitment/new")
+    public String addNewRecruitmentByCompany(Model model,
+            @ModelAttribute(value="r") Recruitment recruitment) {
+        String message;
+
+        CategoryJob c = this.categoryService.
+                getCategoryById(recruitment.getCategoryJob().getIdCategory());
+        
+        User u = this.userService.getUserByUsername("unknow");
+        
+        recruitment.setEmployer(u.getEmployer());
+        
+        recruitment.setCategoryJob(c);
+        
+        if(this.recruitmentService.addRecruitment(recruitment) == true)
+            message = "Cập nhật dữ liệu thành công";
+        else
+            message = "Cập nhật dữ liệu thất bại";
+        
+        model.addAttribute("message", message);
+
+        return "addRecruitment";
+    }
+   
 }

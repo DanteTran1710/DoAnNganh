@@ -1,6 +1,6 @@
 <%-- 
-    Document   : updateRecruitment
-    Created on : Sep 29, 2021, 6:28:49 PM
+    Document   : addRecruitment
+    Created on : Oct 2, 2021, 11:34:47 AM
     Author     : hp
 --%>
 
@@ -9,7 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:url value="/employer/recruitment/${r.idRecruitment}" var="action" />
+<c:url value="/employer/recruitment/new" var="action" />
 
 <c:if test="${message != null}">
     <div id="toast">
@@ -32,8 +32,9 @@
         <div class="login100-form validate-form">
             <fieldset class="border p-2">
                 <legend class="w-auto p-2">RECRUITMENT DETAILS</legend>  
-
+                
                 <form:form method="post" action="${action}" modelAttribute="r">
+                    <h1>${r.idRecruitment}</h1>
                     <div class="personal-form">
                         <div class="grid-item form-group">
                             <label for="title">Title</label>
@@ -58,12 +59,7 @@
                         <div class="grid-item form-group">
                             <label for="salary" class="w-auto">Salary offer (By $)</label>
                             <form:checkbox path="salary" value="0" id="action" onclick="show()"/> Thỏa thuận lương
-                            <c:if test="${r.salary == 0}">
                             <form:input type="text" path="salary" id="salary-company-job" disabled="true"/>
-                            </c:if>
-                            <c:if test="${r.salary != 0}">
-                            <form:input type="text" path="salary" id="salary-company-job"/>
-                            </c:if>
                         </div>
                        <div class="grid-item form-group">
                             <label for="salary" class="w-auto">Require job now</label>

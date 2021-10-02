@@ -15,6 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -30,11 +31,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+    private LocalSessionFactoryBean sessionFactory;
 
     @Override
     public List<Recruitment> getListRecruitment(String kw) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
@@ -54,64 +55,108 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
     @Override
     public Recruitment getRecruitmentById(int id) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
 
         return session.get(Recruitment.class, id);
     }
 
     @Override
     public List<Recruitment> getListRecruitmentByFilter(String pos) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
 
         if (pos != null) {
-            Predicate p = builder.equal(root.get("position").as(String.class),pos);
+            Predicate p = builder.equal(root.get("position").as(String.class), pos);
 
             query = query.where(p);
         }
 
         Query q = session.createQuery(query);
 
-        return q.getResultList();  
+        return q.getResultList();
     }
 
     @Override
     public List<Recruitment> getListRecruitmentBySalary(int a, int b) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
         Predicate p;
-        
-        if (b == 0 && a == 0) 
-            p = builder.equal(root.get("salary").as(BigDecimal.class),0);
-        else
+
+        if (b == 0 && a == 0) {
+            p = builder.equal(root.get("salary").as(BigDecimal.class), 0);
+        } else {
             p = builder.between(root.get("salary").as(BigDecimal.class), a, b);
-        
+        }
+
         query = query.where(p);
         Query q = session.createQuery(query);
 
-        return q.getResultList();   
+        return q.getResultList();
     }
 
     @Override
     public List<Recruitment> getListRecruitmentByNow(int a) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
         query = query.select(root);
-        
-        Predicate p = builder.equal(root.get("now"),a);
-        
+
+        Predicate p = builder.equal(root.get("now"), a);
+
         query = query.where(p);
         Query q = session.createQuery(query);
 
-        return q.getResultList();    
+        return q.getResultList();
+    }
+
+    @Override
+    public boolean updateRecruitment(Recruitment r) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+
+        if (r.getCategoryJob() != null && !r.getDescription().equals("")
+                && !r.getExperience().equals("") && !r.getPosition().equals("")
+                && !r.getRequirement().equals("") && !r.getTitle().equals("")
+                && !r.getWelfare().equals("")) {
+            String query = "UPDATE Recruitment SET title=:a, welfare=:b, description=:c,"
+                    + "requirement=:d, position=:e, experience=:f, salary=:g, now=:h, categoryJob=:i"
+                    + " WHERE idRecruitment=:id ";
+            Query q = session.createQuery(query);
+            q.setParameter("a", r.getTitle());
+            q.setParameter("b", r.getWelfare());
+            q.setParameter("c", r.getDescription());
+            q.setParameter("d", r.getRequirement());
+            q.setParameter("e", r.getPosition());
+            q.setParameter("f", r.getExperience());
+            q.setParameter("g", r.getSalary());
+            q.setParameter("h", r.isNow());
+            q.setParameter("i", r.getCategoryJob());
+            q.setParameter("id", r.getIdRecruitment());
+
+            q.executeUpdate();
+
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addRecruitment(Recruitment r) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.save(r);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println("MESSAGE HERE = " +ex.getMessage());
+        }
+        return false;
     }
 
 }

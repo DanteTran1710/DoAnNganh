@@ -1884,8 +1884,26 @@ label{
     color: #425451;
 }
 /*--------------------------------------------------------------
+# RECRUIMENTS BY COMPANY
+--------------------------------------------------------------*/
+.jobscompany{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #C0C0C0;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+.jobscompany .jcompany{
+    padding: 20px;
+}
+
+/*--------------------------------------------------------------
 # RECRUIMENTS
 --------------------------------------------------------------*/
+#title-company-job, #salary-company-job{
+    width: 100%;
+}
 #description{
     width: 75%;
 }

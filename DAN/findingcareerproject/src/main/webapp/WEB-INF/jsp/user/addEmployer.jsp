@@ -1,6 +1,6 @@
 <%-- 
-    Document   : employerProfile
-    Created on : Aug 31, 2021, 11:50:41 AM
+    Document   : addEmployer
+    Created on : Sep 9, 2021, 5:41:46 PM
     Author     : hp
 --%>
 
@@ -9,7 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:url value="/employer/employer-profile" var="action" />
+<c:url value="/add-employer" var="action" />
 
 <c:if test="${message != null}">
     <div id="toast">
@@ -37,7 +37,7 @@
             <fieldset class="border p-2">
                 <legend class="w-auto p-2">UPDATE PROFILE</legend>  
 
-                <form:form method="post" action="${action}" modelAttribute="employer">
+                <form:form method="post" action="${action}" modelAttribute="employer" >
                     <div class="personal-form grid-container">
                         <div class="grid-item form-group">
                             <label for="phone">Phone number</label>

@@ -17,11 +17,11 @@ import org.springframework.beans.support.PagedListHolder;
  */
 public class Utils {
 
-    public static PagedListHolder<Recruitment> pagination(List<Recruitment> list, String page){
+    public static PagedListHolder<Recruitment> pagination(List<Recruitment> list, String page, int size){
         PagedListHolder<Recruitment> pagedList = new PagedListHolder<>();
         
         pagedList.setSource(list);
-        pagedList.setPageSize(3);
+        pagedList.setPageSize(size);
         if(page.equals("prev"))
             pagedList.previousPage();
         else if(page.equals("next"))

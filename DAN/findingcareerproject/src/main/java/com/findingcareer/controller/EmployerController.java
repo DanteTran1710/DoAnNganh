@@ -10,6 +10,9 @@ import com.findingcareer.pojo.User;
 import com.findingcareer.service.EmployerService;
 import com.findingcareer.service.UserService;
 import java.util.Map;
+import Utils.Utils;
+import com.findingcareer.pojo.Recruitment;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,7 +35,7 @@ public class EmployerController {
 
     private String username;
 
-    @GetMapping("/add_employer")
+    @GetMapping("/user/add-employer")
     public String addEmployerView(Model model, @RequestParam Map<String, String> params) {
         this.username = params.get("username");
         model.addAttribute("employer", new Employer());
@@ -40,7 +43,7 @@ public class EmployerController {
         return "addEmployer";
     }
 
-    @PostMapping("/add_employer")
+    @PostMapping("/user/add-employer")
     public String addEmployer(Model model,
             @ModelAttribute(value = "employer") Employer employer) {
         String errorMessage;
@@ -66,7 +69,7 @@ public class EmployerController {
         return "addEmployer";
     }
 
-    @GetMapping("/user/employer_profile")
+    @GetMapping("/employer/employer-profile")
     public String profileEmployerView(Model model, @RequestParam Map<String, String> params) {
         username = params.get("username");
 
@@ -78,7 +81,7 @@ public class EmployerController {
         return "employerProfile";
     }
 
-    @PostMapping("/user/employer_profile")
+    @PostMapping("/employer/employer-profile")
     public String profileEmployer(Model model,
             @ModelAttribute(value = "employer") Employer e) {
         String message;
@@ -95,5 +98,21 @@ public class EmployerController {
         model.addAttribute("message", message);
 
         return "employerProfile";
+    }
+    
+    @GetMapping("/employer/manage")
+    public String recruitmentByCompany(Model model,@RequestParam Map<String, String> params){
+        
+        username = params.get("username");
+        String page = params.getOrDefault("page", "1");
+        
+        User u = this.userService.getUserByUsername(username);
+        
+        Employer e = this.employerService.getEmployerById(u.getEmployer().getIdEmployer());
+        
+        model.addAttribute("recruitments",Utils.pagination(e.getListRecruiment(),page,2));
+        model.addAttribute("un", username);
+        
+        return "manageRecruitment";
     }
 }

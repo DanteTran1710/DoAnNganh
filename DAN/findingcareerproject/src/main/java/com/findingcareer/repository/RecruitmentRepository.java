@@ -18,4 +18,6 @@ public interface RecruitmentRepository {
     List<Recruitment> getListRecruitmentBySalary(int a, int b);
     List<Recruitment> getListRecruitmentByNow(int a);
     Recruitment getRecruitmentById(int id);
+    boolean updateRecruitment(Recruitment r);
+    boolean addRecruitment(Recruitment r);
 }

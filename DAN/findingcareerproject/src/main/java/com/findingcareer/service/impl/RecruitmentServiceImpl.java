@@ -21,6 +21,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Autowired
     private RecruitmentRepository recruitmentRepository;
+    
 
     @Override
     public List<Recruitment> getListRecruitment(String kw) {
@@ -45,5 +46,16 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     @Override
     public List<Recruitment> getListRecruitmentByNow(int a) {
         return this.recruitmentRepository.getListRecruitmentByNow(a);
+    }
+
+    @Override
+    public boolean updateRecruitment(Recruitment r) {
+        return this.recruitmentRepository.updateRecruitment(r);
+    }
+
+    @Override
+    public boolean addRecruitment(Recruitment r) {
+        
+        return this.recruitmentRepository.addRecruitment(r);
     }
 }

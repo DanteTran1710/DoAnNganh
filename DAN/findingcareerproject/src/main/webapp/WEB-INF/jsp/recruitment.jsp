@@ -59,7 +59,7 @@
                     </div>
                     <div class="section">
                         <label>TAGS</label>
-                        <div class="mt-2 hastag">${re.hastag}</div>
+                        <div class="mt-2 hastag"></div>
                     </div>
                 </div>
                 <div class="wrap-infor" id="summary">

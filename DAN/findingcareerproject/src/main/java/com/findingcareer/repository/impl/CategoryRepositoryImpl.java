@@ -27,11 +27,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryRepositoryImpl implements CategoryRepository{
 
     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+    private LocalSessionFactoryBean sessionFactory;
     
     @Override
     public List<CategoryJob> getListCategory() {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<CategoryJob> query = builder.createQuery(CategoryJob.class);
         Root root = query.from(CategoryJob.class);
@@ -45,7 +45,7 @@ public class CategoryRepositoryImpl implements CategoryRepository{
 
     @Override
     public CategoryJob getCategoryById(int id) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         
         return session.get(CategoryJob.class, id);
     }
