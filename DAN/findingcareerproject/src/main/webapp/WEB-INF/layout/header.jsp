@@ -78,30 +78,21 @@
                             </li>
                             <li>
                                 <security:authorize access="hasRole('ROLE_EMPLOYER')"> 
-                                    <c:url value="/employer/employer-profile" var="un">
-                                        <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
-                                    </c:url>
-                                    <a href="${un}">
+                                    <a href="<c:url value="/employer/employer-profile"/>">
                                         <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
                                     </a>
                                 </security:authorize>
                             </li>
                             <li>
                                 <security:authorize access="hasRole('ROLE_EMPLOYER')"> 
-                                    <c:url value="/employer/manage" var="un">
-                                        <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
-                                    </c:url>
-                                    <a href="${un}">
+                                    <a href="<c:url value="/employer/manage"/>">
                                         <i class="fa fa-server" aria-hidden="true"></i>&nbsp;&nbsp;MANAGE RECRUITMENT
                                     </a>
                                 </security:authorize>
                             </li>
                             <li>
                                 <security:authorize access="hasRole('ROLE_EMPLOYEE')">
-                                    <c:url value="/employee/employee-profile" var="un" >
-                                        <c:param name="username" value="${pageContext.request.userPrincipal.name}" />
-                                    </c:url>
-                                    <a href="${un}">
+                                    <a href="<c:url value="/employee/employee-profile"/>">
                                         <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
                                     </a>
                                 </security:authorize>

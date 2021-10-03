@@ -42,16 +42,14 @@
         </div>
         <!-- CLASSIFY THE PAGINATION BY THE CONDITIONS -->
         <nav class="pagi">
-            <c:if test="${un != null}">
-                <ul class="pagination pagination-lg justify-content-center">
-                    <c:forEach begin="1" end="${list.pageCount}" step="1" varStatus="i">
-                        <li class="page-item">
-                            <a class="page-link" href="
-                               <c:url value="/employer/manage"/>?username=${un}&page=${i.index}">${i.index}</a>
-                        </li>
-                    </c:forEach>
-                </ul>
-            </c:if>
+            <ul class="pagination pagination-lg justify-content-center">
+                <c:forEach begin="1" end="${list.pageCount}" step="1" varStatus="i">
+                    <li class="page-item">
+                        <a class="page-link" href="
+                           <c:url value="/employer/manage"/>?page=${i.index}">${i.index}</a>
+                    </li>
+                </c:forEach>
+            </ul>
         </nav>
     </div>
 </section><!-- End Our Services Section -->

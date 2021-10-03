@@ -11,9 +11,8 @@ import com.findingcareer.service.EmployerService;
 import com.findingcareer.service.UserService;
 import java.util.Map;
 import Utils.Utils;
-import com.findingcareer.pojo.Recruitment;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,11 +32,8 @@ public class EmployerController {
     @Autowired
     private EmployerService employerService;
 
-    private String username;
-
     @GetMapping("/user/add-employer")
-    public String addEmployerView(Model model, @RequestParam Map<String, String> params) {
-        this.username = params.get("username");
+    public String addEmployerView(Model model) {
         model.addAttribute("employer", new Employer());
 
         return "addEmployer";
@@ -48,17 +44,8 @@ public class EmployerController {
             @ModelAttribute(value = "employer") Employer employer) {
         String errorMessage;
 
-        //GET USER BY USER NAME
-        User u = this.userService.getUserByUsername(username);
-        // SET NEW ROLE FOR USER
-        u.setUserRole("ROLE_EMPLOYER");
-        // SET ID USER FOR EMPLOYER
-        employer.setUser(u);
         // ADD NEW EMPLOYER
-
         if (this.employerService.addEmployer(employer) == true) {
-            // CHANGE USER ROLE
-            this.userService.updateUserRole(u);
             return "redirect:/login";
         } else {
             errorMessage = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
@@ -70,10 +57,10 @@ public class EmployerController {
     }
 
     @GetMapping("/employer/employer-profile")
-    public String profileEmployerView(Model model, @RequestParam Map<String, String> params) {
-        username = params.get("username");
+    public String profileEmployerView(Model model) {
 
-        User u = this.userService.getUserByUsername(username);
+        User u = this.userService.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
 
         model.addAttribute("employer",
                 this.employerService.getEmployerById(u.getEmployer().getIdEmployer()));
@@ -86,8 +73,6 @@ public class EmployerController {
             @ModelAttribute(value = "employer") Employer e) {
         String message;
         
-        e.setIdEmployer(this.userService.
-                getUserByUsername(username).getEmployer().getIdEmployer());
         if (this.employerService.updateEmployer(e) == true) {
 
             message = "Cập nhật dữ liệu thành công";
@@ -103,15 +88,14 @@ public class EmployerController {
     @GetMapping("/employer/manage")
     public String recruitmentByCompany(Model model,@RequestParam Map<String, String> params){
         
-        username = params.get("username");
         String page = params.getOrDefault("page", "1");
         
-        User u = this.userService.getUserByUsername(username);
+        User u = this.userService.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
         
         Employer e = this.employerService.getEmployerById(u.getEmployer().getIdEmployer());
         
         model.addAttribute("recruitments",Utils.pagination(e.getListRecruiment(),page,2));
-        model.addAttribute("un", username);
         
         return "manageRecruitment";
     }

@@ -9,7 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:url value="/employer/recruitment/${r.idRecruitment}" var="action" />
+<c:url value="/employer/recruitment/update/${r.idRecruitment}" var="action" />
 
 <c:if test="${message != null}">
     <div id="toast">

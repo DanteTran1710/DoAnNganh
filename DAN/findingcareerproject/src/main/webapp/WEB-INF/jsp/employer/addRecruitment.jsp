@@ -34,7 +34,6 @@
                 <legend class="w-auto p-2">RECRUITMENT DETAILS</legend>  
                 
                 <form:form method="post" action="${action}" modelAttribute="r">
-                    <h1>${r.idRecruitment}</h1>
                     <div class="personal-form">
                         <div class="grid-item form-group">
                             <label for="title">Title</label>
@@ -59,7 +58,7 @@
                         <div class="grid-item form-group">
                             <label for="salary" class="w-auto">Salary offer (By $)</label>
                             <form:checkbox path="salary" value="0" id="action" onclick="show()"/> Thỏa thuận lương
-                            <form:input type="text" path="salary" id="salary-company-job" disabled="true"/>
+                            <form:input type="text" path="salary" id="salary-company-job"/>
                         </div>
                        <div class="grid-item form-group">
                             <label for="salary" class="w-auto">Require job now</label>

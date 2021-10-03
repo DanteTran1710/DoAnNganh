@@ -8,14 +8,12 @@ package com.findingcareer.controller;
 import com.findingcareer.pojo.CategoryJob;
 import Utils.Utils;
 import com.findingcareer.pojo.Recruitment;
-import com.findingcareer.pojo.User;
 import com.findingcareer.service.EmployerService;
 import com.findingcareer.service.RecruitmentService;
 import com.findingcareer.service.CategoryService;
 import com.findingcareer.service.UserService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -117,11 +115,6 @@ public class RecruitmentController {
         
         recruitment.setIdRecruitment(recruitmentId);
         
-        CategoryJob c = this.categoryService.
-                getCategoryById(recruitment.getCategoryJob().getIdCategory());
-        
-        recruitment.setCategoryJob(c);
-        
         if(this.recruitmentService.updateRecruitment(recruitment) == true)
             message = "Cập nhật dữ liệu thành công";
         else
@@ -145,15 +138,6 @@ public class RecruitmentController {
     public String addNewRecruitmentByCompany(Model model,
             @ModelAttribute(value="r") Recruitment recruitment) {
         String message;
-
-        CategoryJob c = this.categoryService.
-                getCategoryById(recruitment.getCategoryJob().getIdCategory());
-        
-        User u = this.userService.getUserByUsername("unknow");
-        
-        recruitment.setEmployer(u.getEmployer());
-        
-        recruitment.setCategoryJob(c);
         
         if(this.recruitmentService.addRecruitment(recruitment) == true)
             message = "Cập nhật dữ liệu thành công";

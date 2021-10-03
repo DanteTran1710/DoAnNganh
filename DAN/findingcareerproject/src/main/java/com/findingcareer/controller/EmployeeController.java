@@ -14,6 +14,7 @@ import com.findingcareer.service.UserService;
 import java.io.IOException;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,19 +28,13 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class EmployeeController {
-
-    @Autowired
-    private Cloudinary cloudinary;
-    @Autowired
-    private UserService userService;
     @Autowired
     private EmployeeService employeeService;
-
-    String username;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/user/add-employee")
-    public String addEmployeeView(Model model, @RequestParam Map<String, String> params) {
-        this.username = params.get("username");
+    public String addEmployeeView(Model model) {
         model.addAttribute("employee", new Employee());
 
         return "addEmployee";
@@ -49,30 +44,9 @@ public class EmployeeController {
     public String addEmployee(Model model,
             @ModelAttribute(value = "employee") Employee employee) {
         String errorMessage;
-        // LOAD IMAGE UP TO CLOUDINARY
-        String img = null;
-        try {
-            Map r = this.cloudinary.uploader().upload(employee.getFile().getBytes(),
-                    ObjectUtils.asMap("resource_type", "auto"));
-            //GET IMAGE'S URL AND ADD TO DATABASE
-            img = (String) r.get("secure_url");
-        } catch (IOException ex) {
-            System.err.println("Failure: " + ex.getMessage());
-        }
-
-        //GET USER BY USER NAME
-        User u = this.userService.getUserByUsername(username);
-        // SET NEW ROLE FOR USER
-        u.setUserRole("ROLE_EMPLOYEE");
-        // SET ID USER FOR EMPLOYER
-        employee.setUser(u);
-        //SET AVARTAR
-        employee.setAvatarUrl(img);
+        
         // ADD NEW EMPLOYER
-
         if (this.employeeService.addEmployee(employee) == true) {
-            // CHANGE USER ROLE
-            this.userService.updateUserRole(u);
             return "redirect:/login";
         } else {
             errorMessage = "Hệ thống hiện đang lỗi! Vui lòng thử lại sau";
@@ -84,12 +58,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/employee-profile")
-    public String editProfileEmployeeView(Model model,
-            @RequestParam Map<String, String> params) {
-
-        this.username = params.get("username");
-
-        User u = this.userService.getUserByUsername(username);
+    public String editProfileEmployeeView(Model model) {
+        
+        User u = this.userService.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
 
         model.addAttribute("employee",
                 this.employeeService.getEmployeeById(u.getEmployee().getIdEmployee()));
@@ -102,22 +74,7 @@ public class EmployeeController {
             @ModelAttribute(value = "employee") Employee e) {
 
         String message;
-
-        //GET USER BY USER NAME
-        User u = this.userService.getUserByUsername(username);
         
-        String img = null;
-        try {
-            Map r = this.cloudinary.uploader().upload(e.getFile().getBytes(),
-                    ObjectUtils.asMap("resource_type", "auto"));
-            //GET IMAGE'S URL AND ADD TO DATABASE
-            img = (String) r.get("secure_url");
-        } catch (IOException ex) {
-            System.err.println("Failure: " + ex.getMessage());
-        }
-
-        e.setIdEmployee(u.getEmployee().getIdEmployee());
-        e.setAvatarUrl(img);
         if (this.employeeService.updateEmployee(e)) {
             message = "Cập nhật dữ liệu thành công!";
         } else {

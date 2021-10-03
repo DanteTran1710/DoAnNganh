@@ -6,9 +6,12 @@
 package com.findingcareer.service.impl;
 
 import com.findingcareer.pojo.Employer;
+import com.findingcareer.pojo.User;
 import com.findingcareer.repository.EmployerRepository;
+import com.findingcareer.repository.UserRepository;
 import com.findingcareer.service.EmployerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,10 +22,23 @@ import org.springframework.stereotype.Service;
 public class EmployerServiceImpl implements EmployerService{
     @Autowired
     private EmployerRepository employerRepository;
+    @Autowired
+    private UserRepository userRepository;
     
     @Override
     public boolean addEmployer(Employer e) {
+        //GET USER BY USER NAME
+        User u = this.userRepository.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
+        // SET NEW ROLE FOR USER
+        u.setUserRole("ROLE_EMPLOYER");
+        // SET ID USER FOR EMPLOYER
+        e.setUser(u);
+        // CHANGE USER ROLE
+        this.userRepository.updateUserRole(u);
+        
         e.setActive(false);
+        
         return this.employerRepository.addEmployer(e);
     }
 
@@ -32,8 +48,13 @@ public class EmployerServiceImpl implements EmployerService{
     }
 
     @Override
-    public boolean updateEmployer(Employer emplr) {
-        return this.employerRepository.updateEmployer(emplr);
+    public boolean updateEmployer(Employer e) {
+        User u = this.userRepository.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
+        
+        e.setIdEmployer(u.getEmployer().getIdEmployer());
+        
+        return this.employerRepository.updateEmployer(e);
     }
     
 }
