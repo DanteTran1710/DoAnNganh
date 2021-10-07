@@ -44,9 +44,10 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         if (kw != null) {
             Predicate p = builder.like(root.get("title").as(String.class),
                     String.format("%%%s%%", kw));
-
+            
             query = query.where(p);
         }
+        query = query.orderBy(builder.desc(root.get("idRecruitment")));
 
         Query q = session.createQuery(query);
 
@@ -73,6 +74,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
             query = query.where(p);
         }
+        query = query.orderBy(builder.desc(root.get("idRecruitment")));
 
         Query q = session.createQuery(query);
 
@@ -95,6 +97,8 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         }
 
         query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("idRecruitment")));
+        
         Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -111,6 +115,8 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         Predicate p = builder.equal(root.get("now"), a);
 
         query = query.where(p);
+        query = query.orderBy(builder.desc(root.get("idRecruitment")));
+
         Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -158,5 +164,16 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         }
         return false;
     }
+
+    @Override
+    public boolean deleteRecruitment(Recruitment r) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+            session.delete(r);
+            return true;
+        } catch (HibernateException ex) {
+            System.err.println("MESSAGE HERE = " +ex.getMessage());
+        }
+        return false;    }
 
 }

@@ -5,6 +5,8 @@
  */
 package com.findingcareer.config;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.util.Properties;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +66,17 @@ public class HibernateConfig {
         transactionManager.setSessionFactory(getSessionFactory().getObject());
      
         return transactionManager;
+    }
+    //Using cloudinary to upload file 
+    @Bean
+    public Cloudinary cloudinary(){
+        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name","dd58hrv0h",
+                "api_key","388372944622867",
+                "api_secret","-lyQci3ZQYQcLOi168TI4V8kU7g",
+                "secure",true
+                ));
+        
+        return c;
     }
 }

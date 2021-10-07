@@ -96,16 +96,4 @@ public class WebApplicationContextConfig implements WebMvcConfigurer{
         return resolver;
     }
     
-    //Using cloudinary to upload file 
-    @Bean
-    public Cloudinary cloudinary(){
-        Cloudinary c = new Cloudinary(ObjectUtils.asMap(
-                "cloud_name","dd58hrv0h",
-                "api_key","388372944622867",
-                "api_secret","-lyQci3ZQYQcLOi168TI4V8kU7g",
-                "secure",true
-                ));
-        
-        return c;
-    }
 }

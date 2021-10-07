@@ -12,6 +12,7 @@
     <class>com.findingcareer.pojo.User</class>
     <class>com.findingcareer.pojo.Hastag</class>
     <class>com.findingcareer.pojo.Recruitment</class>
+    <class>com.findingcareer.pojo.EmployeeDetails</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/findingcareerdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

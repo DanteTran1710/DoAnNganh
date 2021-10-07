@@ -10,6 +10,7 @@ import com.findingcareer.pojo.User;
 import com.findingcareer.repository.EmployerRepository;
 import com.findingcareer.repository.UserRepository;
 import com.findingcareer.service.EmployerService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,16 @@ public class EmployerServiceImpl implements EmployerService{
         e.setIdEmployer(u.getEmployer().getIdEmployer());
         
         return this.employerRepository.updateEmployer(e);
+    }
+
+    @Override
+    public List<Employer> getListEmployerByName(String string, int page) {
+        return this.employerRepository.getListEmployerByName(string, page);
+    }
+
+    @Override
+    public long countEmployer() {
+        return this.employerRepository.countEmployer();
     }
     
 }

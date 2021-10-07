@@ -707,7 +707,33 @@ section {
 .authorize .title a:hover {
     color: #E50914;
 }
-
+/*--------------------------------------------------------------
+# EMPLOYEES
+--------------------------------------------------------------*/
+.details-form input{
+    width : 100%;
+}
+.details-form label{
+    margin-top: 10px;
+}
+.details-form #company{
+    width : 70%;
+    margin-right: 10px;
+}
+.details-form #title{
+    width: 100%;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: black;
+    text-align: center;
+}
+.avatar img{
+    width: 200px;
+    height: 200px;
+}
 /*--------------------------------------------------------------
 # JOBS
 --------------------------------------------------------------*/

@@ -7,9 +7,14 @@ package com.findingcareer.repository.impl;
 
 import com.findingcareer.pojo.Employer;
 import com.findingcareer.repository.EmployerRepository;
+import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
+import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -23,11 +28,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class EmployerRepositoryImpl implements EmployerRepository{
     @Autowired
-    private LocalSessionFactoryBean sessionFactoryBean;
+    private LocalSessionFactoryBean sessionFactory;
     
     @Override
     public boolean addEmployer(Employer e) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try{
             session.save(e);
@@ -42,7 +47,7 @@ public class EmployerRepositoryImpl implements EmployerRepository{
 
     @Override
     public boolean updateEmployer(Employer e) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         
         if(!e.getCompanyName().isEmpty() && !e.getAddress().isEmpty()
            && !e.getDescription().isEmpty() && !e.getOrientation().isEmpty()
@@ -66,9 +71,44 @@ public class EmployerRepositoryImpl implements EmployerRepository{
 
     @Override
     public Employer getEmployerById(int id) {
-        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         
         return session.get(Employer.class, id);
+    }
+
+    @Override
+    public List<Employer> getListEmployerByName(String kw, int page) {
+   Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Employer> query = builder.createQuery(Employer.class);
+        Root root = query.from(Employer.class);
+        query = query.select(root);
+
+        if (kw != null) {
+            Predicate p = builder.like(root.get("companyName").as(String.class),
+                    String.format("%%%s%%", kw));
+            
+            query = query.where(p);
+        }
+        query = query.orderBy(builder.desc(root.get("idEmployer")));
+
+        Query q = session.createQuery(query);
+        
+        int max = 3;
+        q.setMaxResults(max);
+        
+        q.setFirstResult((page-1)*max);
+
+        return q.getResultList(); 
+    }
+
+    @Override
+    public long countEmployer() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        Query q = session.createQuery("Select Count(*) from Employer");
+        
+        return Long.parseLong(q.getSingleResult().toString());
     }
     
 }

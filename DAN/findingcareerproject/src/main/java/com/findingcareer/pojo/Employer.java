@@ -7,6 +7,7 @@ package com.findingcareer.pojo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,10 @@ public class Employer implements Serializable {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
     private User user;
-    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "employer", 
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE, 
+            orphanRemoval = true)
     private List<Recruitment> listRecruiment;
     private String logo;
     private String companyImgs;

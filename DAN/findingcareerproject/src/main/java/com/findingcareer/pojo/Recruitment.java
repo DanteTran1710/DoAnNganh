@@ -36,7 +36,6 @@ public class Recruitment implements Serializable{
     private BigDecimal salary;
     private boolean now;
     @ManyToOne(
-            cascade = CascadeType.REMOVE,
             fetch = FetchType.EAGER,
             optional = true
     )
@@ -44,7 +43,6 @@ public class Recruitment implements Serializable{
     private Employer employer;
     @ManyToOne(
             optional = true,
-            cascade =  CascadeType.REMOVE,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "idCategory")

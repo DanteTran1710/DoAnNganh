@@ -5,8 +5,14 @@
  */
 package com.findingcareer.pojo;
 
-import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Temporal;
+import javax.persistence.Transient;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,10 +21,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.Transient;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -44,15 +48,69 @@ public class Employee implements Serializable{
     private String address;
     @Transient
     private MultipartFile file;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String position;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String company;
+    @Basic(optional = false)
+    @NotNull
+    private boolean currentjob;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String subject;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String school;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String qualification;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String skill;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String language;
+    @Basic(optional = false)
+    @NotNull
+    private BigDecimal salaryOffer;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    private String positionOffer;
 
     public Employee() {
     }
 
-    public Employee(int idEmployee, String avatarUrl, String cv, User user) {
+    public Employee(int idEmployee, String avatarUrl, String cv, User user, String phoneNumber, Date dob, boolean sex, String nationality, String address, MultipartFile file, String position, String company, boolean currentjob, String subject, String school, String qualification, String skill, String language, BigDecimal salaryOffer, String positionOffer) {
         this.idEmployee = idEmployee;
         this.avatarUrl = avatarUrl;
         this.cv = cv;
         this.user = user;
+        this.phoneNumber = phoneNumber;
+        this.dob = dob;
+        this.sex = sex;
+        this.nationality = nationality;
+        this.address = address;
+        this.file = file;
+        this.position = position;
+        this.company = company;
+        this.currentjob = currentjob;
+        this.subject = subject;
+        this.school = school;
+        this.qualification = qualification;
+        this.skill = skill;
+        this.language = language;
+        this.salaryOffer = salaryOffer;
+        this.positionOffer = positionOffer;
     }
 
     
@@ -87,14 +145,14 @@ public class Employee implements Serializable{
     /**
      * @return the cv
      */
-    public String getCvUrl() {
+    public String getCv() {
         return cv;
     }
 
     /**
      * @param cv the cv to set
      */
-    public void setCvUrl(String cv) {
+    public void setCv(String cv) {
         this.cv = cv;
     }
 
@@ -195,4 +253,146 @@ public class Employee implements Serializable{
     public void setFile(MultipartFile file) {
         this.file = file;
     }
+
+    /**
+     * @return the position
+     */
+    public String getPosition() {
+        return position;
+    }
+
+    /**
+     * @param position the position to set
+     */
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    /**
+     * @return the company
+     */
+    public String getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    /**
+     * @return the currentjob
+     */
+    public boolean isCurrentjob() {
+        return currentjob;
+    }
+
+    /**
+     * @param currentjob the currentjob to set
+     */
+    public void setCurrentjob(boolean currentjob) {
+        this.currentjob = currentjob;
+    }
+
+    /**
+     * @return the subject
+     */
+    public String getSubject() {
+        return subject;
+    }
+
+    /**
+     * @param subject the subject to set
+     */
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    /**
+     * @return the school
+     */
+    public String getSchool() {
+        return school;
+    }
+
+    /**
+     * @param school the school to set
+     */
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    /**
+     * @return the qualification
+     */
+    public String getQualification() {
+        return qualification;
+    }
+
+    /**
+     * @param qualification the qualification to set
+     */
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    /**
+     * @return the skill
+     */
+    public String getSkill() {
+        return skill;
+    }
+
+    /**
+     * @param skill the skill to set
+     */
+    public void setSkill(String skill) {
+        this.skill = skill;
+    }
+
+    /**
+     * @return the language
+     */
+    public String getLanguage() {
+        return language;
+    }
+
+    /**
+     * @param language the language to set
+     */
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    /**
+     * @return the salaryOffer
+     */
+    public BigDecimal getSalaryOffer() {
+        return salaryOffer;
+    }
+
+    /**
+     * @param salaryOffer the salaryOffer to set
+     */
+    public void setSalaryOffer(BigDecimal salaryOffer) {
+        this.salaryOffer = salaryOffer;
+    }
+
+    /**
+     * @return the positionOffer
+     */
+    public String getPositionOffer() {
+        return positionOffer;
+    }
+
+    /**
+     * @param positionOffer the positionOffer to set
+     */
+    public void setPositionOffer(String positionOffer) {
+        this.positionOffer = positionOffer;
+    }
+
+   
 }

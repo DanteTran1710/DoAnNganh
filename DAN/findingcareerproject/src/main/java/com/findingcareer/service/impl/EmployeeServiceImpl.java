@@ -13,6 +13,7 @@ import com.findingcareer.repository.EmployeeRepository;
 import com.findingcareer.repository.UserRepository;
 import com.findingcareer.service.EmployeeService;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,25 +27,25 @@ import org.springframework.stereotype.Controller;
 public class EmployeeServiceImpl implements EmployeeService{
     @Autowired
     private EmployeeRepository employeeRepository;
-//    @Autowired
-//    private Cloudinary cloudinary;
+    @Autowired
+    private Cloudinary cloudinary;
     @Autowired
     private UserRepository userRepository;
     
     @Override
     public boolean addEmployee(Employee employee) {
-//        // LOAD IMAGE UP TO CLOUDINARY
-//        String img = null;
-//        try {
-//            Map r = this.cloudinary.uploader().upload(employee.getFile().getBytes(),
-//                    ObjectUtils.asMap("resource_type", "auto"));
-//            //GET IMAGE'S URL AND ADD TO DATABASE
-//            img = (String) r.get("secure_url");
-//        } catch (IOException ex) {
-//            System.err.println("Failure: " + ex.getMessage());
-//        }
-//        //SET AVARTAR
-//        employee.setAvatarUrl(img);
+        // LOAD IMAGE UP TO CLOUDINARY
+        String img = null;
+        try {
+            Map r = this.cloudinary.uploader().upload(employee.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            //GET IMAGE'S URL AND ADD TO DATABASE
+            img = (String) r.get("secure_url");
+        } catch (IOException ex) {
+            System.err.println("Failure: " + ex.getMessage());
+        }
+        //SET AVARTAR
+        employee.setAvatarUrl(img);
         //GET USER BY USER NAME
         User u = this.userRepository.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
@@ -52,7 +53,6 @@ public class EmployeeServiceImpl implements EmployeeService{
         u.setUserRole("ROLE_EMPLOYEE");
         // SET ID USER FOR EMPLOYER
         employee.setUser(u);
-        employee.setAvatarUrl("hi");
         //UPDATE ROLE IN USER
         this.userRepository.updateUserRole(u);
         
@@ -65,16 +65,17 @@ public class EmployeeServiceImpl implements EmployeeService{
         User u = this.userRepository.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         
-//        String img = null;
-//        try {
-//            Map r = this.cloudinary.uploader().upload(e.getFile().getBytes(),
-//                    ObjectUtils.asMap("resource_type", "auto"));
-//            //GET IMAGE'S URL AND ADD TO DATABASE
-//            img = (String) r.get("secure_url");
-//        } catch (IOException ex) {
-//            System.err.println("Failure: " + ex.getMessage());
-//        }
-        e.setAvatarUrl("hi");
+        String img = null;
+        try {
+            Map r = this.cloudinary.uploader().upload(e.getFile().getBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            //GET IMAGE'S URL AND ADD TO DATABASE
+            img = (String) r.get("secure_url");
+        } catch (IOException ex) {
+            System.err.println("Failure: " + ex.getMessage());
+        }
+        //UPDATE AVARTAR
+        e.setAvatarUrl(img);
 
         e.setIdEmployee(u.getEmployee().getIdEmployee());
         
@@ -84,6 +85,16 @@ public class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Employee getEmployeeById(int i) {
         return this.employeeRepository.getEmployeeById(i);
+    }
+
+    @Override
+    public List<Object> getListEmployee(String string, int i) {
+        return this.employeeRepository.getListEmployee(string, i);
+    }
+
+    @Override
+    public long countEmployee() {
+        return this.employeeRepository.countEmployee();
     }
     
 }

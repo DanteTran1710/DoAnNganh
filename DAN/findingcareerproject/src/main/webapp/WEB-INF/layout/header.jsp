@@ -24,7 +24,16 @@
                 <li class="active"><a href="<c:url value="/" />">Home</a></li>
                 <li><a href="<c:url value="/jobs" />">Jobs</a></li>
                 <li><a href="#services">Services</a></li>
-                <li><a href="#team">Team</a></li>
+                <li>                   
+                    <security:authorize access="hasRole('ROLE_EMPLOYEE')"> 
+                        <a href="<c:url value="/employee/find-employers"/>">Employers</a>
+                    </security:authorize>
+                </li>
+                <li>                   
+                    <security:authorize access="hasRole('ROLE_EMPLOYER')"> 
+                        <a href="<c:url value="/employer/find-employees"/>">Employees</a>
+                    </security:authorize>
+                </li>
 
                 <li class="drop-down"><a href="">Drop Down</a>
                     <ul>

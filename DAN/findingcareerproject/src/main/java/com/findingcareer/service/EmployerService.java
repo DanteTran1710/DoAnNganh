@@ -6,6 +6,7 @@
 package com.findingcareer.service;
 
 import com.findingcareer.pojo.Employer;
+import java.util.List;
 
 /**
  *
@@ -15,4 +16,6 @@ public interface EmployerService {
     boolean addEmployer(Employer e);
     boolean updateEmployer(Employer e);
     Employer getEmployerById(int id);
+    List<Employer> getListEmployerByName(String kw, int page);
+    long countEmployer();
 }

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : updateRecruitment
-    Created on : Sep 9, 2021, 4:01:17 PM
+    Document   : listEmployers
+    Created on : Oct 6, 2021, 11:03:31 AM
     Author     : hp
 --%>
 
@@ -10,22 +10,6 @@
 <%@taglib prefix="property" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 
-<c:if test="${message != null}">
-    <div id="toast">
-        <div id="toast_main">
-            <div class="toast_icon">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-            </div>
-            <div class="toast_body">
-                <h3 class="toast_title">THÔNG BÁO!</h3>
-                <div class="toast_message">${message}</div>
-            </div>
-            <div class="toast_close" onclick="removeToast();">
-                <i class="fa fa-times" aria-hidden="true"></i>
-            </div>
-        </div>
-    </div>
-</c:if>
 <!-- ======= JOBS Section ======= -->
 <section id="job" class="job">
     <!-- SEARCH SECTION -->
@@ -39,21 +23,21 @@
             </div>
         </form>
     </div>
-    <div><a href="<c:url value="/employer/recruitment/new"/>">Add</a></div>
-    <c:set value="${recruitments}" var="list" />
+    <div class="container">
+        <div class="filter-result">
+
+        </div>
+    </div>
+
     <div class="container">
         <!-- JOB SECTION -->
         <div class="row pb-4">
-            <c:forEach var="r" items="${list.pageList}">
+            <c:forEach var="e" items="${employer}">
                 <div class="col-md-12 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0 pb-4">
                     <div class="icon-box">
                         <div class="box1">
                             <div class="icon"></div>
-                            <h4 class="title"><a href="<c:url value="/employer/recruitment/update/${r.idRecruitment}"/>">${r.title}</a></h4>
-                                <c:url value="/employer/manage" var="id">
-                                    <c:param name="idRe" value="${r.idRecruitment}"></c:param>
-                                </c:url>
-                            <div><a href="${id}">Delete</a></div>
+                            <h4 class="title"><a href="<c:url value="/recruitment/${e.idEmployer}"/>">${e.companyName}</a></h4>
                         </div>
                         <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                     </div>
@@ -63,10 +47,9 @@
         <!-- CLASSIFY THE PAGINATION BY THE CONDITIONS -->
         <nav class="pagi">
             <ul class="pagination pagination-lg justify-content-center">
-                <c:forEach begin="1" end="${list.pageCount}" step="1" varStatus="i">
+                <c:forEach begin="1" end="${Math.ceil(counter/3)}" step="1" var="i">
                     <li class="page-item">
-                        <a class="page-link" href="
-                           <c:url value="/employer/manage"/>?page=${i.index}">${i.index}</a>
+                        <a class="page-link" href="<c:url value="/jobs"/>?page=${i}">${i}</a>
                     </li>
                 </c:forEach>
             </ul>

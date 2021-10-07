@@ -20,4 +20,5 @@ public interface RecruitmentRepository {
     Recruitment getRecruitmentById(int id);
     boolean updateRecruitment(Recruitment r);
     boolean addRecruitment(Recruitment r);
+    boolean deleteRecruitment(Recruitment r);
 }

@@ -85,4 +85,9 @@ public class RecruitmentServiceImpl implements RecruitmentService {
         
         return this.recruitmentRepository.addRecruitment(r);
     }
+
+    @Override
+    public boolean deleteRecruitment(Recruitment r) {
+        return this.recruitmentRepository.deleteRecruitment(r);
+    }
 }

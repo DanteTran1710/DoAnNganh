@@ -7,6 +7,7 @@ package com.findingcareer.pojo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -28,9 +29,16 @@ public class CategoryJob implements Serializable{
     private String nameJob; 
     private String description;
     private String hastag;
-    @OneToMany(mappedBy = "categoryJob", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "categoryJob",
+            fetch = FetchType.LAZY,
+            cascade =  CascadeType.REMOVE,
+            orphanRemoval = true)
     private List<Recruitment> listRecruitment;
-    
+    @OneToMany(mappedBy = "categoryJob",
+            fetch = FetchType.LAZY,
+            cascade =  CascadeType.REMOVE,
+            orphanRemoval = true)
+    private List<Hastag> listHastags;
 
     public CategoryJob() {
     }
@@ -110,6 +118,20 @@ public class CategoryJob implements Serializable{
      */
     public void setListRecruitment(List<Recruitment> listRecruitment) {
         this.listRecruitment = listRecruitment;
+    }
+
+    /**
+     * @return the listHastags
+     */
+    public List<Hastag> getListHastags() {
+        return listHastags;
+    }
+
+    /**
+     * @param listHastags the listHastags to set
+     */
+    public void setListHastags(List<Hastag> listHastags) {
+        this.listHastags = listHastags;
     }
 
     /**

@@ -28,7 +28,6 @@
         </div>
     </div>
 </c:if>
-
 <div class="container-login100">
     <div class="wrap-login100">
         <span class="login100-form-title">
@@ -37,39 +36,109 @@
         <div class="login100-form validate-form">
             <fieldset class="border p-2">
                 <legend class="w-auto p-2">PERSONAL INFORMATION</legend>  
-
                 <form:form method="post" action="${action}" modelAttribute="employee"
                            enctype="multipart/form-data">
-                    <div class="personal-form grid-container">
-                        <div class="grid-item form-group">
-                            <label for="phone">Phone number</label>
-                            <form:input type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
+                    <div class="details-form">
+                        <div class="personal-section">
+                            <div class="grid-item form-group">
+                                <label for="phone">Phone number</label>
+                                <form:input type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
+                            </div>
+                            <div class="grid-item form-group">
+                                <label for="dob">Day of birth</label>
+                                <fmt:formatDate value="${employee.dob}" var="date" pattern="dd/MM/yyyy" />
+                                <form:input value="${date}" path="dob" id="dob"/>
+                            </div>
+                            <div class="grid-item form-group">
+                                <label for="dob" class="w-auto">Sex:</label>&nbsp;
+                                Male&nbsp;<form:radiobutton path="sex" value="0" class="w-auto ml-2"/>&nbsp;
+                                Female&nbsp;<form:radiobutton path="sex" value="1" class="w-auto ml-2"/>&nbsp;
+                            </div>
+                            <div class="grid-item form-group">
+                                <label for="nationality">Nationality</label>
+                                <form:select path="nationality" id="nationality" class="custom-select">
+                                    <form:option value="Local VietNamese">Local VietNamese</form:option>
+                                    <form:option value="Foreigner">Foreigner</form:option>
+                                </form:select>
+                            </div>
+                            <div class="grid-item form-group">
+                                <label for="address">Address</label>
+                                <form:input type="text" path="address" id="address" placeholder="Address"/>
+                            </div>
+                            <div class="grid-container">
+                                <div class="grid-item form-group">
+                                    <label for="file">Avatar User</label>
+                                    <form:input type="file" path="file" id="file"/>
+                                </div>
+                                <div class="grid-item form-group avatar">
+                                    <img src="${employee.avatarUrl}"/>
+                                </div>
+                            </div>
                         </div>
-                        <div class="grid-item form-group">
-                            <label for="dob">Day of birth</label>
-                            <fmt:formatDate value="${employee.dob}" var="date" pattern="dd/MM/yyyy" />
-                            <input type="text" id="date" class="form-control date" placeholder="Check-in date">
-                            <form:input value="${date}" path="dob" id="dob"/>
+                        <div class="experience-section">
+                            <label id="title">WORKING HISTORY</label>
+                            <div class="grid-item form-group">
+                                <label for="position">Position</label>
+                                <form:input type="position" path="position" id="position" placeholder="position"/>
+                                <label for="company">Company</label>
+                                <form:input type="company" path="company" id="company" placeholder="company"/>
+                                <label for="currentjob" class="w-auto">Current Job</label>
+                                <form:checkbox path="currentjob" value="1" id="action" class="w-auto"/>
+                            </div>
                         </div>
-                        <div class="grid-item form-group">
-                            <label for="dob">Sex:</label>&nbsp;
-                            Male&nbsp;<form:radiobutton path="sex" value="0"/>&nbsp;
-                            Female&nbsp;<form:radiobutton path="sex" value="1"/>&nbsp;
+                        <div class="education-section">
+                            <label id="title">EDUCATION</label>
+                            <div class="grid-item form-group">
+                                <label for="subject">Subject</label>
+                                <form:input type="subject" path="subject" id="subject" placeholder="subject"/>
+                                <label for="school">School</label>
+                                <form:input type="school" path="school" id="school" placeholder="school"/>
+                                <label for="position">Position</label>
+                                <form:input type="position" path="position" id="position" placeholder="position"/>
+                                <label for="qualification">Qualification</label>
+                                <form:select path="qualification" id="qualification" class="custom-select">
+                                    <form:option value="Đại Học">Đại Học</form:option>
+                                    <form:option value="Trung cấp">Trung cấp</form:option>
+                                    <form:option value="Cao đẳng">Cao đẳng</form:option>
+                                    <form:option value="Cử nhân">Cử nhân</form:option>
+                                    <form:option value="Thạc sĩ">Thạc sĩ</form:option>
+                                </form:select>
+                            </div>
                         </div>
-                        <div class="grid-item form-group">
-                            <label for="nationality">Nationality</label>
-                            <form:select path="nationality" id="nationality" class="custom-select w-75">
-                                <form:option value="Local VietNamese">Local VietNamese</form:option>
-                                <form:option value="Foreigner">Foreigner</form:option>
-                            </form:select>
+                        <div class="skill-section">
+                            <label id="title">SKILLS</label>
+                            <div class="grid-item form-group">
+                                <label for="skill">Language Used</label>
+                                <form:input type="skill" path="skill" id="skill" placeholder="skill"/>
+                            </div>
                         </div>
-                        <div class="grid-item form-group">
-                            <label for="address">Address</label>
-                            <form:input type="text" path="address" id="address" placeholder="Address"/>
+                        <div class="language-section">
+                            <label id="title">LANGUAGES</label>
+                            <div class="grid-item form-group">
+                                <label for="language">Language Used</label>
+                                <form:select path="language" id="language" class="custom-select">
+                                    <form:option value="English">English</form:option>
+                                    <form:option value="Vietnamese">Vietnamese</form:option>
+                                    <form:option value="Chinese">Chinese</form:option>
+                                    <form:option value="French">French</form:option>
+                                    <form:option value="Japanese">Japanese</form:option>
+                                    <form:option value="Taiwanese">Taiwanese</form:option>
+                                    <form:option value="Other">Other</form:option>
+                                </form:select>
+                            </div>
                         </div>
-                        <div class="grid-item form-group">
-                            <label for="file">Avatar User</label>
-                            <form:input type="file" path="file" id="file"/>
+                        <div class="preferences-section">
+                            <label id="title">WORKING PREFERENCE</label>
+                            <div class="grid-item form-group">
+                                <label for="salaryOffer">Salary offer ($ per month)</label>
+                                <form:input type="salaryOffer" path="salaryOffer" id="salaryOffer" placeholder="Your salary offer"/>
+                                <label for="positionOffer">Position job offer</label>
+                                <form:select path="positionOffer" id="positionOffer" class="custom-select">
+                                    <form:option value="Nhân viên">Nhân viên</form:option>
+                                    <form:option value="Trưởng phòng">Trưởng phòng</form:option>
+                                    <form:option value="Giám đốc và cao cấp hơn">Giám đốc và cao cấp hơn</form:option>
+                                </form:select>
+                            </div>
                         </div>
                     </div>
                     <div class="accept-section">
