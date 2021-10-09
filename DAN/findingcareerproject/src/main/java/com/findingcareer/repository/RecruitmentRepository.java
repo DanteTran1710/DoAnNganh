@@ -13,10 +13,7 @@ import java.util.List;
  * @author hp
  */
 public interface RecruitmentRepository {
-    List<Recruitment> getListRecruitment(String kw);
-    List<Recruitment> getListRecruitmentByFilter(String kw);
-    List<Recruitment> getListRecruitmentBySalary(int a, int b);
-    List<Recruitment> getListRecruitmentByNow(int a);
+    List<Object> getListRecruitmentByCondition(String kw, int page);
     Recruitment getRecruitmentById(int id);
     boolean updateRecruitment(Recruitment r);
     boolean addRecruitment(Recruitment r);

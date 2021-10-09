@@ -131,7 +131,13 @@
                             <label id="title">WORKING PREFERENCE</label>
                             <div class="grid-item form-group">
                                 <label for="salaryOffer">Salary offer ($ per month)</label>
-                                <form:input type="salaryOffer" path="salaryOffer" id="salaryOffer" placeholder="Your salary offer"/>
+                                 <form:select path="salaryOffer" id="salaryOffer" class="custom-select">
+                                    <form:option value="1"><= $500</form:option>
+                                    <form:option value="2">$500 - $1000</form:option>
+                                    <form:option value="3">$1000 - $2000</form:option>
+                                    <form:option value="4">>= $2000</form:option>
+                                    <form:option value="0">Thương lượng</form:option>
+                                </form:select>
                                 <label for="positionOffer">Position job offer</label>
                                 <form:select path="positionOffer" id="positionOffer" class="custom-select">
                                     <form:option value="Nhân viên">Nhân viên</form:option>

@@ -1,4 +1,4 @@
-/**
+n/**
 * Template Name: Shuffle - v2.3.1
 * Template URL: https://bootstrapmade.com/bootstrap-3-one-page-template-free-shuffle/
 * Author: BootstrapMade.com
@@ -12,7 +12,7 @@
 body {
     font-family: "Open Sans", sans-serif;
     color: #000 !important;
-    background-color: #f2f5f4;
+    background-color: #e4eae8;
 }
 
 a {
@@ -485,7 +485,7 @@ section {
 
 
 .section-bg {
-    background-color: #f2f5f4;
+    background-color: #e4eae8;
 }
 
 .section-title {
@@ -512,7 +512,7 @@ section {
 --------------------------------------------------------------*/
 .breadcrumbs {
     padding: 15px 0;
-    background-color: #f2f5f4;
+    background-color: #e4eae8;
     min-height: 40px;
 }
 
@@ -717,7 +717,7 @@ section {
     margin-top: 10px;
 }
 .details-form #company{
-    width : 70%;
+    width : 50%;
     margin-right: 10px;
 }
 .details-form #title{
@@ -737,6 +737,21 @@ section {
 /*--------------------------------------------------------------
 # JOBS
 --------------------------------------------------------------*/
+.empty-result{
+    background-color: #fff;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+}
+.empty-result p{
+    padding: 30px;
+    font-weight: 700;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+.job{
+    background-color: #e4eae8;
+}
 .job .icon-box {
     padding: 30px;
     position: relative;
@@ -763,7 +778,7 @@ section {
 }
 
 .job .icon {
-    padding-top: 10px;
+    padding-top: 12px;
     display: inline-block;
     text-align: center;
     border-radius: 50%;
@@ -774,7 +789,7 @@ section {
 }
 
 .job .icon i {
-    font-size: 36px;
+    font-size: 28px;
     line-height: 1;
     color: #fff;
 }
@@ -784,6 +799,24 @@ section {
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 20px;
+}
+.box1 .info{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.box1 .infor-section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.box1 .infor-section .img-section img{
+    width: 190px;
+    height: 190px;
 }
 
 .job .title {
@@ -808,7 +841,7 @@ section {
 }
 
 .job .icon-box:hover .icon i {
-    color:  #E50914;
+    color:  #000;
 }
 /*--------------------------------------------------------------
 # Our Services
@@ -1014,7 +1047,7 @@ section {
 
 .info-box .accordion-list li {
     padding: 20px;
-    background: #f2f5f4;
+    background: #e4eae8;
     border-radius: 5px;
 }
 
@@ -1885,7 +1918,10 @@ label{
 /*--------------------------------------------------------------
 # JOBS
 --------------------------------------------------------------*/
-
+.jobinfo p{
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
 /*------------------------------------------------------------------
 [ SEARCH TOOLS ]*/
 
@@ -2116,6 +2152,11 @@ label{
 --------------------------------------------------------------*/
 .scrolltable{
     height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.ntl-scrolltable{
+    height: 100px;
     overflow-y: auto;
     overflow-x: hidden;
 }

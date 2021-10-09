@@ -123,19 +123,6 @@ public class EmployerController {
         return "manageRecruitment";
     }
 
-    @GetMapping("/recruitment/{recruitmentId}")
-    public String recruitment(Model model,
-            @PathVariable(value = "recruitmentId") int recruitmentId) {
-
-        Recruitment r = this.recruitmentService.getRecruitmentById(recruitmentId);
-
-        model.addAttribute("re", r);
-        model.addAttribute("co",
-                this.employerService.getEmployerById(r.getEmployer().getIdEmployer()));
-
-        return "recruitment";
-    }
-
     @GetMapping("/employer/recruitment/update/{recruitmentId}")
     public String recruitmentByCompany(Model model,
             @PathVariable(value = "recruitmentId") int recruitmentId) {
@@ -198,10 +185,11 @@ public class EmployerController {
         String kw = params.getOrDefault("kw", null);
         String page = params.getOrDefault("page", "1");
 
-            model.addAttribute("employees",
-                    this.employeeService.getListEmployee(kw, Integer.parseInt(page)));
-            model.addAttribute("counter", this.employeeService.countEmployee());
-            
+        model.addAttribute("employees",
+                this.employeeService.getListEmployee(kw, Integer.parseInt(page)));
+        model.addAttribute("counter", this.employeeService.countEmployee());
+        model.addAttribute("category", this.categoryService.getListCategory());
+
         return "listEmployees";
     }
 

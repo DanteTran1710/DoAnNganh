@@ -32,28 +32,13 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Recruitment> getListRecruitment(String kw) {
-        return this.recruitmentRepository.getListRecruitment(kw);
+    public List<Object> getListRecruitmentByCondition(String kw, int page) {
+        return this.recruitmentRepository.getListRecruitmentByCondition(kw, page);
     }
 
     @Override
     public Recruitment getRecruitmentById(int id) {
         return this.recruitmentRepository.getRecruitmentById(id);
-    }
-
-    @Override
-    public List<Recruitment> getListRecruitmentByFilter(String kw) {
-        return this.recruitmentRepository.getListRecruitmentByFilter(kw);
-    }
-
-    @Override
-    public List<Recruitment> getListRecruitmentBySalary(int i, int i1) {
-        return this.recruitmentRepository.getListRecruitmentBySalary(i, i1);
-    }
-
-    @Override
-    public List<Recruitment> getListRecruitmentByNow(int a) {
-        return this.recruitmentRepository.getListRecruitmentByNow(a);
     }
 
     @Override

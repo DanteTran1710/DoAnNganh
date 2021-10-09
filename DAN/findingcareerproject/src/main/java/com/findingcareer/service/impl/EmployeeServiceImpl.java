@@ -24,14 +24,15 @@ import org.springframework.stereotype.Controller;
  * @author hp
  */
 @Controller
-public class EmployeeServiceImpl implements EmployeeService{
+public class EmployeeServiceImpl implements EmployeeService {
+
     @Autowired
     private EmployeeRepository employeeRepository;
     @Autowired
     private Cloudinary cloudinary;
     @Autowired
     private UserRepository userRepository;
-    
+
     @Override
     public boolean addEmployee(Employee employee) {
         // LOAD IMAGE UP TO CLOUDINARY
@@ -55,7 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         employee.setUser(u);
         //UPDATE ROLE IN USER
         this.userRepository.updateUserRole(u);
-        
+
         return this.employeeRepository.addEmployee(employee);
     }
 
@@ -64,7 +65,6 @@ public class EmployeeServiceImpl implements EmployeeService{
         //GET USER BY USER NAME
         User u = this.userRepository.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
-        
         String img = null;
         try {
             Map r = this.cloudinary.uploader().upload(e.getFile().getBytes(),
@@ -78,7 +78,7 @@ public class EmployeeServiceImpl implements EmployeeService{
         e.setAvatarUrl(img);
 
         e.setIdEmployee(u.getEmployee().getIdEmployee());
-        
+
         return this.employeeRepository.updateEmployee(e);
     }
 
@@ -96,5 +96,5 @@ public class EmployeeServiceImpl implements EmployeeService{
     public long countEmployee() {
         return this.employeeRepository.countEmployee();
     }
-    
+
 }
