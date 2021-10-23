@@ -5,9 +5,10 @@
  */
 package com.findingcareer.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -40,13 +44,19 @@ public class Recruitment implements Serializable{
             optional = true
     )
     @JoinColumn(name = "idCompany")
+    @JsonIgnore
     private Employer employer;
     @ManyToOne(
             optional = true,
             fetch = FetchType.EAGER
     )
     @JoinColumn(name = "idCategory")
+    @JsonIgnore
     private CategoryJob categoryJob;
+    @OneToMany(mappedBy = "recruitment", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<CVsForRecruitments> cVsForRecruitmentses;
 
     public Recruitment() {
     }
@@ -216,6 +226,20 @@ public class Recruitment implements Serializable{
      */
     public void setNow(boolean now) {
         this.now = now;
+    }
+
+    /**
+     * @return the cVsForRecruitmentses
+     */
+    public List<CVsForRecruitments> getcVsForRecruitmentses() {
+        return cVsForRecruitmentses;
+    }
+
+    /**
+     * @param cVsForRecruitmentses the cVsForRecruitmentses to set
+     */
+    public void setcVsForRecruitmentses(List<CVsForRecruitments> cVsForRecruitmentses) {
+        this.cVsForRecruitmentses = cVsForRecruitmentses;
     }
 
 }

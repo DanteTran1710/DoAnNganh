@@ -5,16 +5,14 @@
  */
 package com.findingcareer.repository;
 
-import com.findingcareer.pojo.Employee;
 import java.util.List;
+import com.findingcareer.pojo.Comment;
 
 /**
  *
  * @author hp
  */
-public interface EmployeeRepository {
-    boolean addEmployee(Employee e);
-    boolean updateEmployee(Employee e);
-    Employee getEmployeeById(int id);
-    List<Object> getListEmployee(String kw, int page);
+public interface CommentRepository {
+    List<Comment> getCommentsByCompanyid(int id, int page);
+    Comment addComment(Comment c);
 }

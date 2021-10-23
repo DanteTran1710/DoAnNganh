@@ -1,10 +1,11 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template fileAva, choose Tools | Templates
  * and open the template in the editor.
  */
 package com.findingcareer.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
@@ -12,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,10 +21,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -38,6 +43,7 @@ public class Employee implements Serializable{
     private String cv;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idUser")
+    @JsonIgnore
     private User user;
     private String phoneNumber;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -47,7 +53,9 @@ public class Employee implements Serializable{
     private String nationality;
     private String address;
     @Transient
-    private MultipartFile file;
+    private MultipartFile fileAva;
+    @Transient
+    private MultipartFile fileCV;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -86,11 +94,23 @@ public class Employee implements Serializable{
     @NotNull
     @Size(min = 1, max = 45)
     private String positionOffer;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<Comment> listComment;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<Rating> listRatings;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<CVsForRecruitments> cVsForRecruitmentses;
 
     public Employee() {
     }
 
-    public Employee(int idEmployee, String avatarUrl, String cv, User user, String phoneNumber, Date dob, boolean sex, String nationality, String address, MultipartFile file, String position, String company, boolean currentjob, String subject, String school, String qualification, String skill, String language, BigDecimal salaryOffer, String positionOffer) {
+    public Employee(int idEmployee, String avatarUrl, String cv, User user, String phoneNumber, Date dob, boolean sex, String nationality, String address, MultipartFile fileAva, MultipartFile fileCV, String position, String company, boolean currentjob, String subject, String school, String qualification, String skill, String language, BigDecimal salaryOffer, String positionOffer, List<Comment> listComment, List<Rating> listRatings) {
         this.idEmployee = idEmployee;
         this.avatarUrl = avatarUrl;
         this.cv = cv;
@@ -100,7 +120,8 @@ public class Employee implements Serializable{
         this.sex = sex;
         this.nationality = nationality;
         this.address = address;
-        this.file = file;
+        this.fileAva = fileAva;
+        this.fileCV = fileCV;
         this.position = position;
         this.company = company;
         this.currentjob = currentjob;
@@ -111,8 +132,9 @@ public class Employee implements Serializable{
         this.language = language;
         this.salaryOffer = salaryOffer;
         this.positionOffer = positionOffer;
+        this.listComment = listComment;
+        this.listRatings = listRatings;
     }
-
     
     /**
      * @return the idEmployee
@@ -241,17 +263,31 @@ public class Employee implements Serializable{
     }
 
     /**
-     * @return the file
+     * @return the fileAva
      */
-    public MultipartFile getFile() {
-        return file;
+    public MultipartFile getFileAva() {
+        return fileAva;
     }
 
     /**
-     * @param file the file to set
+     * @param fileAva the fileAva to set
      */
-    public void setFile(MultipartFile file) {
-        this.file = file;
+    public void setFileAva(MultipartFile fileAva) {
+        this.fileAva = fileAva;
+    }
+
+    /**
+     * @return the fileCV
+     */
+    public MultipartFile getFileCV() {
+        return fileCV;
+    }
+
+    /**
+     * @param fileCV the fileCV to set
+     */
+    public void setFileCV(MultipartFile fileCV) {
+        this.fileCV = fileCV;
     }
 
     /**
@@ -394,5 +430,46 @@ public class Employee implements Serializable{
         this.positionOffer = positionOffer;
     }
 
-   
+    /**
+     * @return the listComment
+     */
+    public List<Comment> getListComment() {
+        return listComment;
+    }
+
+    /**
+     * @param listComment the listComment to set
+     */
+    public void setListComment(List<Comment> listComment) {
+        this.listComment = listComment;
+    }
+
+    /**
+     * @return the listRatings
+     */
+    public List<Rating> getListRatings() {
+        return listRatings;
+    }
+
+    /**
+     * @param listRatings the listRatings to set
+     */
+    public void setListRatings(List<Rating> listRatings) {
+        this.listRatings = listRatings;
+    }
+
+    /**
+     * @return the cVsForRecruitmentses
+     */
+    public List<CVsForRecruitments> getcVsForRecruitmentses() {
+        return cVsForRecruitmentses;
+    }
+
+    /**
+     * @param cVsForRecruitmentses the cVsForRecruitmentses to set
+     */
+    public void setcVsForRecruitmentses(List<CVsForRecruitments> cVsForRecruitmentses) {
+        this.cVsForRecruitmentses = cVsForRecruitmentses;
+    }
+
 }

@@ -59,13 +59,8 @@ public class EmployerServiceImpl implements EmployerService{
     }
 
     @Override
-    public List<Employer> getListEmployerByName(String string, int page) {
+    public List<Object[]> getListEmployerByName(String string, int page) {
         return this.employerRepository.getListEmployerByName(string, page);
-    }
-
-    @Override
-    public long countEmployer() {
-        return this.employerRepository.countEmployer();
     }
     
 }

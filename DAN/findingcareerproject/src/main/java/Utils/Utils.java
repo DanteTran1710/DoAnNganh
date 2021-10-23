@@ -6,9 +6,7 @@
 package Utils;
 
 import com.findingcareer.pojo.Recruitment;
-import com.findingcareer.service.RecruitmentService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 
 /**

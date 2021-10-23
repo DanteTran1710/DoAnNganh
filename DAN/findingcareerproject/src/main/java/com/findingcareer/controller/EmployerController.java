@@ -15,6 +15,7 @@ import com.findingcareer.pojo.Recruitment;
 import com.findingcareer.service.CategoryService;
 import com.findingcareer.service.EmployeeService;
 import com.findingcareer.service.RecruitmentService;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -97,28 +98,18 @@ public class EmployerController {
     }
 
     @GetMapping("/employer/manage")
-    public String recruitmentByCompany(Model model, @RequestParam Map<String, String> params) {
-        String message;
+    public String recruitmentByCompany(Model model,
+            @RequestParam Map<String, String> params, HttpSession session) {
         String page = params.getOrDefault("page", "1");
-        String idRe = params.getOrDefault("idRe", null);
-
-        if (idRe != null) {
-            Recruitment r = this.recruitmentService.getRecruitmentById(Integer.parseInt(idRe));
-
-            if (this.recruitmentService.deleteRecruitment(r) == true) {
-                message = "Delete recruitment successful!";
-            } else {
-                message = "Delete recruitment unsuccessful!";
-            }
-
-            model.addAttribute("message", message);
-        }
+        
         User u = this.userService.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
 
         Employer e = this.employerService.getEmployerById(u.getEmployer().getIdEmployer());
 
         model.addAttribute("recruitments", Utils.pagination(e.getListRecruiment(), page, 2));
+        
+        model.addAttribute("msg", session.getAttribute("msg"));
 
         return "manageRecruitment";
     }
@@ -187,7 +178,8 @@ public class EmployerController {
 
         model.addAttribute("employees",
                 this.employeeService.getListEmployee(kw, Integer.parseInt(page)));
-        model.addAttribute("counter", this.employeeService.countEmployee());
+        model.addAttribute("counter",
+                this.employeeService.getListEmployee(kw, Integer.parseInt(page)).size());
         model.addAttribute("category", this.categoryService.getListCategory());
 
         return "listEmployees";

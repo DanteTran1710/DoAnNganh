@@ -14,8 +14,10 @@ import java.util.List;
  */
 public interface RecruitmentRepository {
     List<Object> getListRecruitmentByCondition(String kw, int page);
+    List<Recruitment> getAmountRecruitmentByCompany(int id, int index);
     Recruitment getRecruitmentById(int id);
     boolean updateRecruitment(Recruitment r);
     boolean addRecruitment(Recruitment r);
     boolean deleteRecruitment(Recruitment r);
+    long countRes();
 }

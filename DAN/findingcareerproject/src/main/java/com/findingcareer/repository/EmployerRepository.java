@@ -17,6 +17,6 @@ public interface EmployerRepository {
     boolean addEmployer(Employer e);
     boolean updateEmployer(Employer e);
     Employer getEmployerById(int id);
-    List<Employer> getListEmployerByName(String kw, int page);
+    List<Object[]> getListEmployerByName(String kw, int page);
     long countEmployer();
 }

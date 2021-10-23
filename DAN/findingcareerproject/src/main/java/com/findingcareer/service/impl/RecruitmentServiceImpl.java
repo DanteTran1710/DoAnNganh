@@ -72,7 +72,19 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public boolean deleteRecruitment(Recruitment r) {
+    public boolean deleteRecruitment(int id) {
+        Recruitment r = this.recruitmentRepository.getRecruitmentById(id);
+
         return this.recruitmentRepository.deleteRecruitment(r);
+    }
+
+    @Override
+    public List<Recruitment> getAmountRecruitmentByCompany(int id, int index) {
+        return this.recruitmentRepository.getAmountRecruitmentByCompany(id, index);
+    }
+
+    @Override
+    public long countRes() {
+        return this.recruitmentRepository.countRes();
     }
 }

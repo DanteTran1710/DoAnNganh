@@ -5,6 +5,7 @@
  */
 package com.findingcareer.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -25,7 +28,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "employer")
 public class Employer implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idEmployer;
@@ -39,12 +41,30 @@ public class Employer implements Serializable {
     private User user;
     @OneToMany(mappedBy = "employer", 
             fetch = FetchType.EAGER,
-            cascade = CascadeType.REMOVE, 
+            cascade = CascadeType.ALL, 
             orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Recruitment> listRecruiment;
     private String logo;
     private String companyImgs;
     private boolean active;
+    private String email;
+    @OneToMany(mappedBy = "employer", 
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, 
+            orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Comment> listComment;
+    @OneToMany(mappedBy = "employer", 
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, 
+            orphanRemoval = true)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Rating> listRatings;
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<CVsForRecruitments> cVsForRecruitmentses;
 
     public Employer() {
     }
@@ -212,6 +232,62 @@ public class Employer implements Serializable {
      */
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the listComment
+     */
+    public List<Comment> getListComment() {
+        return listComment;
+    }
+
+    /**
+     * @param listComment the listComment to set
+     */
+    public void setListComment(List<Comment> listComment) {
+        this.listComment = listComment;
+    }
+
+    /**
+     * @return the listRatings
+     */
+    public List<Rating> getListRatings() {
+        return listRatings;
+    }
+
+    /**
+     * @param listRatings the listRatings to set
+     */
+    public void setListRatings(List<Rating> listRatings) {
+        this.listRatings = listRatings;
+    }
+
+    /**
+     * @return the cVsForRecruitmentses
+     */
+    public List<CVsForRecruitments> getcVsForRecruitmentses() {
+        return cVsForRecruitmentses;
+    }
+
+    /**
+     * @param cVsForRecruitmentses the cVsForRecruitmentses to set
+     */
+    public void setcVsForRecruitmentses(List<CVsForRecruitments> cVsForRecruitmentses) {
+        this.cVsForRecruitmentses = cVsForRecruitmentses;
     }
 
 }

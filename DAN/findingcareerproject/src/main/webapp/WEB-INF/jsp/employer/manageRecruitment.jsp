@@ -10,7 +10,7 @@
 <%@taglib prefix="property" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 
-<c:if test="${message != null}">
+<c:if test="${msg != null}">
     <div id="toast">
         <div id="toast_main">
             <div class="toast_icon">
@@ -18,7 +18,7 @@
             </div>
             <div class="toast_body">
                 <h3 class="toast_title">THÔNG BÁO!</h3>
-                <div class="toast_message">${message}</div>
+                <div class="toast_message">${msg}</div>
             </div>
             <div class="toast_close" onclick="removeToast();">
                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -39,23 +39,23 @@
             </div>
         </form>
     </div>
-    <div><a href="<c:url value="/employer/recruitment/new"/>">Add</a></div>
     <c:set value="${recruitments}" var="list" />
     <div class="container">
         <!-- JOB SECTION -->
         <div class="row pb-4">
             <c:forEach var="r" items="${list.pageList}">
                 <div class="col-md-12 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0 pb-4">
-                    <div class="icon-box">
-                        <div class="box1">
-                            <div class="icon"></div>
+                    <div class="icon-box" id="reId${r.idRecruitment}">
+                        <div class="box2">
                             <h4 class="title"><a href="<c:url value="/employer/recruitment/update/${r.idRecruitment}"/>">${r.title}</a></h4>
                                 <c:url value="/employer/manage" var="id">
                                     <c:param name="idRe" value="${r.idRecruitment}"></c:param>
                                 </c:url>
-                            <div><a href="${id}">Delete</a></div>
+                            <div class="manage">
+                                <a href="<c:url value="/employer/recruitment/update/${r.idRecruitment}"/>">Update</a>
+                                <a href="#"onclick="deleteRecruitment(${r.idRecruitment})">Delete</a>
+                            </div>
                         </div>
-                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                     </div>
                 </div>
             </c:forEach>

@@ -17,8 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.findingcareer.pojo.Employer;
+import com.findingcareer.service.CommentService;
+import com.findingcareer.service.RatingService;
+import com.findingcareer.service.RecruitmentService;
 
 /**
  *
@@ -32,6 +37,12 @@ public class EmployeeController {
     private UserService userService;
     @Autowired
     private EmployerService employerService;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private RecruitmentService recruitmentService;
+    @Autowired
+    private RatingService ratingService;
 
     @GetMapping("/user/add-employee")
     public String addEmployeeView(Model model) {
@@ -85,50 +96,44 @@ public class EmployeeController {
         return "employeeProfile";
     }
     
-     @GetMapping("/employee/find-employers")
-    public String listJob(Model model,
+    @GetMapping("/employee/find-employers")
+    public String listEmployer(Model model,
             @RequestParam(required = false) Map<String, String> params) {
         String kw = params.getOrDefault("kw", null);
         String page = params.getOrDefault("page", "1");
-//        String position = params.getOrDefault("position", null);
-//        String salary = params.get("salary");
-//        String idCate = params.get("idCat");
-//        String now = params.get("now");
-        
-//        if(now != null){
-//            model.addAttribute("recruitment",
-//                    Utils.pagination(this.recruitmentService.
-//                            getListRecruitmentByNow(Integer.parseInt(now)), page,3));
-//            model.addAttribute("now",now);
-//        }
-//        else if(salary != null){
-//            String[] l = salary.split("-");
-//            
-//            model.addAttribute("recruitment",
-//                    Utils.pagination(this.recruitmentService.getListRecruitmentBySalary(
-//                            Integer.parseInt(l[0]),Integer.parseInt(l[1])), page,3));
-//        }   
-//        else if (position != null) {
-//            // POSITION CONDITIONS
-//            model.addAttribute("recruitment",
-//                    Utils.pagination(this.recruitmentService.getListRecruitmentByFilter(position), page,3));
-//            model.addAttribute("position", position);
-//        } else if (idCate != null && position == null) {
-//            // CATEGORY CONDITIONS
-//            CategoryJob c = this.categoryService.getCategoryById(Integer.parseInt(idCate));
-//            model.addAttribute("recruitment", Utils.pagination(c.getListRecruitment(), page,3));
-//            model.addAttribute("idCate", idCate);
-//
-//        } else{
-//            
-//        }
-//        
+
         // KEYWORDS CONDITIONS AND NO CONDITIONS
             model.addAttribute("employer",
                     this.employerService.getListEmployerByName(kw, Integer.parseInt(page)));
-            model.addAttribute("counter", this.employerService.countEmployer());
-
+            model.addAttribute("counter",
+                    this.employerService.getListEmployerByName(kw, Integer.parseInt(page)).size());
         return "listEmployers";
+    }
+    
+    @GetMapping("/employee/employer-details/{employerId}")
+    public String employerDetails(Model model,
+            @PathVariable(value = "employerId") int id,
+            @RequestParam(required = false) Map<String, String> params) {
+        
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        
+        Employer e = this.employerService.getEmployerById(id);
+        
+        User u = this.userService.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
+
+        model.addAttribute("e",e);
+        model.addAttribute("jobs",
+                this.recruitmentService.getAmountRecruitmentByCompany(id, 0));
+        model.addAttribute("comments",
+                this.commentService.getCommentsByCompanyid(id, page));
+        model.addAttribute("counter",e.getListComment().size());
+        model.addAttribute("avgrate",this.ratingService.getAverageRatingCompany(id));
+        model.addAttribute("rate", 
+                this.ratingService.getRatingByEmployee(u.getEmployee().getIdEmployee(),id));
+        model.addAttribute("id",u.getEmployee().getIdEmployee());
+        
+        return "employerDetails";
     }
 
 }

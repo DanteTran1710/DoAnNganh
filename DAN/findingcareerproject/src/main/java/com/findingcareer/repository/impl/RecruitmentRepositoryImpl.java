@@ -163,4 +163,32 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
         return false;
     }
 
+    @Override
+    public List<Recruitment> getAmountRecruitmentByCompany(int id, int index) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Recruitment> query =  builder.createQuery(Recruitment.class);
+        Root root = query.from(Recruitment.class);
+        
+        query = query.where(builder.equal(root.get("employer"), id));
+        query = query.orderBy(builder.desc(root.get("idRecruitment")));
+        
+        Query q = session.createQuery(query);
+        
+        int max = 2;
+        q.setMaxResults(max);
+        q.setFirstResult(index);
+        return q.getResultList();   
+        
+    }
+
+    @Override
+    public long countRes() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        Query q = session.createQuery("Select Count(*) from Recruitment");
+        
+        return Long.parseLong(q.getSingleResult().toString());
+    }
+
 }

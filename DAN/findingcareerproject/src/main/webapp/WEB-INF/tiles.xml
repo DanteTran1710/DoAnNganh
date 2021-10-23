@@ -76,11 +76,19 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/employer/employerProfile.jsp"/>
     </definition>
     
+    
     <!-- Definition List Employers Layout -->
     <definition name="listEmployers" extends="homeBaseLayout">
         <put-attribute name="banner" value=""/>
         <put-attribute name="title" value="EMPLOYERS"/>
         <put-attribute name="content" value="/WEB-INF/jsp/employee/listEmployers.jsp"/>
+    </definition>
+    
+    <!-- Definition Employer Details Layout -->
+    <definition name="employerDetails" extends="homeBaseLayout">
+        <put-attribute name="banner" value=""/>
+        <put-attribute name="title" value="EMPLOYER DETAILS"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/employee/employerDetails.jsp"/>
     </definition>
     
     <!-- Definition List Employees Layout -->

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -55,11 +56,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
                 && !e.getSubject().isEmpty() && !e.getSchool().isEmpty()
                 && !e.getQualification().isEmpty() && !e.getSkill().isEmpty()
                 && !e.getLanguage().isEmpty() && e.getSalaryOffer() != null
-                && !e.getPositionOffer().isEmpty()) {
+                && !e.getPositionOffer().isEmpty() && !e.getCv().isEmpty()) {
             String query = "UPDATE Employee SET avatarUrl=:a, phoneNumber=:b, dob=:c,"
                     + "sex=:d, nationality=:e, address=:f, position=:g, company=:h,"
                     + "currentjob=:i, subject=:j, school=:k, qualification=:l, skill=:m,"
-                    + "language=:n, salaryOffer=:o, positionOffer=:p WHERE idEmployee=:id ";
+                    + "language=:n, salaryOffer=:o, positionOffer=:p, cv=:q WHERE idEmployee=:id ";
             Query q = session.createQuery(query);
             
             q.setParameter("a", e.getAvatarUrl());
@@ -78,14 +79,16 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             q.setParameter("n", e.getLanguage());
             q.setParameter("o", e.getSalaryOffer());
             q.setParameter("p", e.getPositionOffer());
+            q.setParameter("q", e.getCv());
             q.setParameter("id", e.getIdEmployee());
-
             q.executeUpdate();
 
             return true;
         }
-
-        return false;
+        else{
+            System.err.print("null" + e.getAddress());
+            return false;
+        }
     }
 
     @Override
@@ -143,14 +146,5 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         q.setFirstResult((page - 1) * max);
 
         return q.getResultList();
-    }
-
-    @Override
-    public long countEmployee() {
-        Session session = this.sessionFactory.getObject().getCurrentSession();
-
-        Query q = session.createQuery("Select Count(*) from Employee");
-
-        return Long.parseLong(q.getSingleResult().toString());
     }
 }

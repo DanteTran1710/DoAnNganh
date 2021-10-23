@@ -6,6 +6,9 @@
 package com.findingcareer.repository.impl;
 
 import com.findingcareer.pojo.Employer;
+import com.findingcareer.pojo.Employer_;
+import com.findingcareer.pojo.Rating;
+import com.findingcareer.pojo.Rating_;
 import com.findingcareer.repository.EmployerRepository;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,6 +18,8 @@ import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import javax.persistence.Query;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -77,20 +82,28 @@ public class EmployerRepositoryImpl implements EmployerRepository{
     }
 
     @Override
-    public List<Employer> getListEmployerByName(String kw, int page) {
+    public List<Object[]> getListEmployerByName(String kw, int page) {
    Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Employer> query = builder.createQuery(Employer.class);
-        Root root = query.from(Employer.class);
-        query = query.select(root);
-
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root<Employer> rootE = query.from(Employer.class);
+        ListJoin<Employer, Rating> ratings = rootE.join(Employer_.listRatings,JoinType.INNER);
+        
+        query.where(builder.equal(rootE.get(Employer_.idEmployer), ratings.get(Rating_.employer)));
+        
+        query.multiselect(rootE.get(Employer_.idEmployer), rootE.get(Employer_.companyName),
+                rootE.get(Employer_.email), rootE.get(Employer_.address), rootE.get(Employer_.phoneNumber),
+                rootE.get(Employer_.orientation),rootE.get(Employer_.logo),
+                builder.avg(ratings.get(Rating_.star)));
+        
         if (kw != null) {
-            Predicate p = builder.like(root.get("companyName").as(String.class),
+            Predicate p = builder.like(rootE.get(Employer_.companyImgs).as(String.class),
                     String.format("%%%s%%", kw));
             
             query = query.where(p);
         }
-        query = query.orderBy(builder.desc(root.get("idEmployer")));
+        query = query.groupBy(rootE.get(Employer_.idEmployer));
+        query = query.orderBy(builder.desc(rootE.get(Employer_.idEmployer)));
 
         Query q = session.createQuery(query);
         

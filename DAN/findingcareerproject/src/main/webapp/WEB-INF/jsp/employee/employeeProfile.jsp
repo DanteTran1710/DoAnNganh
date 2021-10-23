@@ -28,6 +28,7 @@
         </div>
     </div>
 </c:if>
+
 <div class="container-login100">
     <div class="wrap-login100">
         <span class="login100-form-title">
@@ -68,7 +69,7 @@
                             <div class="grid-container">
                                 <div class="grid-item form-group">
                                     <label for="file">Avatar User</label>
-                                    <form:input type="file" path="file" id="file"/>
+                                    <form:input type="file" path="fileAva" id="fileAva"/>
                                 </div>
                                 <div class="grid-item form-group avatar">
                                     <img src="${employee.avatarUrl}"/>
@@ -93,8 +94,6 @@
                                 <form:input type="subject" path="subject" id="subject" placeholder="subject"/>
                                 <label for="school">School</label>
                                 <form:input type="school" path="school" id="school" placeholder="school"/>
-                                <label for="position">Position</label>
-                                <form:input type="position" path="position" id="position" placeholder="position"/>
                                 <label for="qualification">Qualification</label>
                                 <form:select path="qualification" id="qualification" class="custom-select">
                                     <form:option value="Đại Học">Đại Học</form:option>
@@ -131,7 +130,7 @@
                             <label id="title">WORKING PREFERENCE</label>
                             <div class="grid-item form-group">
                                 <label for="salaryOffer">Salary offer ($ per month)</label>
-                                 <form:select path="salaryOffer" id="salaryOffer" class="custom-select">
+                                <form:select path="salaryOffer" id="salaryOffer" class="custom-select">
                                     <form:option value="1"><= $500</form:option>
                                     <form:option value="2">$500 - $1000</form:option>
                                     <form:option value="3">$1000 - $2000</form:option>
@@ -144,6 +143,8 @@
                                     <form:option value="Trưởng phòng">Trưởng phòng</form:option>
                                     <form:option value="Giám đốc và cao cấp hơn">Giám đốc và cao cấp hơn</form:option>
                                 </form:select>
+                                <label for="file">Avatar your own CV</label>
+                                <form:input type="file" path="fileCV" id="fileCV"/>   
                             </div>
                         </div>
                     </div>

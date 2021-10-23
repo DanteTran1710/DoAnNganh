@@ -7,9 +7,10 @@ package com.findingcareer.pojo;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,29 +18,48 @@ import javax.persistence.Table;
  * @author hp
  */
 @Entity
-@Table(name = "application")
-public class Application implements Serializable{
+@Table(name = "rating")
+public class Rating  implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idRating;
+    private int star;
+    @ManyToOne(      
+            optional = true,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "idEmployee")
     private Employee employee;
+    @ManyToOne(      
+            optional = true,
+            fetch = FetchType.EAGER)
+    @JoinColumn(name = "idCompany")
     private Employer employer;
 
-    public Application() {
+    /**
+     * @return the idRating
+     */
+    public int getIdRating() {
+        return idRating;
     }
 
     /**
-     * @return the id
+     * @param idRating the idRating to set
      */
-    public int getId() {
-        return id;
+    public void setIdRating(int idRating) {
+        this.idRating = idRating;
     }
 
     /**
-     * @param id the id to set
+     * @return the star
      */
-    public void setId(int id) {
-        this.id = id;
+    public int getStar() {
+        return star;
+    }
+
+    /**
+     * @param star the star to set
+     */
+    public void setStar(int star) {
+        this.star = star;
     }
 
     /**

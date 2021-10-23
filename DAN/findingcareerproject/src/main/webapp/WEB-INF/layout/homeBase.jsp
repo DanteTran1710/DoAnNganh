@@ -56,6 +56,7 @@
             
         <!-- HOME PAGE RESOURCES -->    
         <!-- Vendor JS Files -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"/></script>
         <script src="<c:url value="/vendor/jquery/home/jquery.min.js"/>"/></script>
         <script src="<c:url value="/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"/></script>
         <script src="<c:url value="/vendor/jquery.easing/jquery.easing.min.js"/>"/></script>

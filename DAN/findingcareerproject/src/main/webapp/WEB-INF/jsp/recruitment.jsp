@@ -10,19 +10,43 @@
 <%@taglib prefix="property" uri="http://www.springframework.org/tags"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<section class="job">
-    <div class="imgcompany">
-        picture
+
+<c:if test="${addCvMsg != null}">
+    <div id="toast">
+        <div id="toast_main">
+            <div class="toast_icon">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+            </div>
+            <div class="toast_body">
+                <h3 class="toast_title">THÔNG BÁO!</h3>
+                <div class="toast_message">${addCvMsg}</div>
+            </div>
+            <div class="toast_close" onclick="removeToast();">
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
+</c:if>
+
+<section class="job">
     <div class="container jobtitle">
-        <div class="imglogo">img</div>
+        <img src="${co.logo}"/>
         <div class="job-title">
             <label class="big-title">${re.title}</label>
             <div class="button-apply">
-                <div>APPLY CV</div>
-                <div class="like">
+                <div class="apply" onclick="addCV(${re.idRecruitment})"><p>APPLY CV</p></div>
+                <c:if test="${likebyE == null}">
+                    <div id="like-section" style="background-color: #B22222"
+                     class="like" onclick="addLike(${re.idRecruitment})">
                     <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
                 </div>
+                </c:if>
+                <c:if test="${likebyE != null}">
+                    <div id="like-section" style="background-color: #87817f; color: #000"
+                     class="like" onclick="addLike(${re.idRecruitment})">
+                    <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
+                </div>
+                </c:if>
             </div>
         </div>
     </div>
@@ -86,8 +110,17 @@
                 <div class="companyinfor">
                     <div class="wrap-infor" id="description">
                         <div class="section">
-                            <div class="imgs mt-2">img</div>
-                            <div class="infor mt-2">${co.orientation}</div>
+                            <div class="imgs mt-2">
+                                img
+                            </div>
+                        <div class="section">
+                            <label>COMPANY DESCRIPTION</label>
+                            <div>${co.description}</div>
+                        </div>
+                        <div class="section">
+                            <label>OUR ORIENTATION</label>
+                            <div>${co.orientation}</div>
+                        </div>
                         </div>
                     </div>
                     <div class="wrap-infor">
@@ -98,6 +131,20 @@
                                     &nbsp;&nbsp;LOCATION
                                 </label>
                                 <div class="mt-2 description">${co.address}</div>
+                            </div>
+                            <div class="section">
+                                <label>
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    &nbsp;&nbsp;EMAIL
+                                </label>
+                                <div class="mt-2 description">${co.email}</div>
+                            </div>
+                            <div class="section">
+                                <label>
+                                    <i class="fa fa-phone-square" aria-hidden="true"></i>
+                                    &nbsp;&nbsp;CONTACT
+                                </label>
+                                <div class="mt-2 description">${co.phoneNumber}</div>
                             </div>
                         </div>
                     </div>

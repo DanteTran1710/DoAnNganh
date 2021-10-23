@@ -131,7 +131,7 @@
                 <input type="text" name="kw" class="form-control"
                        placeholder="Search by nationality, skill, language, qualification">
                 <div class="input-group-append">
-                    <button class="btn-search" type="submit">Go</button>
+                    <button class="btn-search" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
             </div>
         </form>

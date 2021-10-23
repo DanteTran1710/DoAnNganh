@@ -100,6 +100,13 @@
                                 </security:authorize>
                             </li>
                             <li>
+                                <security:authorize access="hasRole('ROLE_EMPLOYER')"> 
+                                    <a href="<c:url value="/employer/recruitment/new"/>">
+                                        <i class="fa fa-file-o" aria-hidden="true"></i>&nbsp;&nbsp;ADD NEW RECRUITMENT
+                                    </a>
+                                </security:authorize>
+                            </li>
+                            <li>
                                 <security:authorize access="hasRole('ROLE_EMPLOYEE')">
                                     <a href="<c:url value="/employee/employee-profile"/>">
                                         <i class="fa fa-id-card-o" aria-hidden="true"></i>&nbsp;&nbsp;EDIT PROFILE
