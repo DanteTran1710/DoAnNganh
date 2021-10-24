@@ -38,6 +38,8 @@
         <link href="<c:url value="/css/home.style.css" />" rel="stylesheet">
         <!--Icont Font-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!--SLICK SLIDER-->
+        <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
         
     </head>
     <body>
@@ -69,7 +71,8 @@
         <script src="<c:url value="/vendor/venobox/venobox.min.js"/>"/></script>
           <!-- Template Main JS File -->
         <script src="<c:url value="/js/main.js"/>"/></script>   
-
+        <!--SLICK SLIDER-->
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     </body>
     
 </html>

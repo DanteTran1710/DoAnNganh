@@ -20,4 +20,5 @@ public interface RecruitmentService {
     boolean addRecruitment(Recruitment r);
     boolean deleteRecruitment(int id);
     long countRes();
+    List<Object[]> getFavoriteRecruitments();
 }

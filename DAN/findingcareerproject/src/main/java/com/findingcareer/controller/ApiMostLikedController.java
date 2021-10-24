@@ -5,12 +5,13 @@
  */
 package com.findingcareer.controller;
 
-import com.findingcareer.service.MostLikedService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+import com.findingcareer.service.MostLikedRecruitmentService;
+import com.findingcareer.service.MostLikedCompanyService;
 
 /**
  *
@@ -19,12 +20,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiMostLikedController {
     @Autowired
-    private MostLikedService likedService;
+    private MostLikedRecruitmentService likedRecruitmentService;
+    @Autowired
+    private MostLikedCompanyService likedCompanyService;
     
-    @GetMapping(path="/api/add-like/{id}")
-    public int addLike(@PathVariable(value = "id") int idRe){
+    @GetMapping(path="/api/add-re-like/{id}")
+    public int addReLike(@PathVariable(value = "id") int idRe){
         
-        if(this.likedService.AddLike(idRe))
+        if(this.likedRecruitmentService.AddLike(idRe))
+            return 1;
+        else
+            return 0;
+        
+    }
+    @GetMapping(path="/api/add-co-like/{id}")
+    public int addCoLike(@PathVariable(value = "id") int idCo){
+        
+        if(this.likedCompanyService.AddLike(idCo))
             return 1;
         else
             return 0;

@@ -1993,6 +1993,10 @@ label{
 /*--------------------------------------------------------------
 # RECRUIMENTS BY COMPANY
 --------------------------------------------------------------*/
+.button-like{
+    width: 200px;
+    padding-top: 20px;
+}
 .load-more{
     color: black;
     text-align: right;
@@ -2090,6 +2094,23 @@ label{
 /*--------------------------------------------------------------
 # RECRUIMENTS
 --------------------------------------------------------------*/
+.ti h5{
+    padding: 5px;
+    color : #425451;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+}
+.ti .salary{
+    padding: 5px;
+    font-size: 17px;
+    color: #20B2AA;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+}
+.ti h5:hover{
+    transition: ease-in 0.02s;
+    color: #FFA07A;
+}
 #title-company-job, #salary-company-job{
     width: 100%;
 }
@@ -2123,6 +2144,12 @@ label{
     height: 230px;
     background-color: #fff;
     margin-top: 10px;
+    padding: 20px;
+}
+.recommend{
+    width: 100%;
+    height: auto;
+    margin-top: 10px;  
     padding: 20px;
 }
 .jobtitle .job-title{

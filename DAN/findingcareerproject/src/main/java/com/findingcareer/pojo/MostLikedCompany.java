@@ -6,7 +6,6 @@
 package com.findingcareer.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,8 +20,8 @@ import javax.persistence.Table;
  * @author hp
  */
 @Entity
-@Table(name = "most_liked")
-public class MostLiked implements Serializable{
+@Table(name = "most_liked_company")
+public class MostLikedCompany {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -41,15 +40,15 @@ public class MostLiked implements Serializable{
     @JoinColumn(name = "idEmployee")
     @JsonIgnore
     private Employee employee;
-    @ManyToOne(
-            optional = true,
-            fetch = FetchType.EAGER
-    )
-    @JoinColumn(name = "idRecruitment")
-    @JsonIgnore
-    private Recruitment recruitment;
 
-    public MostLiked() {
+    public MostLikedCompany() {
+    }
+
+    public MostLikedCompany(int id, int heart, Employer employer, Employee employee) {
+        this.id = id;
+        this.heart = heart;
+        this.employer = employer;
+        this.employee = employee;
     }
 
     /**
@@ -107,19 +106,4 @@ public class MostLiked implements Serializable{
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
-
-    /**
-     * @return the recruitment
-     */
-    public Recruitment getRecruitment() {
-        return recruitment;
-    }
-
-    /**
-     * @param recruitment the recruitment to set
-     */
-    public void setRecruitment(Recruitment recruitment) {
-        this.recruitment = recruitment;
-    }
-
 }

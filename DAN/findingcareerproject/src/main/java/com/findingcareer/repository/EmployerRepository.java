@@ -19,4 +19,5 @@ public interface EmployerRepository {
     Employer getEmployerById(int id);
     List<Object[]> getListEmployerByName(String kw, int page);
     long countEmployer();
+    List<Object[]> getFavoriteCompanies();
 }

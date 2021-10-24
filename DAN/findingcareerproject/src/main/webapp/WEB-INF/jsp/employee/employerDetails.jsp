@@ -40,6 +40,20 @@
                 <i class="fa fa-star star-rated" aria-hidden="true"
                    style=" color:#ccc; font-size: 40px;" ></i>
             </c:forEach>
+            <div class="button-like">
+                <c:if test="${likebyE == null}">
+                    <div id="like-section"
+                         class="like" onclick="addCoLike(${e.idEmployer})">
+                        <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
+                    </div>
+                </c:if>
+                <c:if test="${likebyE != null}">
+                    <div id="like-section" style="background-color: #87817f; color: #000"
+                         class="like">
+                        <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
+                    </div>
+                </c:if>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -157,7 +171,7 @@
                     <div id="cmt" class="comment-section">
                         <img src="${c.employee.avatarUrl}"/>
                         <div>
-                            <label class="job-tit">${c.content}</label>
+                            <label class="job-tit" style="font-size: 20px;">${c.content}</label>
                             <p class="date-comment">${c.createDate}</p>
                         </div>
                     </div>
@@ -172,7 +186,7 @@
                 </p>
             </div>
             <div id="cmt-area">
-                
+
             </div>
         </c:if>
         <!-- CLASSIFY THE PAGINATION BY THE CONDITIONS -->

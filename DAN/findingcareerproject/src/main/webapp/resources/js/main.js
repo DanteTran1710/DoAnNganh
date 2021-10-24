@@ -350,8 +350,29 @@ function addCV(recruitmentid) {
     }
 }
 // ADD LIKE TO RECRUITMENT
-function addLike(recruitmentid) {
-    fetch(`/findingcareerproject/api/add-like/${recruitmentid}`, {
+function addReLike(recruitmentid) {
+    fetch(`/findingcareerproject/api/add-re-like/${recruitmentid}`, {
+        method: "get",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+        
+        return res.json();
+    }).then(function (data) {
+
+        if(data === 1){
+            $('#like-section').css('background-color','#87817f');
+            $('#like-section').css('color','#000');
+        }
+        else
+            alert("Error!!");
+        
+    })
+}
+// ADD LIKE TO COMPANY
+function addCoLike(recruitmentid) {
+    fetch(`/findingcareerproject/api/add-co-like/${recruitmentid}`, {
         method: "get",
         headers: {
             "Content-Type": "application/json"

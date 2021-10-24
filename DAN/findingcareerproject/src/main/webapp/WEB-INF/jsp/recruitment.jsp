@@ -32,20 +32,32 @@
     <div class="container jobtitle">
         <img src="${co.logo}"/>
         <div class="job-title">
-            <label class="big-title">${re.title}</label>
+            <div class="ti" style="width: 75%">
+                <label class="big-title">${re.title}</label>
+                <a href="<c:url value="/employee/employer-details/${co.idEmployer}"/>"><h5>${co.companyName}</h5></a>
+                <p class="salary">
+                    Salary: 
+                    <c:if test="${re.salary != 0}">
+                        ${re.salary}$
+                    </c:if>
+                    <c:if test="${re.salary == 0}">
+                        Thương lượng
+                    </c:if>
+                </p>
+            </div>
             <div class="button-apply">
                 <div class="apply" onclick="addCV(${re.idRecruitment})"><p>APPLY CV</p></div>
                 <c:if test="${likebyE == null}">
-                    <div id="like-section" style="background-color: #B22222"
-                     class="like" onclick="addLike(${re.idRecruitment})">
-                    <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
-                </div>
+                    <div id="like-section"
+                         class="like" onclick="addReLike(${re.idRecruitment})">
+                        <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
+                    </div>
                 </c:if>
                 <c:if test="${likebyE != null}">
                     <div id="like-section" style="background-color: #87817f; color: #000"
-                     class="like" onclick="addLike(${re.idRecruitment})">
-                    <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
-                </div>
+                         class="like">
+                        <i class="fa fa-heart" aria-hidden="true"></i>&nbsp;LIKE
+                    </div>
                 </c:if>
             </div>
         </div>
@@ -113,14 +125,14 @@
                             <div class="imgs mt-2">
                                 img
                             </div>
-                        <div class="section">
-                            <label>COMPANY DESCRIPTION</label>
-                            <div>${co.description}</div>
-                        </div>
-                        <div class="section">
-                            <label>OUR ORIENTATION</label>
-                            <div>${co.orientation}</div>
-                        </div>
+                            <div class="section">
+                                <label>COMPANY DESCRIPTION</label>
+                                <div>${co.description}</div>
+                            </div>
+                            <div class="section">
+                                <label>OUR ORIENTATION</label>
+                                <div>${co.orientation}</div>
+                            </div>
                         </div>
                     </div>
                     <div class="wrap-infor">
@@ -152,8 +164,147 @@
             </div>
         </div>
     </div>
-
-    <div class="recommend">recommend</div>
+    <div class="container recommend"> 
+        <label class="big-title">FAVORITE COMPANY</label>
+        <div class="row favorite-company">
+            <c:forEach var="e" items="${favComs}">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box">
+                        <div class="box1">
+                            <div class="infor-section">
+                                <div class="ti">
+                                    <h4 class="title-com">
+                                        <a href="<c:url value="/employee/employer-details/${e[0]}"/>">${e[1]}</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="infor-section">
+                                <div style="width: 100%">
+                                    <p class="email">
+                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;
+                                        Email: ${e[2]}
+                                    </p>
+                                    <p class="location-com">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;
+                                        Address: ${e[3]}
+                                    </p>
+                                    <p class="phoneNumber">
+                                        <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;
+                                        Contact: ${e[4]}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <label class="big-title pt-2">FAVORITE RECRUITMENT</label>
+        <div class="row favorite-recruitment">
+            <c:forEach var="r" items="${favRes}">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box">
+                        <div class="box1">
+                            <div class="infor-section">
+                                <div class="ti">
+                                    <h4 class="title-com" style="width: 100%; height: 20px">
+                                        <a href="<c:url value="/recruitment/${r[0]}"/>">${r[1]}</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="infor-section">
+                                <div style="width: 100%">
+                                    <p class="salary text text-danger">
+                                        <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
+                                        Salary: 
+                                        <c:if test="${r[2] != 0}">
+                                            ${r[2]}$
+                                        </c:if>
+                                        <c:if test="${r[2] == 0}">
+                                            Thương lượng
+                                        </c:if>
+                                    </p>
+                                    <p class="category">
+                                        <i class="fa fa-id-badge" aria-hidden="true"></i>&nbsp;
+                                        Position: ${r[3]}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+        <label class="big-title pt-2">SAME MAJOR</label>
+        <div class="row same-recruitment">
+            <c:forEach var="r" items="${sameCates}">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box">
+                        <div class="box1">
+                            <div class="infor-section">
+                                <div class="ti">
+                                    <h4 class="title-com" style="width: 100%; height: 20px">
+                                        <a href="<c:url value="/recruitment/${r.idRecruitment}"/>">${r.title}</a>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="infor-section">
+                                <div style="width: 100%">
+                                    <p class="salary text text-danger">
+                                        <i class="fa fa-money" aria-hidden="true"></i>&nbsp;
+                                        Salary: 
+                                        <c:if test="${r.salary != 0}">
+                                            ${r.salary}$
+                                        </c:if>
+                                        <c:if test="${r.salary == 0}">
+                                            Thương lượng
+                                        </c:if>
+                                    </p>
+                                    <p class="category">
+                                        <i class="fa fa-id-badge" aria-hidden="true"></i>&nbsp;
+                                        Position: ${r.position}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
 </section>
 
 <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+<script>
+    $(document).ready(function () {
+        $('.favorite-company').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: '',
+            nextArrow: ''
+        });
+    });
+
+    $(document).ready(function () {
+        $('.favorite-recruitment').slick({
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: '',
+            nextArrow: ''
+        });
+    });
+    $(document).ready(function () {
+        $('.same-recruitment').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            prevArrow: '',
+            nextArrow: ''
+        });
+    });
+</script>

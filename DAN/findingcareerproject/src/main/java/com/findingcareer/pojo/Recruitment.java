@@ -57,23 +57,30 @@ public class Recruitment implements Serializable{
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     private List<CVsForRecruitments> cVsForRecruitmentses;
+    @OneToMany(mappedBy = "recruitment", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<MostLikedRecruitment> mostLikeds;
 
     public Recruitment() {
     }
 
-    public Recruitment(int idRecruitment, String title, String description, String requirement, String position, String experience, BigDecimal salary, Employer employer, CategoryJob categoryJob) {
+    public Recruitment(int idRecruitment, String title, String welfare, String description, String requirement, String position, String experience, BigDecimal salary, boolean now, Employer employer, CategoryJob categoryJob, List<CVsForRecruitments> cVsForRecruitmentses, List<MostLikedRecruitment> mostLikeds) {
         this.idRecruitment = idRecruitment;
         this.title = title;
+        this.welfare = welfare;
         this.description = description;
         this.requirement = requirement;
         this.position = position;
         this.experience = experience;
         this.salary = salary;
+        this.now = now;
         this.employer = employer;
         this.categoryJob = categoryJob;
+        this.cVsForRecruitmentses = cVsForRecruitmentses;
+        this.mostLikeds = mostLikeds;
     }
 
-    
     /**
      * @return the idRecruitment
      */
@@ -100,6 +107,20 @@ public class Recruitment implements Serializable{
      */
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * @return the welfare
+     */
+    public String getWelfare() {
+        return welfare;
+    }
+
+    /**
+     * @param welfare the welfare to set
+     */
+    public void setWelfare(String welfare) {
+        this.welfare = welfare;
     }
 
     /**
@@ -173,6 +194,20 @@ public class Recruitment implements Serializable{
     }
 
     /**
+     * @return the now
+     */
+    public boolean isNow() {
+        return now;
+    }
+
+    /**
+     * @param now the now to set
+     */
+    public void setNow(boolean now) {
+        this.now = now;
+    }
+
+    /**
      * @return the employer
      */
     public Employer getEmployer() {
@@ -201,34 +236,6 @@ public class Recruitment implements Serializable{
     }
 
     /**
-     * @return the welfare
-     */
-    public String getWelfare() {
-        return welfare;
-    }
-
-    /**
-     * @param welfare the welfare to set
-     */
-    public void setWelfare(String welfare) {
-        this.welfare = welfare;
-    }
-
-    /**
-     * @return the now
-     */
-    public boolean isNow() {
-        return now;
-    }
-
-    /**
-     * @param now the now to set
-     */
-    public void setNow(boolean now) {
-        this.now = now;
-    }
-
-    /**
      * @return the cVsForRecruitmentses
      */
     public List<CVsForRecruitments> getcVsForRecruitmentses() {
@@ -240,6 +247,20 @@ public class Recruitment implements Serializable{
      */
     public void setcVsForRecruitmentses(List<CVsForRecruitments> cVsForRecruitmentses) {
         this.cVsForRecruitmentses = cVsForRecruitmentses;
+    }
+
+    /**
+     * @return the mostLikeds
+     */
+    public List<MostLikedRecruitment> getMostLikeds() {
+        return mostLikeds;
+    }
+
+    /**
+     * @param mostLikeds the mostLikeds to set
+     */
+    public void setMostLikeds(List<MostLikedRecruitment> mostLikeds) {
+        this.mostLikeds = mostLikeds;
     }
 
 }

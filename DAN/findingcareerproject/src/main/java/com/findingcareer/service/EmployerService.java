@@ -17,4 +17,5 @@ public interface EmployerService {
     boolean updateEmployer(Employer e);
     Employer getEmployerById(int id);
     List<Object[]> getListEmployerByName(String kw, int page);
+    List<Object[]> getFavoriteCompanies();
 }

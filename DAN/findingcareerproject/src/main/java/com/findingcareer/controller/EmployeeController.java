@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.findingcareer.pojo.Employer;
 import com.findingcareer.service.CommentService;
+import com.findingcareer.service.MostLikedCompanyService;
 import com.findingcareer.service.RatingService;
 import com.findingcareer.service.RecruitmentService;
 
@@ -31,6 +32,7 @@ import com.findingcareer.service.RecruitmentService;
  */
 @Controller
 public class EmployeeController {
+
     @Autowired
     private EmployeeService employeeService;
     @Autowired
@@ -43,6 +45,8 @@ public class EmployeeController {
     private RecruitmentService recruitmentService;
     @Autowired
     private RatingService ratingService;
+    @Autowired
+    private MostLikedCompanyService mostLikedService;
 
     @GetMapping("/user/add-employee")
     public String addEmployeeView(Model model) {
@@ -55,7 +59,7 @@ public class EmployeeController {
     public String addEmployee(Model model,
             @ModelAttribute(value = "employee") Employee employee) {
         String errorMessage;
-        
+
         // ADD NEW EMPLOYER
         if (this.employeeService.addEmployee(employee) == true) {
             return "redirect:/login";
@@ -70,7 +74,7 @@ public class EmployeeController {
 
     @GetMapping("/employee/employee-profile")
     public String editProfileEmployeeView(Model model) {
-        
+
         User u = this.userService.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
 
@@ -85,7 +89,7 @@ public class EmployeeController {
             @ModelAttribute(value = "employee") Employee e) {
 
         String message;
-        
+
         if (this.employeeService.updateEmployee(e)) {
             message = "Cập nhật dữ liệu thành công!";
         } else {
@@ -95,44 +99,50 @@ public class EmployeeController {
 
         return "employeeProfile";
     }
-    
+
     @GetMapping("/employee/find-employers")
     public String listEmployer(Model model,
             @RequestParam(required = false) Map<String, String> params) {
         String kw = params.getOrDefault("kw", null);
         String page = params.getOrDefault("page", "1");
+        //GET USER BY USER NAME
+        Employee e = this.userService.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName()).getEmployee();
 
+        
         // KEYWORDS CONDITIONS AND NO CONDITIONS
-            model.addAttribute("employer",
-                    this.employerService.getListEmployerByName(kw, Integer.parseInt(page)));
-            model.addAttribute("counter",
-                    this.employerService.getListEmployerByName(kw, Integer.parseInt(page)).size());
+        model.addAttribute("employer",
+                this.employerService.getListEmployerByName(kw, Integer.parseInt(page)));
+        model.addAttribute("counter",
+                this.employerService.getListEmployerByName(kw, Integer.parseInt(page)).size());
         return "listEmployers";
     }
-    
+
     @GetMapping("/employee/employer-details/{employerId}")
     public String employerDetails(Model model,
             @PathVariable(value = "employerId") int id,
             @RequestParam(required = false) Map<String, String> params) {
-        
+
         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-        
+
         Employer e = this.employerService.getEmployerById(id);
-        
+
         User u = this.userService.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
 
-        model.addAttribute("e",e);
+        model.addAttribute("e", e);
         model.addAttribute("jobs",
                 this.recruitmentService.getAmountRecruitmentByCompany(id, 0));
         model.addAttribute("comments",
                 this.commentService.getCommentsByCompanyid(id, page));
-        model.addAttribute("counter",e.getListComment().size());
-        model.addAttribute("avgrate",this.ratingService.getAverageRatingCompany(id));
-        model.addAttribute("rate", 
-                this.ratingService.getRatingByEmployee(u.getEmployee().getIdEmployee(),id));
-        model.addAttribute("id",u.getEmployee().getIdEmployee());
-        
+        model.addAttribute("counter", e.getListComment().size());
+        model.addAttribute("avgrate", this.ratingService.getAverageRatingCompany(id));
+        model.addAttribute("rate",
+                this.ratingService.getRatingByEmployee(u.getEmployee().getIdEmployee(), id));
+        model.addAttribute("likebyE", this.mostLikedService.getLikeByEmployeeId(
+                u.getEmployee().getIdEmployee(), e.getIdEmployer()));
+        model.addAttribute("id", u.getEmployee().getIdEmployee());
+
         return "employerDetails";
     }
 

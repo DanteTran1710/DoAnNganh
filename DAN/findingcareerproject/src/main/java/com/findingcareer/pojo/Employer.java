@@ -65,11 +65,15 @@ public class Employer implements Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     private List<CVsForRecruitments> cVsForRecruitmentses;
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<MostLikedCompany> mostLikeds;
 
     public Employer() {
     }
 
-    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user) {
+    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user, List<Recruitment> listRecruiment, String logo, String companyImgs, boolean active, String email, List<Comment> listComment, List<Rating> listRatings, List<CVsForRecruitments> cVsForRecruitmentses, List<MostLikedCompany> mostLikeds) {
         this.idEmployer = idEmployer;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
@@ -77,9 +81,17 @@ public class Employer implements Serializable {
         this.address = address;
         this.description = description;
         this.user = user;
+        this.listRecruiment = listRecruiment;
+        this.logo = logo;
+        this.companyImgs = companyImgs;
+        this.active = active;
+        this.email = email;
+        this.listComment = listComment;
+        this.listRatings = listRatings;
+        this.cVsForRecruitmentses = cVsForRecruitmentses;
+        this.mostLikeds = mostLikeds;
     }
 
-    
     /**
      * @return the idEmployer
      */
@@ -290,4 +302,17 @@ public class Employer implements Serializable {
         this.cVsForRecruitmentses = cVsForRecruitmentses;
     }
 
+    /**
+     * @return the mostLikeds
+     */
+    public List<MostLikedCompany> getMostLikeds() {
+        return mostLikeds;
+    }
+
+    /**
+     * @param mostLikeds the mostLikeds to set
+     */
+    public void setMostLikeds(List<MostLikedCompany> mostLikeds) {
+        this.mostLikeds = mostLikeds;
+    }
 }

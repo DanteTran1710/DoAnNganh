@@ -20,4 +20,5 @@ public interface RecruitmentRepository {
     boolean addRecruitment(Recruitment r);
     boolean deleteRecruitment(Recruitment r);
     long countRes();
+    List<Object[]> getFavoriteRecruitments();
 }

@@ -5,13 +5,14 @@
  */
 package com.findingcareer.service;
 
-import com.findingcareer.pojo.MostLiked;
+import com.findingcareer.pojo.MostLikedRecruitment;
+import java.util.List;
 
 /**
  *
  * @author hp
  */
-public interface MostLikedService {
+public interface MostLikedRecruitmentService {
     boolean AddLike(int idRe);
-    MostLiked getLikeByEmployeeId(int idEmployee, int idRecruitment);
+    MostLikedRecruitment getLikeByEmployeeId(int idEmployee, int idRecruitment);
 }

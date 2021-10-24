@@ -87,4 +87,10 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     public long countRes() {
         return this.recruitmentRepository.countRes();
     }
+
+    @Override
+    public List<Object[]> getFavoriteRecruitments() {
+        return this.recruitmentRepository.getFavoriteRecruitments();
+    }
+
 }

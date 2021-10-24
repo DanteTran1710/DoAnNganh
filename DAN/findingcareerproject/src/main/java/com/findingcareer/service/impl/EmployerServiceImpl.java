@@ -62,5 +62,10 @@ public class EmployerServiceImpl implements EmployerService{
     public List<Object[]> getListEmployerByName(String string, int page) {
         return this.employerRepository.getListEmployerByName(string, page);
     }
+
+    @Override
+    public List<Object[]> getFavoriteCompanies() {
+        return this.employerRepository.getFavoriteCompanies();
+    }
     
 }

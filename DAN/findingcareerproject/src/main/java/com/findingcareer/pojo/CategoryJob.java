@@ -30,7 +30,7 @@ public class CategoryJob implements Serializable{
     private String description;
     private String hastag;
     @OneToMany(mappedBy = "categoryJob",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade =  CascadeType.REMOVE,
             orphanRemoval = true)
     private List<Recruitment> listRecruitment;

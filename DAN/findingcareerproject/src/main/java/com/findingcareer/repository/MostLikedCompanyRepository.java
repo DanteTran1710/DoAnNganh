@@ -5,13 +5,13 @@
  */
 package com.findingcareer.repository;
 
-import com.findingcareer.pojo.MostLiked;
+import com.findingcareer.pojo.MostLikedCompany;
 
 /**
  *
  * @author hp
  */
-public interface MostLikedRepository {
-    boolean AddLike(MostLiked like);
-    MostLiked getLikeByEmployeeId(int idEmployee, int idRecruitment);
+public interface MostLikedCompanyRepository {
+    boolean AddLike(MostLikedCompany like);
+    MostLikedCompany getLikeByEmployeeId(int idEmployee, int idCompany);
 }

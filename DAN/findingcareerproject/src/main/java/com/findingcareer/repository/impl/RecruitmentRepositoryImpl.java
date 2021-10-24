@@ -8,12 +8,17 @@ package com.findingcareer.repository.impl;
 import com.findingcareer.pojo.CategoryJob;
 import com.findingcareer.pojo.Employer;
 import com.findingcareer.pojo.Recruitment;
+import com.findingcareer.pojo.Recruitment_;
+import com.findingcareer.pojo.MostLikedRecruitment;
+import com.findingcareer.pojo.MostLikedRecruitment_;
 import com.findingcareer.repository.RecruitmentRepository;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -54,20 +59,19 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
             if (kw.contains("-")) {
                 String[] l = kw.split("-");
                 if (Integer.parseInt(l[0]) == 0 && Integer.parseInt(l[1]) == 0) {
-                   Predicate s = builder.equal(rootR.get("salary").as(BigDecimal.class), 0);
-                   
-                   query = query.where(builder.and(pc,p,s));
-                    
+                    Predicate s = builder.equal(rootR.get("salary").as(BigDecimal.class), 0);
+
+                    query = query.where(builder.and(pc, p, s));
+
                 } else {
                     Predicate s = builder.between(rootR.get("salary").as(BigDecimal.class),
                             Integer.parseInt(l[0]), Integer.parseInt(l[1]));
-                    query = query.where(builder.and(pc,p,s));
+                    query = query.where(builder.and(pc, p, s));
                 }
-            }else if(kw.equals("1")){
-                query = query.where(builder.and(pc,p,builder.equal(rootR.get("now")
-                        , Integer.parseInt(kw))));
-            }
-            else {
+            } else if (kw.equals("1")) {
+                query = query.where(builder.and(pc, p, builder.equal(rootR.get("now"),
+                         Integer.parseInt(kw))));
+            } else {
                 Predicate p1 = builder.like(rootR.get("title").as(String.class),
                         String.format("%%%s%%", kw));
                 Predicate p2 = builder.like(rootR.get("position").as(String.class),
@@ -83,16 +87,16 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
                 Predicate p7 = builder.like(rootC.get("nameJob").as(String.class),
                         String.format("%%%s%%", kw));
 
-                query = query.where(builder.and(builder.or(p1, p2, p3, 
+                query = query.where(builder.and(builder.or(p1, p2, p3,
                         p4, p5, p6, p7), p, pc));
             }
         } else {
-            query = query.where(builder.and(p,pc));
+            query = query.where(builder.and(p, pc));
         }
         query = query.orderBy(builder.desc(rootR.get("idRecruitment")));
 
         Query q = session.createQuery(query);
-        
+
         int max = 3;
         q.setMaxResults(max);
 
@@ -107,7 +111,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
         return session.get(Recruitment.class, id);
     }
-    
+
     @Override
     public boolean updateRecruitment(Recruitment r) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
@@ -167,28 +171,49 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
     public List<Recruitment> getAmountRecruitmentByCompany(int id, int index) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Recruitment> query =  builder.createQuery(Recruitment.class);
+        CriteriaQuery<Recruitment> query = builder.createQuery(Recruitment.class);
         Root root = query.from(Recruitment.class);
-        
+
         query = query.where(builder.equal(root.get("employer"), id));
         query = query.orderBy(builder.desc(root.get("idRecruitment")));
-        
+
         Query q = session.createQuery(query);
-        
+
         int max = 2;
         q.setMaxResults(max);
         q.setFirstResult(index);
-        return q.getResultList();   
-        
+        return q.getResultList();
+
     }
 
     @Override
     public long countRes() {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-        
+
         Query q = session.createQuery("Select Count(*) from Recruitment");
-        
+
         return Long.parseLong(q.getSingleResult().toString());
+    }
+
+    @Override
+    public List<Object[]> getFavoriteRecruitments() {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+        Root<Recruitment> rootE = query.from(Recruitment.class);
+        ListJoin<Recruitment, MostLikedRecruitment> mostlikeds = rootE.join(Recruitment_.mostLikeds, JoinType.INNER);
+
+        query.where(builder.equal(rootE.get(Recruitment_.idRecruitment), mostlikeds.get(MostLikedRecruitment_.recruitment)));
+
+        query.multiselect(rootE.get(Recruitment_.idRecruitment), rootE.get(Recruitment_.title),
+                rootE.get(Recruitment_.salary), rootE.get(Recruitment_.position));
+
+        query = query.groupBy(rootE.get(Recruitment_.idRecruitment));
+        query = query.orderBy(builder.desc(builder.count(mostlikeds.get(MostLikedRecruitment_.heart))));
+
+        Query q = session.createQuery(query);
+
+        return q.getResultList();
     }
 
 }

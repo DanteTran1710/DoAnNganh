@@ -106,34 +106,12 @@ public class Employee implements Serializable{
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     private List<CVsForRecruitments> cVsForRecruitmentses;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<MostLikedRecruitment> mostLikeds;
 
     public Employee() {
-    }
-
-    public Employee(int idEmployee, String avatarUrl, String cv, User user, String phoneNumber, Date dob, boolean sex, String nationality, String address, MultipartFile fileAva, MultipartFile fileCV, String position, String company, boolean currentjob, String subject, String school, String qualification, String skill, String language, BigDecimal salaryOffer, String positionOffer, List<Comment> listComment, List<Rating> listRatings) {
-        this.idEmployee = idEmployee;
-        this.avatarUrl = avatarUrl;
-        this.cv = cv;
-        this.user = user;
-        this.phoneNumber = phoneNumber;
-        this.dob = dob;
-        this.sex = sex;
-        this.nationality = nationality;
-        this.address = address;
-        this.fileAva = fileAva;
-        this.fileCV = fileCV;
-        this.position = position;
-        this.company = company;
-        this.currentjob = currentjob;
-        this.subject = subject;
-        this.school = school;
-        this.qualification = qualification;
-        this.skill = skill;
-        this.language = language;
-        this.salaryOffer = salaryOffer;
-        this.positionOffer = positionOffer;
-        this.listComment = listComment;
-        this.listRatings = listRatings;
     }
     
     /**
@@ -470,6 +448,20 @@ public class Employee implements Serializable{
      */
     public void setcVsForRecruitmentses(List<CVsForRecruitments> cVsForRecruitmentses) {
         this.cVsForRecruitmentses = cVsForRecruitmentses;
+    }
+
+    /**
+     * @return the mostLikeds
+     */
+    public List<MostLikedRecruitment> getMostLikeds() {
+        return mostLikeds;
+    }
+
+    /**
+     * @param mostLikeds the mostLikeds to set
+     */
+    public void setMostLikeds(List<MostLikedRecruitment> mostLikeds) {
+        this.mostLikeds = mostLikeds;
     }
 
 }

@@ -34,6 +34,16 @@ public class Rating  implements Serializable{
     @JoinColumn(name = "idCompany")
     private Employer employer;
 
+    public Rating() {
+    }
+
+    public Rating(int idRating, int star, Employee employee, Employer employer) {
+        this.idRating = idRating;
+        this.star = star;
+        this.employee = employee;
+        this.employer = employer;
+    }
+
     /**
      * @return the idRating
      */

@@ -10,7 +10,6 @@ import com.findingcareer.pojo.User;
 import com.findingcareer.service.RecruitmentService;
 import com.findingcareer.service.CategoryService;
 import com.findingcareer.service.EmployerService;
-import com.findingcareer.service.MostLikedService;
 import com.findingcareer.service.UserService;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.findingcareer.service.MostLikedRecruitmentService;
 
 /**
  *
@@ -36,7 +36,7 @@ public class RecruitmentController {
     @Autowired
     private UserService userService;
     @Autowired
-    private MostLikedService mostLikedService;
+    private MostLikedRecruitmentService mostLikedRecruitmentService;
     
     @GetMapping("/jobs")
     public String listJob(Model model,
@@ -58,13 +58,14 @@ public class RecruitmentController {
         User u = this.userService.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         
-
         Recruitment r = this.recruitmentService.getRecruitmentById(recruitmentId);
 
         model.addAttribute("re", r);
-        model.addAttribute("likebyE",this.mostLikedService.getLikeByEmployeeId(
+        model.addAttribute("likebyE",this.mostLikedRecruitmentService.getLikeByEmployeeId(
                 u.getEmployee().getIdEmployee(), recruitmentId));
-        
+        model.addAttribute("favComs",this.employerService.getFavoriteCompanies());
+        model.addAttribute("favRes",this.recruitmentService.getFavoriteRecruitments());
+        model.addAttribute("sameCates",r.getCategoryJob().getListRecruitment());
         model.addAttribute("co",
                 this.employerService.getEmployerById(r.getEmployer().getIdEmployer()));
 
