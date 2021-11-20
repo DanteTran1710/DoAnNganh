@@ -32,7 +32,7 @@
 <div class="container-login100">
     <div class="wrap-login100">
         <span class="login100-form-title">
-            Employer Profile
+            Employee Profile
         </span>
         <div class="login100-form validate-form">
             <fieldset class="border p-2">
@@ -72,7 +72,7 @@
                                     <form:input type="file" path="fileAva" id="fileAva"/>
                                 </div>
                                 <div class="grid-item form-group avatar">
-                                    <img src="${employee.avatarUrl}"/>
+                                    <img src="${employee.avatarUrl}" "alt="Hình ảnh không tồn tại" />
                                 </div>
                             </div>
                         </div>

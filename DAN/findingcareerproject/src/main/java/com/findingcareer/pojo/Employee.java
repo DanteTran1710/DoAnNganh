@@ -101,15 +101,19 @@ public class Employee implements Serializable{
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
-    private List<Rating> listRatings;
+    private List<RatingCompany> listRatings;
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     private List<CVsForRecruitments> cVsForRecruitmentses;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
+    private List<MostLikedRecruitment> listLikedRes;
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
-    private List<MostLikedRecruitment> mostLikeds;
+    private List<MostLikedCompany> listLikedComs;
 
     public Employee() {
     }
@@ -425,14 +429,14 @@ public class Employee implements Serializable{
     /**
      * @return the listRatings
      */
-    public List<Rating> getListRatings() {
+    public List<RatingCompany> getListRatings() {
         return listRatings;
     }
 
     /**
      * @param listRatings the listRatings to set
      */
-    public void setListRatings(List<Rating> listRatings) {
+    public void setListRatings(List<RatingCompany> listRatings) {
         this.listRatings = listRatings;
     }
 
@@ -451,17 +455,31 @@ public class Employee implements Serializable{
     }
 
     /**
-     * @return the mostLikeds
+     * @return the listLikedRes
      */
     public List<MostLikedRecruitment> getMostLikeds() {
-        return mostLikeds;
+        return listLikedRes;
     }
 
     /**
-     * @param mostLikeds the mostLikeds to set
+     * @param listLikedRes the listLikedRes to set
      */
-    public void setMostLikeds(List<MostLikedRecruitment> mostLikeds) {
-        this.mostLikeds = mostLikeds;
+    public void setMostLikeds(List<MostLikedRecruitment> listLikedRes) {
+        this.listLikedRes = listLikedRes;
+    }
+
+    /**
+     * @return the listLikedComs
+     */
+    public List<MostLikedCompany> getListLikedComs() {
+        return listLikedComs;
+    }
+
+    /**
+     * @param listLikedComs the listLikedComs to set
+     */
+    public void setListLikedComs(List<MostLikedCompany> listLikedComs) {
+        this.listLikedComs = listLikedComs;
     }
 
 }

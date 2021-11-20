@@ -6,13 +6,15 @@
 package com.findingcareer.controller;
 
 import com.findingcareer.pojo.Comment;
+import com.findingcareer.pojo.User;
+import com.findingcareer.repository.UserRepository;
 import com.findingcareer.service.CommentService;
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiCommentController {
     @Autowired
     private CommentService commentService;
+    @Autowired
+    private UserRepository userRepository;
     
     @PostMapping(path= "/api/add-comment", produces = {
         MediaType.APPLICATION_JSON_VALUE

@@ -5,7 +5,7 @@
  */
 package com.findingcareer.repository.impl;
 
-import com.findingcareer.pojo.Rating;
+import com.findingcareer.pojo.RatingCompany;
 import com.findingcareer.repository.RatingRepository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -31,7 +31,7 @@ public class RatingRepositoryImpl implements RatingRepository{
     private LocalSessionFactoryBean sessionFactory;
     
     @Override
-    public boolean addRating(Rating r) {
+    public boolean addRating(RatingCompany r) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         
         try{
@@ -46,11 +46,11 @@ public class RatingRepositoryImpl implements RatingRepository{
     }
 
     @Override
-    public Rating getRatingByEmployee(int idEmployee, int idEmployer) {
+    public RatingCompany getRatingByEmployee(int idEmployee, int idEmployer) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
-        CriteriaQuery<Rating> query =  builder.createQuery(Rating.class);
-        Root root = query.from(Rating.class);
+        CriteriaQuery<RatingCompany> query =  builder.createQuery(RatingCompany.class);
+        Root root = query.from(RatingCompany.class);
         
         
         Predicate p1 = builder.equal(root.get("employee"), idEmployee);
@@ -58,7 +58,7 @@ public class RatingRepositoryImpl implements RatingRepository{
         
         query = query.where(builder.and(p1,p2));
         
-        Rating r = session.createQuery(query).uniqueResult();    
+        RatingCompany r = session.createQuery(query).uniqueResult();    
         
         return r; 
     }
@@ -68,7 +68,7 @@ public class RatingRepositoryImpl implements RatingRepository{
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object> query =  builder.createQuery(Object.class);
-        Root root = query.from(Rating.class);
+        Root root = query.from(RatingCompany.class);
         
         query.where(builder.equal(root.get("employer"), id));
         

@@ -5,7 +5,7 @@
  */
 package com.findingcareer.service;
 
-import com.findingcareer.pojo.Rating;
+import com.findingcareer.pojo.RatingCompany;
 
 /**
  *
@@ -13,6 +13,6 @@ import com.findingcareer.pojo.Rating;
  */
 public interface RatingService {
     boolean addRating(int id, int star);
-    Rating getRatingByEmployee(int idEmployee, int idEmployer);
+    RatingCompany getRatingByEmployee(int idEmployee, int idEmployer);
     Object getAverageRatingCompany(int id);
 }

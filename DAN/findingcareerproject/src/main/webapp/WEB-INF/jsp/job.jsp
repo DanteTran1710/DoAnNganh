@@ -21,25 +21,25 @@
                     <li class="drop-down"><a href="<c:url value="/jobs"/>">Tất cả cấp bậc</a>
                         <ul class="scrolltable">
                             <c:url value="/jobs" var="ps">
-                                <c:param name="kw" value="Thực tập sinh/Sinh viên"></c:param>
+                                <c:param name="kw" value="Intern/Student"></c:param>
                             </c:url>
-                            <li><a href="${ps}">Thực tập sinh/Sinh viên</a></li>
+                            <li><a href="${ps}">Intern/Student</a></li>
                                 <c:url value="/jobs" var="ps">
-                                    <c:param name="kw" value="Mới tốt nghiệp"></c:param>
+                                    <c:param name="kw" value="Fresher/Entry Level"></c:param>
                                 </c:url>
-                            <li><a href="${ps}">Mới tốt nghiệp</a></li>
+                            <li><a href="${ps}">Fresher/Entry Level</a></li>
                                 <c:url value="/jobs" var="ps">
-                                    <c:param name="kw" value="Nhân viên"></c:param>
+                                    <c:param name="kw" value="Experienced"></c:param>
                                 </c:url>
-                            <li><a href="${ps}">Nhân viên</a></li>
+                            <li><a href="${ps}">Experienced</a></li>
                                 <c:url value="/jobs" var="ps">
-                                    <c:param name="kw" value="Trưởng phòng"></c:param>
+                                    <c:param name="kw" value="Manager"></c:param>
                                 </c:url>
-                            <li><a href="${ps}">Trưởng phòng</a></li>
+                            <li><a href="${ps}">Manager</a></li>
                                 <c:url value="/jobs" var="ps">
-                                    <c:param name="kw" value="Giám đốc và cao cấp hơn"></c:param>
+                                    <c:param name="kw" value="Director and above"></c:param>
                                 </c:url>
-                            <li><a href="${ps}">Giám đốc và cao cấp hơn</a></li>
+                            <li><a href="${ps}">Director and above</a></li>
                         </ul>
                     </li>
                     <!-- THE CATEGORY FILTER OF CONDITIONS -->
@@ -139,10 +139,17 @@
             <!-- CLASSIFY THE PAGINATION BY THE CONDITIONS -->
             <nav class="pagi">
                 <ul class="pagination pagination-lg justify-content-center">
-                    <c:forEach begin="1" end="${Math.ceil(counter/3)}" step="1" var="i">
-                        <li class="page-item">
-                            <a class="page-link" href="<c:url value="/jobs"/>?page=${i}">${i}</a>
-                        </li>
+                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" step="1" var="i">
+                        <c:if test="${keyword == null}">
+                            <li class="page-item">
+                                <a class="page-link" href="<c:url value="/jobs"/>?page=${i}">${i}</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${keyword != null}">
+                            <li class="page-item">
+                                <a class="page-link" href="<c:url value="/jobs"/>?kw=${keyword}&page=${i}">${i}</a>
+                            </li>
+                        </c:if>
                     </c:forEach>
                 </ul>
             </nav>

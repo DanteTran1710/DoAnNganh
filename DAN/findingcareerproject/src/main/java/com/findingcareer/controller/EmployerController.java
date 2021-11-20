@@ -12,6 +12,7 @@ import com.findingcareer.service.UserService;
 import java.util.Map;
 import Utils.Utils;
 import com.findingcareer.pojo.Recruitment;
+import com.findingcareer.service.CVsForRecruitmentsService;
 import com.findingcareer.service.CategoryService;
 import com.findingcareer.service.EmployeeService;
 import com.findingcareer.service.RecruitmentService;
@@ -43,6 +44,8 @@ public class EmployerController {
     private UserService userService;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private CVsForRecruitmentsService cVsForRecruitmentsService;
 
     @GetMapping("/user/add-employer")
     public String addEmployerView(Model model) {
@@ -55,7 +58,7 @@ public class EmployerController {
     public String addEmployer(Model model,
             @ModelAttribute(value = "employer") Employer employer) {
         String errorMessage;
-
+        
         // ADD NEW EMPLOYER
         if (this.employerService.addEmployer(employer) == true) {
             return "redirect:/login";
@@ -80,11 +83,11 @@ public class EmployerController {
         return "employerProfile";
     }
 
-    @PostMapping("/employer/employer-profile")
+    @PostMapping(path="/employer/employer-profile")
     public String profileEmployer(Model model,
             @ModelAttribute(value = "employer") Employer e) {
         String message;
-
+        
         if (this.employerService.updateEmployer(e) == true) {
 
             message = "Cập nhật dữ liệu thành công";
@@ -101,17 +104,38 @@ public class EmployerController {
     public String recruitmentByCompany(Model model,
             @RequestParam Map<String, String> params, HttpSession session) {
         String page = params.getOrDefault("page", "1");
-        
+
         User u = this.userService.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
 
         Employer e = this.employerService.getEmployerById(u.getEmployer().getIdEmployer());
 
-        model.addAttribute("recruitments", Utils.pagination(e.getListRecruiment(), page, 2));
-        
+        model.addAttribute("recruitments", Utils.pagination(e.getListRecruiment(), page, 4));
+
         model.addAttribute("msg", session.getAttribute("msg"));
 
         return "manageRecruitment";
+    }
+    
+     @GetMapping("/employer/cv")
+    public String cvByCompany(Model model,
+            @RequestParam Map<String, String> params, HttpSession session) {
+        String page = params.getOrDefault("page", "1");
+
+        User u = this.userService.getUserByUsername(
+                SecurityContextHolder.getContext().getAuthentication().getName());
+
+        Employer e = this.employerService.getEmployerById(u.getEmployer().getIdEmployer());
+
+        model.addAttribute("cvs",
+                this.cVsForRecruitmentsService.
+                        getListCVByEmployer(e.getIdEmployer(), Integer.parseInt(page)));
+        model.addAttribute("counter",
+                this.cVsForRecruitmentsService.countCvsByEmployer(e));
+
+        model.addAttribute("msg", session.getAttribute("msg"));
+
+        return "manageCVs";
     }
 
     @GetMapping("/employer/recruitment/update/{recruitmentId}")
@@ -126,7 +150,7 @@ public class EmployerController {
         return "updateRecruitment";
     }
 
-    @PostMapping("/employer/recruitment/update/{recruitmentId}")
+    @PostMapping(path="/employer/recruitment/update/{recruitmentId}")
     public String updateRecruitmentByCompany(Model model,
             @ModelAttribute(value = "r") Recruitment recruitment,
             @PathVariable(value = "recruitmentId") int recruitmentId) {
@@ -184,5 +208,4 @@ public class EmployerController {
 
         return "listEmployees";
     }
-
 }

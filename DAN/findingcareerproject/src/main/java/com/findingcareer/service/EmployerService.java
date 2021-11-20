@@ -13,9 +13,16 @@ import java.util.List;
  * @author hp
  */
 public interface EmployerService {
+
     boolean addEmployer(Employer e);
+
     boolean updateEmployer(Employer e);
+
     Employer getEmployerById(int id);
+
     List<Object[]> getListEmployerByName(String kw, int page);
+
+    long countEmployer();
+
     List<Object[]> getFavoriteCompanies();
 }

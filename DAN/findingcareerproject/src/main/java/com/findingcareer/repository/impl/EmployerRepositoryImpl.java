@@ -7,8 +7,8 @@ package com.findingcareer.repository.impl;
 
 import com.findingcareer.pojo.Employer;
 import com.findingcareer.pojo.Employer_;
-import com.findingcareer.pojo.Rating;
-import com.findingcareer.pojo.Rating_;
+import com.findingcareer.pojo.RatingCompany;
+import com.findingcareer.pojo.RatingCompany_;
 import com.findingcareer.pojo.MostLikedCompany;
 import com.findingcareer.pojo.MostLikedCompany_;
 import com.findingcareer.repository.EmployerRepository;
@@ -61,7 +61,8 @@ public class EmployerRepositoryImpl implements EmployerRepository {
                 && !e.getDescription().isEmpty() && !e.getOrientation().isEmpty()
                 && !e.getPhoneNumber().isEmpty()) {
             String query = "UPDATE Employer SET companyName=:a, phoneNumber=:b, orientation=:c,"
-                    + "description=:d, address=:f WHERE idEmployer=:id ";
+                    + "description=:d, address=:f, email=:g, logo=:i,"
+                    + "companyImg=:j WHERE idEmployer=:id ";
             javax.persistence.Query q = session.createQuery(query);
             q.setParameter("a", e.getCompanyName());
             q.setParameter("b", e.getPhoneNumber());
@@ -69,6 +70,9 @@ public class EmployerRepositoryImpl implements EmployerRepository {
             q.setParameter("d", e.getDescription());
             q.setParameter("f", e.getAddress());
             q.setParameter("id", e.getIdEmployer());
+            q.setParameter("g", e.getEmail());
+            q.setParameter("i", e.getLogo());
+            q.setParameter("j", e.getCompanyImg());
 
             q.executeUpdate();
 
@@ -90,14 +94,14 @@ public class EmployerRepositoryImpl implements EmployerRepository {
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
         Root<Employer> rootE = query.from(Employer.class);
-        ListJoin<Employer, Rating> ratings = rootE.join(Employer_.listRatings, JoinType.INNER);
+        ListJoin<Employer, RatingCompany> ratings = rootE.join(Employer_.listRatings, JoinType.INNER);
 
-        query.where(builder.equal(rootE.get(Employer_.idEmployer), ratings.get(Rating_.employer)));
+        query.where(builder.equal(rootE.get(Employer_.idEmployer), ratings.get(RatingCompany_.employer)));
 
         query.multiselect(rootE.get(Employer_.idEmployer), rootE.get(Employer_.companyName),
                 rootE.get(Employer_.email), rootE.get(Employer_.address), rootE.get(Employer_.phoneNumber),
                 rootE.get(Employer_.orientation), rootE.get(Employer_.logo),
-                builder.avg(ratings.get(Rating_.star)));
+                builder.avg(ratings.get(RatingCompany_.star)));
 
         if (kw != null) {
             Predicate p = builder.like(rootE.get(Employer_.companyName).as(String.class),
@@ -110,7 +114,7 @@ public class EmployerRepositoryImpl implements EmployerRepository {
 
         Query q = session.createQuery(query);
 
-        int max = 3;
+        int max = 4;
         q.setMaxResults(max);
 
         q.setFirstResult((page - 1) * max);
@@ -138,7 +142,8 @@ public class EmployerRepositoryImpl implements EmployerRepository {
         query.where(builder.equal(rootE.get(Employer_.idEmployer), mostlikeds.get(MostLikedCompany_.employer)));
 
         query.multiselect(rootE.get(Employer_.idEmployer), rootE.get(Employer_.companyName),
-                rootE.get(Employer_.email), rootE.get(Employer_.address), rootE.get(Employer_.phoneNumber));
+                rootE.get(Employer_.email), rootE.get(Employer_.address),
+                rootE.get(Employer_.phoneNumber), rootE.get(Employer_.logo), rootE.get(Employer_.orientation));
         
         query = query.groupBy(rootE.get(Employer_.idEmployer));
         query = query.orderBy(builder.desc(builder.count(mostlikeds.get(MostLikedCompany_.heart))));

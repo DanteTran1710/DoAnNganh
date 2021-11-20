@@ -26,28 +26,19 @@ public class CategoryJob implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCategory;
-    private String nameJob; 
-    private String description;
-    private String hastag;
+    private String nameJob;
     @OneToMany(mappedBy = "categoryJob",
             fetch = FetchType.EAGER,
             cascade =  CascadeType.REMOVE,
             orphanRemoval = true)
     private List<Recruitment> listRecruitment;
-    @OneToMany(mappedBy = "categoryJob",
-            fetch = FetchType.LAZY,
-            cascade =  CascadeType.REMOVE,
-            orphanRemoval = true)
-    private List<Hastag> listHastags;
 
     public CategoryJob() {
     }
 
-    public CategoryJob(int idCategory, String nameJob, String description, String hastag) {
+    public CategoryJob(int idCategory, String nameJob, String description) {
         this.idCategory = idCategory;
         this.nameJob = nameJob;
-        this.description = description;
-        this.hastag = hastag;
     }
     
     /**
@@ -77,35 +68,6 @@ public class CategoryJob implements Serializable{
     public void setNameJob(String nameJob) {
         this.nameJob = nameJob;
     }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * @return the hastag
-     */
-    public String getHastag() {
-        return hastag;
-    }
-
-    /**
-     * @param hastag the hastag to set
-     */
-    public void setHastag(String hastag) {
-        this.hastag = hastag;
-    }
-
     /**
      * @return the listRecruitment
      */
@@ -119,22 +81,4 @@ public class CategoryJob implements Serializable{
     public void setListRecruitment(List<Recruitment> listRecruitment) {
         this.listRecruitment = listRecruitment;
     }
-
-    /**
-     * @return the listHastags
-     */
-    public List<Hastag> getListHastags() {
-        return listHastags;
-    }
-
-    /**
-     * @param listHastags the listHastags to set
-     */
-    public void setListHastags(List<Hastag> listHastags) {
-        this.listHastags = listHastags;
-    }
-
-    /**
-     * @return the recruitment
-     */
 }

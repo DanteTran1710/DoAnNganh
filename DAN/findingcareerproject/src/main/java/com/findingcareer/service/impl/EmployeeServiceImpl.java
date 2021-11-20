@@ -145,4 +145,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Object> getListEmployee(String string, int i) {
         return this.employeeRepository.getListEmployee(string, i);
     }
+
+    @Override
+    public Object getDetailsEmployeeById(int id) {
+        return this.employeeRepository.getDetailsEmployeeById(id);
+    }
 }

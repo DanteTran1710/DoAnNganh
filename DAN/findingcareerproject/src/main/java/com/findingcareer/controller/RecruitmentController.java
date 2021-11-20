@@ -48,6 +48,7 @@ public class RecruitmentController {
                 this.recruitmentService.getListRecruitmentByCondition(kw, Integer.parseInt(page)));
         model.addAttribute("counter", this.recruitmentService.countRes());
         model.addAttribute("category", this.categoryService.getListCategory());
+        model.addAttribute("keyword", kw);
         return "job";
     }
     
@@ -60,9 +61,19 @@ public class RecruitmentController {
         
         Recruitment r = this.recruitmentService.getRecruitmentById(recruitmentId);
 
+        String[] a = r.getDescription().split("-");
+        String[] b = r.getRequirement().split("-");
+        String[] c = r.getWelfare().split("-");
+        
         model.addAttribute("re", r);
-        model.addAttribute("likebyE",this.mostLikedRecruitmentService.getLikeByEmployeeId(
+        model.addAttribute("description",a);
+        model.addAttribute("requirement", b);
+        model.addAttribute("welfare", c);
+        
+        if(u.getUserRole().equals("ROLE_EMPLOYEE")){
+            model.addAttribute("likebyE",this.mostLikedRecruitmentService.getLikeByEmployeeId(
                 u.getEmployee().getIdEmployee(), recruitmentId));
+        }
         model.addAttribute("favComs",this.employerService.getFavoriteCompanies());
         model.addAttribute("favRes",this.recruitmentService.getFavoriteRecruitments());
         model.addAttribute("sameCates",r.getCategoryJob().getListRecruitment());

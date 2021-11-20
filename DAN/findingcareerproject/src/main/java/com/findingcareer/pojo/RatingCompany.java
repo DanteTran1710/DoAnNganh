@@ -18,8 +18,8 @@ import javax.persistence.Table;
  * @author hp
  */
 @Entity
-@Table(name = "rating")
-public class Rating  implements Serializable{
+@Table(name = "rating_company")
+public class RatingCompany  implements Serializable{
     @Id
     private int idRating;
     private int star;
@@ -34,10 +34,10 @@ public class Rating  implements Serializable{
     @JoinColumn(name = "idCompany")
     private Employer employer;
 
-    public Rating() {
+    public RatingCompany() {
     }
 
-    public Rating(int idRating, int star, Employee employee, Employer employer) {
+    public RatingCompany(int idRating, int star, Employee employee, Employer employer) {
         this.idRating = idRating;
         this.star = star;
         this.employee = employee;

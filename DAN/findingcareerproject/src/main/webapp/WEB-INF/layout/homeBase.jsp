@@ -32,7 +32,7 @@
         <!-- CSS Files -->
         <link href="<c:url value="/vendor/bootstrap/home/css/bootstrap.min.css"/>" rel="stylesheet">
         <link href="<c:url value="/vendor/icofont/icofont.min.css" />" rel="stylesheet">
-        <link href="<c:url value="/vendor/animate/css/animate.min.css" />" rel="stylesheet">
+        <link href="<c:url value="/vendor/animate.css/animate.min.css" />" rel="stylesheet">
         <link href="<c:url value="/vendor/assets/owl.carousel.min.css" />" rel="stylesheet"> 
         <link href="<c:url value="/vendor/venobox/venobox.css"/>" rel="stylesheet">
         <link href="<c:url value="/css/home.style.css" />" rel="stylesheet">
@@ -68,6 +68,7 @@
         <script src="<c:url value="/vendor/counterup/counterup.min.js"/>"/></script>
         <script src="<c:url value="/vendor/isotope-layout/isotope.pkgd.min.js"/>"/></script>
         <script src="<c:url value="/vendor/owl.carousel/owl.carousel.min.js"/>"></script>
+        <script src="<c:url value="/vendor/owl.carousel/assets/owl.carousel.min.css"/>"></script>
         <script src="<c:url value="/vendor/venobox/venobox.min.js"/>"/></script>
           <!-- Template Main JS File -->
         <script src="<c:url value="/js/main.js"/>"/></script>   

@@ -82,9 +82,9 @@
             <!-- CLASSIFY THE PAGINATION BY THE CONDITIONS -->
             <nav class="pagi">
                 <ul class="pagination pagination-lg justify-content-center">
-                    <c:forEach begin="1" end="${Math.ceil(counter/3)}" step="1" var="i">
+                    <c:forEach begin="1" end="${Math.ceil(counter/4)}" step="1" var="i">
                         <li class="page-item">
-                            <a class="page-link" href="<c:url value="/employer/find-employees"/>?page=${i}">${i}</a>
+                            <a class="page-link" href="<c:url value="/employee/find-employers"/>?page=${i}">${i}</a>
                         </li>
                     </c:forEach>
                 </ul>

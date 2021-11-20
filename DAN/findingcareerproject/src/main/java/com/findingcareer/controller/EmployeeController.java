@@ -105,16 +105,13 @@ public class EmployeeController {
             @RequestParam(required = false) Map<String, String> params) {
         String kw = params.getOrDefault("kw", null);
         String page = params.getOrDefault("page", "1");
-        //GET USER BY USER NAME
-        Employee e = this.userService.getUserByUsername(
-                SecurityContextHolder.getContext().getAuthentication().getName()).getEmployee();
-
         
         // KEYWORDS CONDITIONS AND NO CONDITIONS
         model.addAttribute("employer",
                 this.employerService.getListEmployerByName(kw, Integer.parseInt(page)));
         model.addAttribute("counter",
-                this.employerService.getListEmployerByName(kw, Integer.parseInt(page)).size());
+                this.employerService.countEmployer());
+        
         return "listEmployers";
     }
 
@@ -141,8 +138,7 @@ public class EmployeeController {
                 this.ratingService.getRatingByEmployee(u.getEmployee().getIdEmployee(), id));
         model.addAttribute("likebyE", this.mostLikedService.getLikeByEmployeeId(
                 u.getEmployee().getIdEmployee(), e.getIdEmployer()));
-        model.addAttribute("id", u.getEmployee().getIdEmployee());
-
+        
         return "employerDetails";
     }
 

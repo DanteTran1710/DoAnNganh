@@ -9,7 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<c:url value="/add-employer" var="action" />
+<c:url value="/user/add-employer" var="action" />
 
 <c:if test="${message != null}">
     <div id="toast">
@@ -36,9 +36,13 @@
         <div class="login100-form validate-form">
             <fieldset class="border p-2">
                 <legend class="w-auto p-2">UPDATE PROFILE</legend>  
-
-                <form:form method="post" action="${action}" modelAttribute="employer" >
-                    <div class="personal-form grid-container">
+                <form:form method="post" action="${action}" modelAttribute="employer"
+                           enctype="multipart/form-data">
+                    <div class="details-form">
+                        <div class="grid-item form-group">
+                            <label for="phone">Email</label>
+                            <form:input type="text" path="email" id="email" placeholder="Email"/>
+                        </div>
                         <div class="grid-item form-group">
                             <label for="phone">Phone number</label>
                             <form:input type="text" path="phoneNumber" id="phoneNumber" placeholder="Phone number"/>
@@ -58,6 +62,24 @@
                         <div class="grid-item form-group">
                             <label for="description">Description for company</label>
                             <form:textarea type="textarea" path="description" id="description"/>
+                        </div>
+                        <div class="grid-container">
+                            <div class="grid-item form-group">
+                                <label for="file">Upload Logo</label>
+                                <form:input type="file" path="filelogo" id="filelogo"/>
+                            </div>
+                            <div class="grid-item form-group avatar">
+                                <img src="${employer.logo}" "alt="Hình ảnh không tồn tại"/>
+                            </div>
+                        </div>
+                        <div class="grid-container">
+                            <div class="grid-item form-group">
+                                <label for="file">Upload Img</label>
+                                <form:input type="file" path="fileComimg" id="fileComimg"/>
+                            </div>
+                            <div class="grid-item form-group avatar">
+                                <img src="${employer.companyImg}" "alt="Hình ảnh không tồn tại"/>
+                            </div>
                         </div>
                     </div>
                     <div class="accept-section">

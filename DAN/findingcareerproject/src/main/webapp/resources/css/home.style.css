@@ -9,6 +9,9 @@
 # General
 --------------------------------------------------------------*/
 
+section{
+    background-color: #fff;
+}
 body {
     font-family: "Open Sans", sans-serif;
     color: #000 !important;
@@ -111,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu a {
     display: block;
     position: relative;
-    color: #DCDCDC	;
+    color: #DCDCDC;
     padding: 14px 15px;
     transition: 0.3s;
     font-size: 13px;
@@ -141,25 +144,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-#profile .drop-down ul {
-    display: block;
-    position: inherit;
-    left: 0;
-    top: calc(100% + 30px);
-    z-index: 99;
-    opacity: 0;
-    visibility: hidden;
-    padding: 10px 0;
-    background: #fff;
-    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-    transition: ease all 0.3s;
-}
-
-#profile .drop-down:hover > ul {
-    opacity: 1;
-    top: 100%;
-    visibility: visible;
-}
 .nav-menu .drop-down:hover > ul {
     opacity: 1;
     top: 100%;
@@ -328,6 +312,22 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
+
+.carousel-inner .navigation{
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.carousel-inner .navigation .btn{
+    background: white;
+    width: 30px;
+    box-sizing: content-box;
+    border-radius: 50px;
+    margin: 10px;
+}
 #hero {
     width: 100%;
     height: 100vh;
@@ -480,10 +480,12 @@ section {
 }
 
 .cta{
-    background: #fff;
+    background: linear-gradient(rgba(66, 84, 81, 0.5), rgba(43, 56, 54, 0.5)), url(../img/cta-bg.jpg) fixed center center;
 }
 
-
+.cta p{
+    color: #fff;
+}
 .section-bg {
     background-color: #e4eae8;
 }
@@ -707,6 +709,7 @@ section {
 .authorize .title a:hover {
     color: #E50914;
 }
+
 /*--------------------------------------------------------------
 # EMPLOYERS
 --------------------------------------------------------------*/
@@ -732,9 +735,34 @@ section {
     width: 150px;
     height: 150px;
 }
+.emple-details .info{
+    padding: 30px;
+}
+.emple-details .info .infor-section{
+    margin: 20px;
+}
+.emple-details .info p{
+    margin: 20px;
+}
 /*--------------------------------------------------------------
 # JOBS BY EMPLOYER
 --------------------------------------------------------------*/
+#browseCv div{
+    width: max-content;
+    background-color:  #ebebb8;
+    padding: 7px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+#browseCv a{
+    color: #000;
+}
+#browseCv #accept:hover{
+    color:  #0da600;
+}
+#browseCv #decline:hover{
+    color: #d60a00;
+}
 .manage{
     width: 70px;
 }
@@ -748,6 +776,27 @@ section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+.add{
+    text-align: right;
+}
+.add a{
+    color: black;
+}
+.add a:hover{
+    color: #E50914;
+}
+/*--------------------------------------------------------------
+# EMPLOYEE DETAILS
+--------------------------------------------------------------*/
+.emple-details{
+    background-color: white;
+    width: 70%;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+.detail{
+    display: flex;
 }
 /*--------------------------------------------------------------
 # EMPLOYEES
@@ -794,7 +843,7 @@ section {
     font-size: 18px;
     text-transform: uppercase;
 }
-.job{
+.job, .employer, .authorize{
     background-color: #e4eae8;
 }
 .job .icon-box {
@@ -896,7 +945,7 @@ section {
     position: relative;
     overflow: hidden;
     background: #fff;
-    box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+    box-shadow: -10px -5px 40px 0 rgb(0 0 0 / 20%);
     transition: all 0.3s ease-in-out;
     border-radius: 8px;
     z-index: 1;
@@ -973,20 +1022,11 @@ section {
 /*--------------------------------------------------------------
 # Cta
 --------------------------------------------------------------*/
-/*.cta {
-  background: linear-gradient(rgba(66, 84, 81, 0.5), rgba(43, 56, 54, 0.5)), url("../img/cta-bg.jpg") fixed center center;
-  background-size: cover;
-  padding: 60px 0;
-}*/
 
 .cta h3 {
-    color: #000;
+    color: #fff;
     font-size: 28px;
     font-weight: 700;
-}
-
-.cta p {
-    color: #000;
 }
 
 .cta .cta-btn {
@@ -1000,7 +1040,7 @@ section {
     transition: 0.5s;
     margin-top: 10px;
     border: 2px solid  #E50914;
-    color: #000;
+    color: #fff;
 }
 
 .cta .cta-btn:hover {
@@ -2114,9 +2154,6 @@ label{
 #title-company-job, #salary-company-job{
     width: 100%;
 }
-#description{
-    width: 75%;
-}
 #description .section, #summary .section, .location .section{
     margin: 10px;
 }
@@ -2312,6 +2349,11 @@ label{
 }
 .ntl-scrolltable{
     height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.scrolltable-emple{
+    height: 800px;
     overflow-y: auto;
     overflow-x: hidden;
 }

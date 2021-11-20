@@ -119,6 +119,13 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content" value="/WEB-INF/jsp/employer/manageRecruitment.jsp"/>
     </definition>
     
+    <!-- Definition manage cv Layout -->
+    <definition name="manageCVs" extends="homeBaseLayout">
+        <put-attribute name="banner" value=""/>
+        <put-attribute name="title" value="MANAGE CVs"/>
+        <put-attribute name="content" value="/WEB-INF/jsp/employer/manageCVs.jsp"/>
+    </definition>
+    
     <!-- Definition update recruiment Layout -->
     <definition name="updateRecruitment" extends="homeBaseLayout">
         <put-attribute name="banner" value=""/>

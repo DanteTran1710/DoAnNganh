@@ -5,7 +5,7 @@
  */
 package com.findingcareer.service.impl;
 
-import com.findingcareer.pojo.Rating;
+import com.findingcareer.pojo.RatingCompany;
 import com.findingcareer.pojo.User;
 import com.findingcareer.repository.EmployerRepository;
 import com.findingcareer.repository.RatingRepository;
@@ -34,7 +34,7 @@ public class RatingServiceImpl implements RatingService{
         User u = this.userRepository.getUserByUsername(
                 SecurityContextHolder.getContext().getAuthentication().getName());
         
-        Rating r = new Rating();
+        RatingCompany r = new RatingCompany();
         
         r.setEmployee(u.getEmployee());
         r.setStar(star);
@@ -44,7 +44,7 @@ public class RatingServiceImpl implements RatingService{
     }
 
     @Override
-    public Rating getRatingByEmployee(int id1, int id2) {
+    public RatingCompany getRatingByEmployee(int id1, int id2) {
         return this.ratingRepository.getRatingByEmployee(id1,id2);
     }
 

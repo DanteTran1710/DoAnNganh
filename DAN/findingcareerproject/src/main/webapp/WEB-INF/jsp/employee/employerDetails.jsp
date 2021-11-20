@@ -27,7 +27,7 @@
         </div>
     </div>
 </c:if>
-<section class="companydetails">
+<section class="companydetails employer">
     <div class="container jobtitle">
         <img src="${e.logo}"/>
         <label class="job-tit">${e.companyName}</label>
@@ -70,9 +70,12 @@
         <div class="tab-content">
             <div id="companyinfo" class="container tab-pane active">
                 <div class="companyinfo">
-                    <div class="wrap-infor" id="description">
+                    <div class="wrap-infor" id="description" style="width: 100%">
                         <div class="section">
-                            <div class="imgs mt-2">img</div>
+                            <div class="imgs mt-2">
+                                <img style="width: 600px; height: 380px;" src="${e.companyImg}"
+                                     "alt="Hình ảnh không tồn tại"/>
+                            </div>
                         </div>
                         <div class="section">
                             <label>COMPANY DESCRIPTION</label>
@@ -80,19 +83,19 @@
                         </div>
                         <div class="section">
                             <label>OUR ORIENTATION</label>
-                            <div>${e.orientation}</div>
+                            <div><i class="fa fa-circle" aria-hidden="true"></i>&nbsp;${e.orientation}</div>
                         </div>
                         <div class="section">
                             <label>ADDRESS</label>
-                            <div>${e.address}</div>
+                            <div><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp;${e.address}</div>
                         </div>
                         <div class="section">
                             <label>CONTACT EMAIL</label>
-                            <div>${e.email}</div>
+                            <div><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;${e.email}</div>
                         </div>
                         <div class="section">
                             <label>CONTACT NUMBER</label>
-                            <div>${e.phoneNumber}</div>
+                            <div><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;${e.phoneNumber}</div>
                         </div>
                     </div>
                 </div>
@@ -103,7 +106,7 @@
                         <div class="jobbyc col-md-12 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0 pb-4">
                             <div class="icon-box">
                                 <div class="box2">
-                                    <h4 class="title"><a href="${r.idRecruitment}">${r.title}</a></h4>
+                                    <h4 class="title"><a href="<c:url value="/recruitment/${r.idRecruitment}"/>">${r.title}</a></h4>
                                 </div>
                             </div>
                         </div>
@@ -214,4 +217,3 @@
         }
     }
 </script>
-<script src="<c:url value="../js/main.js"/>"/></script> 

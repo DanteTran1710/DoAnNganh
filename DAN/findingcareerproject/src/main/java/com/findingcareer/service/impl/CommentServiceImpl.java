@@ -44,8 +44,8 @@ public class CommentServiceImpl implements CommentService{
         Comment c = new Comment();
         
         c.setContent(content);
-        c.setEmployee(u.getEmployee());
         c.setEmployer(this.employerRepository.getEmployerById(id));
+        c.setEmployee(u.getEmployee());
         c.setCreateDate(new Date());
         
         return this.commentRepository.addComment(c);

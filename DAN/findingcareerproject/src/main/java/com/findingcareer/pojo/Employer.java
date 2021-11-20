@@ -18,8 +18,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -46,7 +48,7 @@ public class Employer implements Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Recruitment> listRecruiment;
     private String logo;
-    private String companyImgs;
+    private String companyImg;
     private boolean active;
     private String email;
     @OneToMany(mappedBy = "employer", 
@@ -60,7 +62,7 @@ public class Employer implements Serializable {
             cascade = CascadeType.ALL, 
             orphanRemoval = true)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Rating> listRatings;
+    private List<RatingCompany> listRatings;
     @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
@@ -69,11 +71,15 @@ public class Employer implements Serializable {
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     private List<MostLikedCompany> mostLikeds;
+    @Transient
+    private MultipartFile filelogo;
+    @Transient
+    private MultipartFile fileComimg;
 
     public Employer() {
     }
 
-    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user, List<Recruitment> listRecruiment, String logo, String companyImgs, boolean active, String email, List<Comment> listComment, List<Rating> listRatings, List<CVsForRecruitments> cVsForRecruitmentses, List<MostLikedCompany> mostLikeds) {
+    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user, List<Recruitment> listRecruiment, String logo, String companyImg, boolean active, String email, List<Comment> listComment, List<RatingCompany> listRatings, List<CVsForRecruitments> cVsForRecruitmentses, List<MostLikedCompany> mostLikeds) {
         this.idEmployer = idEmployer;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
@@ -83,7 +89,7 @@ public class Employer implements Serializable {
         this.user = user;
         this.listRecruiment = listRecruiment;
         this.logo = logo;
-        this.companyImgs = companyImgs;
+        this.companyImg = companyImg;
         this.active = active;
         this.email = email;
         this.listComment = listComment;
@@ -219,17 +225,17 @@ public class Employer implements Serializable {
     }
 
     /**
-     * @return the companyImgs
+     * @return the companyImg
      */
-    public String getCompanyImgs() {
-        return companyImgs;
+    public String getCompanyImg() {
+        return companyImg;
     }
 
     /**
-     * @param companyImgs the companyImgs to set
+     * @param companyImg the companyImg to set
      */
-    public void setCompanyImgs(String companyImgs) {
-        this.companyImgs = companyImgs;
+    public void setCompanyImg(String companyImg) {
+        this.companyImg = companyImg;
     }
 
     /**
@@ -277,14 +283,14 @@ public class Employer implements Serializable {
     /**
      * @return the listRatings
      */
-    public List<Rating> getListRatings() {
+    public List<RatingCompany> getListRatings() {
         return listRatings;
     }
 
     /**
      * @param listRatings the listRatings to set
      */
-    public void setListRatings(List<Rating> listRatings) {
+    public void setListRatings(List<RatingCompany> listRatings) {
         this.listRatings = listRatings;
     }
 
@@ -314,5 +320,33 @@ public class Employer implements Serializable {
      */
     public void setMostLikeds(List<MostLikedCompany> mostLikeds) {
         this.mostLikeds = mostLikeds;
+    }
+
+    /**
+     * @return the filelogo
+     */
+    public MultipartFile getFilelogo() {
+        return filelogo;
+    }
+
+    /**
+     * @param filelogo the filelogo to set
+     */
+    public void setFilelogo(MultipartFile filelogo) {
+        this.filelogo = filelogo;
+    }
+
+    /**
+     * @return the fileComimg
+     */
+    public MultipartFile getFileComimg() {
+        return fileComimg;
+    }
+
+    /**
+     * @param fileComimg the fileComimg to set
+     */
+    public void setFileComimg(MultipartFile fileComimg) {
+        this.fileComimg = fileComimg;
     }
 }

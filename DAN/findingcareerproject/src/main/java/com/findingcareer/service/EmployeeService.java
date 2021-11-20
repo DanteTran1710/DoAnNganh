@@ -17,4 +17,5 @@ public interface EmployeeService {
     boolean updateEmployee(Employee e);
     Employee getEmployeeById(int id);
     List<Object> getListEmployee(String kw, int page);
+    Object getDetailsEmployeeById(int id);
 }

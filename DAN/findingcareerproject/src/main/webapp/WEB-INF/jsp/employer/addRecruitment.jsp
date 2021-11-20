@@ -67,15 +67,15 @@
                         <div class="grid-item form-group">
                             <label for="position">Position job</label>
                             <form:select path="position" id="position" class="custom-select">
-                                <form:option value="Thực tập sinh/Sinh viên">Thực tập sinh/Sinh viên</form:option>
-                                <form:option value="Mới tốt nghiệp">Mới tốt nghiệp</form:option>
-                                <form:option value="Nhân viên">Nhân viên</form:option>
-                                <form:option value="Trưởng phòng">Trưởng phòng</form:option>
-                                <form:option value="Giám đốc và cao cấp hơn">Giám đốc và cao cấp hơn</form:option>
+                                <form:option value="Intern/Student">Intern/Student</form:option>
+                                <form:option value="Fresher/Entry level">Fresher/Entry level</form:option>
+                                <form:option value="Experienced(non-manager)">Experienced</form:option>
+                                <form:option value="Manager">Manager</form:option>
+                                <form:option value="Director and above">Director and above</form:option>
                             </form:select>
                         </div>
                         <div class="grid-item form-group">
-                            <label for="category">Position job</label>
+                            <label for="category">Category job</label>
                             <form:select path="categoryJob.idCategory" id="categoryJob" class="custom-select">
                                 <c:forEach items="${cate}" var="i">
                                     <form:option value="${i.idCategory}">${i.nameJob}</form:option>

@@ -19,11 +19,12 @@ import javax.persistence.Table;
  * @author hp
  */
 @Entity
-@Table(name = "cv_recruitment")
+@Table(name = "cv_for_recruitment")
 public class CVsForRecruitments implements Serializable{
     @Id
     private int id;
     private String cv;
+    private String state;
     @ManyToOne(
             optional = true,
             fetch = FetchType.EAGER
@@ -49,9 +50,10 @@ public class CVsForRecruitments implements Serializable{
     public CVsForRecruitments() {
     }
 
-    public CVsForRecruitments(int id, String cv, Employer employer, Employee employee, Recruitment recruitment) {
+    public CVsForRecruitments(int id, String cv, String state, Employer employer, Employee employee, Recruitment recruitment) {
         this.id = id;
         this.cv = cv;
+        this.state = state;
         this.employer = employer;
         this.employee = employee;
         this.recruitment = recruitment;
@@ -125,5 +127,19 @@ public class CVsForRecruitments implements Serializable{
      */
     public void setRecruitment(Recruitment recruitment) {
         this.recruitment = recruitment;
+    }
+
+    /**
+     * @return the state
+     */
+    public String getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(String state) {
+        this.state = state;
     }
 }

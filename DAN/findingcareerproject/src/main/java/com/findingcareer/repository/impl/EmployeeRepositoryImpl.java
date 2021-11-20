@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.hibernate.HibernateException;
@@ -146,5 +145,31 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         q.setFirstResult((page - 1) * max);
 
         return q.getResultList();
+    }
+
+    @Override
+    public Object getDetailsEmployeeById(int id) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object> query = builder.createQuery(Object.class);
+        Root rootE = query.from(Employee.class);
+        Root rootU = query.from(User.class);
+        
+        Predicate p1 = builder.equal(rootE.get("user"), rootU.get("idUser"));
+        Predicate p2 = builder.equal(rootE.get("idEmployee"), id);
+        
+        query.multiselect(rootU.get("firstName"),rootU.get("lastName"),
+                rootU.get("email"), rootE.get("sex"),rootE.get("phoneNumber"), 
+                rootE.get("nationality"), rootE.get("subject"), rootE.get("school"),
+                rootE.get("qualification"), rootE.get("skill"),
+                rootE.get("language"),rootE.get("avatarUrl"), 
+                rootE.get("idEmployee"),rootE.get("salaryOffer"), rootE.get("positionOffer"),
+                rootE.get("currentjob"), rootE.get("company"));
+        
+        query.where(builder.and(p1,p2));
+        
+        Query q = session.createQuery(query);
+        
+        return q.getSingleResult();
     }
 }

@@ -6,6 +6,7 @@
 package com.findingcareer.repository;
 
 import com.findingcareer.pojo.MostLikedCompany;
+import java.util.List;
 
 /**
  *

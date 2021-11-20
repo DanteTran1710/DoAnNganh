@@ -4,14 +4,14 @@
  * and open the template in the editor.
  */
 package com.findingcareer.repository;
-import com.findingcareer.pojo.Rating;
+import com.findingcareer.pojo.RatingCompany;
 
 /**
  *
  * @author hp
  */
 public interface RatingRepository {
-    boolean addRating(Rating rating);
-    Rating getRatingByEmployee(int idEmployee, int idEmployer);
+    boolean addRating(RatingCompany rating);
+    RatingCompany getRatingByEmployee(int idEmployee, int idEmployer);
     Object getAverageRatingCompany(int id);
 }

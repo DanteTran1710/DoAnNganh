@@ -6,6 +6,8 @@
 package com.findingcareer.service;
 
 import com.findingcareer.pojo.CVsForRecruitments;
+import com.findingcareer.pojo.Employer;
+import java.util.List;
 
 /**
  *
@@ -13,4 +15,8 @@ import com.findingcareer.pojo.CVsForRecruitments;
  */
 public interface CVsForRecruitmentsService {
     boolean addCV(int idRe);
+    CVsForRecruitments getCVById(int id);
+    boolean updateState(CVsForRecruitments cv);
+    List<Object> getListCVByEmployer(int idEmployer, int page); 
+    long countCvsByEmployer(Employer employer);
 }

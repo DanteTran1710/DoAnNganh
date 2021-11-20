@@ -123,23 +123,6 @@
         });
     });
 
-    // Intro carousel
-    var heroCarousel = $("#heroCarousel");
-    var heroCarouselIndicators = $("#hero-carousel-indicators");
-    heroCarousel.find(".carousel-inner").children(".carousel-item").each(function (index) {
-        (index === 0) ?
-                heroCarouselIndicators.append("<li data-target='#heroCarousel' data-slide-to='" + index + "' class='active'></li>") :
-                heroCarouselIndicators.append("<li data-target='#heroCarousel' data-slide-to='" + index + "'></li>");
-
-        $(this).css("background-image", "url('" + $(this).children('.carousel-background').children('img').attr('src') + "')");
-        $(this).children('.carousel-background').remove();
-    });
-
-    heroCarousel.on('slid.bs.carousel', function (e) {
-        $(this).find('h2').addClass('animate__animated animate__fadeInDown');
-        $(this).find('p, .btn-get-started').addClass('animate__animated animate__fadeInUp');
-    });
-
     // Back to top button
     $(window).scroll(function () {
         if ($(this).scrollTop() > 100) {
@@ -231,8 +214,8 @@ function addComment(employerId) {
                         <p class="date-comment">${moment(data.createDate).fromNow()}</p>
                     </div>
                 </div>` + area.innerHTML;
-        location.reload();
-    })
+    location.reload();
+    });
 }
 
 // RECRUITMENTS BY COMPANY
@@ -357,17 +340,16 @@ function addReLike(recruitmentid) {
             "Content-Type": "application/json"
         }
     }).then(function (res) {
-        
+
         return res.json();
     }).then(function (data) {
 
-        if(data === 1){
-            $('#like-section').css('background-color','#87817f');
-            $('#like-section').css('color','#000');
-        }
-        else
+        if (data === 1) {
+            $('#like-section').css('background-color', '#87817f');
+            $('#like-section').css('color', '#000');
+        } else
             alert("Error!!");
-        
+
     })
 }
 // ADD LIKE TO COMPANY
@@ -378,16 +360,123 @@ function addCoLike(recruitmentid) {
             "Content-Type": "application/json"
         }
     }).then(function (res) {
-        
+
         return res.json();
     }).then(function (data) {
 
-        if(data === 1){
-            $('#like-section').css('background-color','#87817f');
-            $('#like-section').css('color','#000');
-        }
-        else
+        if (data === 1) {
+            $('#like-section').css('background-color', '#87817f');
+            $('#like-section').css('color', '#000');
+        } else
             alert("Error!!");
-        
+
+    })
+}
+
+// SHOW EMPLOYEE DETAILS
+function showEmployeeDetails(employeeId) {
+    fetch(`/findingcareerproject/api/employer/employee-details/${employeeId}`, {
+        method: "get",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+
+        return res.json();
+    }).then(function (data) {
+        let area = document.getElementById("info");
+
+        var sex_section;
+        var current_section;
+
+        if (data[3] == true)
+            sex_section = '<i class="fa fa-venus fa-lg" aria-hidden="true"></i>';
+        else
+            sex_section = '<i class="fa fa-mars fa-lg" aria-hidden="true"></i>';
+
+        if (data[15] == true)
+            current_section =
+                    ` <p class="company">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                Used to work in ${data[16]} company
+                            </p>`;
+        else
+            current_section = `<p class="company"> 
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                Having worked in ${data[16]} company
+                            </p>`;
+
+
+        area.innerHTML = `           
+         <div class="info" style="opacity: 1">
+                    <div class="infor-section">
+                        <div style="display : flex">
+                            <h4 class="title" style="width : 70%">
+                                ${data[0]}&nbsp;${data[1]}
+                            </h4>` + sex_section +
+                `</div>
+
+                    </div>
+                    <div>
+                        <p class="email">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;
+                            Email: ${data[2]}
+                        </p>
+                        <p class="phoneNumber">
+                            <i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;
+                            Contact: ${data[4]}
+                        </p>
+                        <p class="nationality">
+                            <i class="fa fa-universal-access" aria-hidden="true"></i>&nbsp;
+                            Nationality: ${data[5]}
+                        </p>
+                        <p class="subject">
+                            <i class="fa fa-id-badge" aria-hidden="true"></i>&nbsp;
+                            Subject: ${data[6]}
+                        </p>
+                        <p class="school">
+                            <i class="fa fa-tags" aria-hidden="true"></i>&nbsp;
+                            School: ${data[7]}
+                        </p>
+                        <p class="qualification">
+                            <i class="fa fa-graduation-cap" aria-hidden="true"></i>&nbsp;
+                            Qualification: ${data[8]}
+                        </p>
+                        <p class="skill">
+                            <i class="fa fa-hand-paper-o" aria-hidden="true"></i>&nbsp;
+                            Skill: ${data[9]}
+                        </p>
+                        <p class="language">
+                            <i class="fa fa-language" aria-hidden="true"></i>&nbsp;
+                            Language in used: ${data[10]}
+                        </p>` + current_section +
+                `<p class="offer">
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            Offer ${data[13]} salary for ${data[14]} postion
+                        </p>
+                    </div>
+                </div>`;
+
+    })
+}
+
+//UPDATE STATE cv
+function updateState(idCv, state) {
+    event.preventDefault();
+    
+    fetch("/findingcareerproject/api/update-cv", {
+        method: 'post',
+        body: JSON.stringify({
+            "state": state,
+            "idCV": idCv
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => {
+        if (res.status === 200) {
+            location.reload();
+        } else
+            alert("Error!!");
     })
 }
