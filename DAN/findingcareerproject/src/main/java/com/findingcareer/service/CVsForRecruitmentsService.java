@@ -7,6 +7,7 @@ package com.findingcareer.service;
 
 import com.findingcareer.pojo.CVsForRecruitments;
 import com.findingcareer.pojo.Employer;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +20,6 @@ public interface CVsForRecruitmentsService {
     boolean updateState(CVsForRecruitments cv);
     List<Object> getListCVByEmployer(int idEmployer, int page); 
     long countCvsByEmployer(Employer employer);
+    List<Object> staticCV(Date fromDate, Date toDate);
+
 }

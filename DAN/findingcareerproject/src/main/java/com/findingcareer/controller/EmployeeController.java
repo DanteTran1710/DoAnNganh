@@ -108,7 +108,7 @@ public class EmployeeController {
         
         // KEYWORDS CONDITIONS AND NO CONDITIONS
         model.addAttribute("employer",
-                this.employerService.getListEmployerByName(kw, Integer.parseInt(page)));
+                this.employerService.getListEmployerByName(kw, Integer.parseInt(page), 1));
         model.addAttribute("counter",
                 this.employerService.countEmployer());
         

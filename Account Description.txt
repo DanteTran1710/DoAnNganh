@@ -1,0 +1,13 @@
+Admin: 
+A: thahtran
+P: 123
+Employer: 
+A: com1
+P: 123
+A: com2
+P: 2
+Employee
+A: thanh
+P: 1
+A: trangkem
+P: 123 

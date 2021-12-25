@@ -53,7 +53,7 @@ public class Recruitment implements Serializable{
     @JoinColumn(name = "idCategory")
     @JsonIgnore
     private CategoryJob categoryJob;
-    @OneToMany(mappedBy = "recruitment", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recruitment", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JsonIgnore
     private List<CVsForRecruitments> cVsForRecruitmentses;

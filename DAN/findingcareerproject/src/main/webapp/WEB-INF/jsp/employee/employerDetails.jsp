@@ -152,7 +152,8 @@
                 </div>
                 <div class="form-group">
                     <button type="button"
-                            class="btn btn-danger " style="float: right" onclick="addComment(${e.idEmployer})">SUBMIT</button>
+                            class="btn btn-danger " style="float: right" onclick="addComment(${e.idEmployer})">SUBMIT
+                    </button>
                 </div>
             </form>
         </div>

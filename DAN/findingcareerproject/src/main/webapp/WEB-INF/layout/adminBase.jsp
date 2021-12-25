@@ -27,6 +27,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- CSS Files -->
         <link href="<c:url value="/css/admin.style.css"/>" rel="stylesheet" />
+        <link href="<c:url value="/css/home.style.css" />" rel="stylesheet">
+        <link href="<c:url value="/vendor/icofont/icofont.min.css" />" rel="stylesheet">
         <link href="<c:url value="/vendor/bootstrap/admin/css/bootstrap.min.css"/>" rel="stylesheet" />
         <!--<link href="<c:url value="/vendor/bootstrap/admin/css/light-bootstrap-dashboard.css?v=2.0.0 " />" rel="stylesheet" />-->
     </head>
@@ -43,28 +45,17 @@
             </div>
 
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"/></script>
+    <script src="<c:url value="/vendor/jquery/home/jquery.min.js"/>"/></script>
+<script src="<c:url value="/vendor/jquery.easing/jquery.easing.min.js"/>"/></script>
+<script src="<c:url value="/vendor/email-form/validate.js"/>"/></script>
+<script src="<c:url value="/vendor/jquery-sticky/jquery.sticky.js"/>"/></script>
+<script src="<c:url value="/vendor/waypoints/jquery.waypoints.min.js"/>"/></script>
+<script src="<c:url value="/vendor/counterup/counterup.min.js"/>"/></script>
+<script src="<c:url value="/vendor/isotope-layout/isotope.pkgd.min.js"/>"/></script>
+<script src="<c:url value="/vendor/owl.carousel/owl.carousel.min.js"/>"></script>
+<script src="<c:url value="/vendor/venobox/venobox.min.js"/>"/></script>
+<script src="<c:url value="/js/main.js"/>"/></script>       
 
-        <!-- Core JS Files -->
-<!--        <script src="<c:url value="/vendor/jquery/jquery.3.2.1.min.js"/>" type="text/javascript"></script>
-        <script src="<c:url value="/vendor/jquery/admin/popper.min.js" />"type="text/javascript"></script>
-        <script src="<c:url value="/vendor/bootstrap/admin/js/bootstrap.min.js" />" type="text/javascript"></script>
-        <script src="<c:url value="/vendor/bootstrap/admin/js/bootstrap-switch.js" />"></script>
-          Google Maps Plugin    
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-          Chartist Plugin  
-        <script src="<c:url value="/vendor/jquery/admin/chartist.min.js" />"></script>
-          Notifications Plugin    
-        <script src="<c:url value="/vendor/bootstrap/admin/js/bootstrap-notify.js" />"></script>
-         Control Center for Light Bootstrap Dashboard: scripts for the example pages etc 
-        <script src="<c:url value="/vendor/jquery/admin/light-bootstrap-dashboard.js" />" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                // Javascript method's body can be found in assets/js/demos.js
-                demo.initDashboardPageCharts();
-
-                demo.showNotification();
-
-            });
-        </script>-->
-    </body>
+</body>
 </html>

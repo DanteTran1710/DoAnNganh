@@ -139,7 +139,7 @@
             <!-- CLASSIFY THE PAGINATION BY THE CONDITIONS -->
             <nav class="pagi">
                 <ul class="pagination pagination-lg justify-content-center">
-                    <c:forEach begin="1" end="${Math.ceil(counter/6)}" step="1" var="i">
+                    <c:forEach begin="1" end="${Math.ceil(counter/20)}" step="1" var="i">
                         <c:if test="${keyword == null}">
                             <li class="page-item">
                                 <a class="page-link" href="<c:url value="/jobs"/>?page=${i}">${i}</a>

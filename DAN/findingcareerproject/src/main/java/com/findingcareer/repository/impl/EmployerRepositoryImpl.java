@@ -89,7 +89,7 @@ public class EmployerRepositoryImpl implements EmployerRepository {
     }
 
     @Override
-    public List<Object[]> getListEmployerByName(String kw, int page) {
+    public List<Object[]> getListEmployerByName(String kw, int page, int state) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
@@ -101,13 +101,14 @@ public class EmployerRepositoryImpl implements EmployerRepository {
         query.multiselect(rootE.get(Employer_.idEmployer), rootE.get(Employer_.companyName),
                 rootE.get(Employer_.email), rootE.get(Employer_.address), rootE.get(Employer_.phoneNumber),
                 rootE.get(Employer_.orientation), rootE.get(Employer_.logo),
-                builder.avg(ratings.get(RatingCompany_.star)));
+                builder.avg(ratings.get(RatingCompany_.star)), rootE.get(Employer_.active));
 
-        if (kw != null) {
+        if (kw != null && state == 1) {
             Predicate p = builder.like(rootE.get(Employer_.companyName).as(String.class),
                     String.format("%%%s%%", kw));
+            Predicate pstate = builder.equal(rootE.get(Employer_.active), state);
 
-            query = query.where(p);
+            query = query.where(builder.and(p, pstate));
         }
         query = query.groupBy(rootE.get(Employer_.idEmployer));
         query = query.orderBy(builder.desc(rootE.get(Employer_.idEmployer)));
@@ -152,5 +153,21 @@ public class EmployerRepositoryImpl implements EmployerRepository {
         
         return q.getResultList();  
     }
+
+    @Override
+    public boolean updateEmployerState(Employer emplr) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        
+        if(!emplr.isActive() == false){
+            Query q = session.createQuery("UPDATE Employer SET active=:ul WHERE id=:id ");
+            q.setParameter("ul", true);
+            q.setParameter("id", emplr.getIdEmployer());
+            
+            q.executeUpdate();
+            
+            return true;
+        }
+        
+        return false;    }
 
 }

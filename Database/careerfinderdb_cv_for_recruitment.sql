@@ -29,6 +29,7 @@ CREATE TABLE `cv_for_recruitment` (
   `idCompany` int NOT NULL,
   `idRecruitment` int NOT NULL,
   `state` varchar(45) NOT NULL,
+  `createdDate` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_cv_employee_idx` (`idEmployee`),
   KEY `id_cv_company_idx` (`idCompany`),
@@ -43,7 +44,7 @@ CREATE TABLE `cv_for_recruitment` (
 
 LOCK TABLES `cv_for_recruitment` WRITE;
 /*!40000 ALTER TABLE `cv_for_recruitment` DISABLE KEYS */;
-INSERT INTO `cv_for_recruitment` VALUES (1,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636779715/zoc9wmwurl139oz3x19u.jpg',1,5,38,'decline'),(2,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636908873/yuarfnds4hrnkhpqo8cw.pdf',4,5,41,'received'),(3,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636949253/vehfopjigxhx0yqlmght.pdf',5,1,51,'received'),(4,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636949253/vehfopjigxhx0yqlmght.pdf',5,2,54,'decline'),(5,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636951261/d76rdniaihrmgpnxt7dc.pdf',6,2,54,'decline');
+INSERT INTO `cv_for_recruitment` VALUES (1,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636779715/zoc9wmwurl139oz3x19u.jpg',1,5,38,'decline','2015-12-12'),(2,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636908873/yuarfnds4hrnkhpqo8cw.pdf',4,5,41,'received','2015-11-22'),(3,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636949253/vehfopjigxhx0yqlmght.pdf',5,1,51,'received','2015-10-17'),(4,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636949253/vehfopjigxhx0yqlmght.pdf',5,2,54,'decline','2015-10-01'),(5,'https://res.cloudinary.com/dd58hrv0h/image/upload/v1636951261/d76rdniaihrmgpnxt7dc.pdf',6,2,54,'decline','2015-12-31');
 /*!40000 ALTER TABLE `cv_for_recruitment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -56,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-15 18:19:01
+-- Dump completed on 2021-12-25 16:04:22

@@ -155,7 +155,7 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
-.nav-menu .drop-down ul a {
+.nav-menu .drop-down ul a{
     padding: 10px 20px;
     font-size: 13px;
     font-weight: 500;
@@ -2295,6 +2295,7 @@ label{
   box-shadow: 0 5px 8px rgba(0,0,0, 0.08);
   border-color: #980000;
   animation: slideInLeft ease .7s, fadeOut linear 1s 7s forwards;
+  z-index: auto;
 }
 @keyframes slideInLeft{
   from{

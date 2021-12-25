@@ -7,12 +7,14 @@ package com.findingcareer.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -46,6 +48,9 @@ public class CVsForRecruitments implements Serializable{
     @JoinColumn(name = "idRecruitment")
     @JsonIgnore
     private Recruitment recruitment;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    
+    private Date createdDate; 
 
     public CVsForRecruitments() {
     }
@@ -141,5 +146,19 @@ public class CVsForRecruitments implements Serializable{
      */
     public void setState(String state) {
         this.state = state;
+    }
+
+    /**
+     * @return the createdDate
+     */
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    /**
+     * @param createdDate the createdDate to set
+     */
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

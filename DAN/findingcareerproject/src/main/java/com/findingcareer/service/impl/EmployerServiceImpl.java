@@ -144,8 +144,8 @@ public class EmployerServiceImpl implements EmployerService {
     }
 
     @Override
-    public List<Object[]> getListEmployerByName(String string, int page) {
-        return this.employerRepository.getListEmployerByName(string, page);
+    public List<Object[]> getListEmployerByName(String string, int page, int state) {
+        return this.employerRepository.getListEmployerByName(string, page, state);
     }
 
     @Override
@@ -156,6 +156,11 @@ public class EmployerServiceImpl implements EmployerService {
     @Override
     public long countEmployer() {
         return this.employerRepository.countEmployer();
+    }
+
+    @Override
+    public boolean updateEmployerState(Employer emplr) {
+        return this.employerRepository.updateEmployerState(emplr);
     }
 
 }

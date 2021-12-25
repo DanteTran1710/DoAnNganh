@@ -20,9 +20,11 @@ public interface EmployerService {
 
     Employer getEmployerById(int id);
 
-    List<Object[]> getListEmployerByName(String kw, int page);
+    List<Object[]> getListEmployerByName(String kw, int page, int state);
 
     long countEmployer();
 
     List<Object[]> getFavoriteCompanies();
+        
+    boolean updateEmployerState(Employer employer);
 }

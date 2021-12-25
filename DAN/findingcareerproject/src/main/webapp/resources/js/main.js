@@ -214,7 +214,7 @@ function addComment(employerId) {
                         <p class="date-comment">${moment(data.createDate).fromNow()}</p>
                     </div>
                 </div>` + area.innerHTML;
-    location.reload();
+        location.reload();
     });
 }
 
@@ -463,7 +463,7 @@ function showEmployeeDetails(employeeId) {
 //UPDATE STATE cv
 function updateState(idCv, state) {
     event.preventDefault();
-    
+
     fetch("/findingcareerproject/api/update-cv", {
         method: 'post',
         body: JSON.stringify({
@@ -479,4 +479,116 @@ function updateState(idCv, state) {
         } else
             alert("Error!!");
     })
+}
+
+// CHART STATISTIC
+function generateColor() {
+    let r = parseInt(Math.random() * 255);
+    let g = parseInt(Math.random() * 255);
+    let b = parseInt(Math.random() * 255);
+
+    return `rgb(${r},${g},${b})`;
+}
+
+function cvChart(cvLabels = [], cvInfo = []) {
+    let colors = [];
+
+    for (let i = 0; i < cvInfo.length; i++)
+        colors.push(generateColor());
+
+    const data = {
+        labels: cvLabels,
+        datasets: [{
+                label: 'Doughnut Chart For CV application',
+                data: cvInfo,
+                backgroundColor: colors,
+                hoverOffset: 4
+            }]
+    };
+
+    const config = {
+        type: 'doughnut',
+        data: data
+    };
+
+    let ctx = document.getElementById("doughnutchart").getContext("2d");
+    new Chart(ctx, config);
+}
+
+function sendCondition() {
+    let sM = document.getElementsByName("rbdM");
+    let sY = document.getElementsByName("rdbY");
+
+    var year;
+    var period;
+
+    for (var i = 0; i < sY.length; i++) {
+        if (sY[i].checked == true)
+            year = sY[i].value;
+    }
+
+    for (var i = 0; i < sM.length; i++) {
+        if (sM[i].checked == true)
+            period = sM[i].value;
+    }
+    
+    getCVStatistic(period, year);
+}
+function getCVStatistic(period, year) {
+    event.preventDefault();
+
+    fetch("/findingcareerproject/api/cv-statis", {
+        method: 'post',
+        body: JSON.stringify({
+            "period": period,
+            "year": year
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(function (res) {
+
+        return res.json();
+    }).then(function (data) {
+        
+        let area = document.getElementById("chartTable");
+        let section = document.getElementById("doughnutchart");
+        let cvLabels = [], cvInfo = [];
+
+        data.forEach(i => {
+            area.innerHTML += `
+                                   <tr>
+                                        <td>${i[0]}</td>
+                                        <td>${i[2]}</td>
+                                        <td>${i[3]}</td>                                        
+                                    </tr>
+                            `;
+            cvLabels.push(i[2]);
+            cvInfo.push(i[3]);
+            
+        });
+        
+        cvChart(cvLabels, cvInfo);
+    });
+}
+
+// BROWSE EMPLOYER
+function browseEmployer(state, id) {
+    event.preventDefault();
+
+    fetch("/findingcareerproject/api/browse-employer", {
+        method: 'post',
+        body: JSON.stringify({
+            "state": state,
+            "id": id
+        }),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => {
+        if (res.status === 200) {
+            location.reload();
+        } else
+            alert("Error!!");
+    });
 }

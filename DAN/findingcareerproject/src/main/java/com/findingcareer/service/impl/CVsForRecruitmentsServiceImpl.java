@@ -13,6 +13,7 @@ import com.findingcareer.repository.CVsForRecruitmentsRepository;
 import com.findingcareer.repository.RecruitmentRepository;
 import com.findingcareer.repository.UserRepository;
 import com.findingcareer.service.CVsForRecruitmentsService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -70,6 +71,11 @@ public class CVsForRecruitmentsServiceImpl implements CVsForRecruitmentsService{
     @Override
     public CVsForRecruitments getCVById(int i) {
         return this.cVsForRecruitmentsRepository.getCVById(i);
+    }
+
+    @Override
+    public List<Object> staticCV(Date fromDate, Date toDate) {
+        return this.cVsForRecruitmentsRepository.staticCV(fromDate, toDate);
     }
     
 }

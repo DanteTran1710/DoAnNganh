@@ -97,7 +97,7 @@ public class RecruitmentRepositoryImpl implements RecruitmentRepository {
 
         Query q = session.createQuery(query);
 
-        int max = 6;
+        int max = 20;
         q.setMaxResults(max);
 
         q.setFirstResult((page - 1) * max);

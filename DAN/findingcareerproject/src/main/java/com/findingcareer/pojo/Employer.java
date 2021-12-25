@@ -79,7 +79,7 @@ public class Employer implements Serializable {
     public Employer() {
     }
 
-    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user, List<Recruitment> listRecruiment, String logo, String companyImg, boolean active, String email, List<Comment> listComment, List<RatingCompany> listRatings, List<CVsForRecruitments> cVsForRecruitmentses, List<MostLikedCompany> mostLikeds) {
+    public Employer(int idEmployer, String phoneNumber, String companyName, String orientation, String address, String description, User user, List<Recruitment> listRecruiment, String logo, String companyImg, boolean active, String email, List<Comment> listComment, List<RatingCompany> listRatings, List<CVsForRecruitments> cVsForRecruitmentses, List<MostLikedCompany> mostLikeds, MultipartFile filelogo, MultipartFile fileComimg) {
         this.idEmployer = idEmployer;
         this.phoneNumber = phoneNumber;
         this.companyName = companyName;
@@ -96,8 +96,10 @@ public class Employer implements Serializable {
         this.listRatings = listRatings;
         this.cVsForRecruitmentses = cVsForRecruitmentses;
         this.mostLikeds = mostLikeds;
+        this.filelogo = filelogo;
+        this.fileComimg = fileComimg;
     }
-
+    
     /**
      * @return the idEmployer
      */
@@ -349,4 +351,6 @@ public class Employer implements Serializable {
     public void setFileComimg(MultipartFile fileComimg) {
         this.fileComimg = fileComimg;
     }
+
+    
 }
